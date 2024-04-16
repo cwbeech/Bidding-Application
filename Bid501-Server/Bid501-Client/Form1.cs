@@ -16,5 +16,13 @@ namespace Bid501_Client
         {
             InitializeComponent();
         }
+
+        private void uxLogin_Click(object sender, EventArgs e)
+        {
+            string username = uxUsername.Text;
+            string password = uxPassword.Text;
+
+
+        }
     }
 }
