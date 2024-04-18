@@ -21,6 +21,7 @@ namespace Bid501_Server
                 Login loginService = new Login(s);
                 return loginService;
             });
+            wss.Start();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
