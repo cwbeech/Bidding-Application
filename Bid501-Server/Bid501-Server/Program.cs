@@ -8,6 +8,10 @@ namespace Bid501_Server
 {
     public delegate int LoginAttempt(string user, string password);
 
+    public delegate bool PlaceBidAttempt(int userid, decimal bid, Product p);
+
+    public delegate List<string> SendProdInfo(Product p);
+
     internal static class Program
     {
         /// <summary>

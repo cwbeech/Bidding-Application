@@ -15,6 +15,10 @@ namespace Bid501_Server
 	{
 		public LoginAttempt LoginDel;
 
+		public PlaceBidAttempt PlaceBidDel;
+
+		public SendProdInfo ProdInfoDel;
+
 		private WebSocketServer wss;
 
 		public ServerCommunictionControl()

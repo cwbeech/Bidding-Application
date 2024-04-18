@@ -56,6 +56,23 @@ namespace Bid501_Server
             CurrentBidderID = 0;
         }
 
+        /// <summary>
+        /// Returns all relevant information, as strings, in a List.
+        /// </summary>
+        /// <returns>List<string> containing all information about the product</returns>
+        public List<string> ToListString()
+        {
+            List<string> pInfo = new List<string>();
+
+            pInfo.Add(Name);
+            pInfo.Add(Description);
+            pInfo.Add(Price.ToString());
+            pInfo.Add(MinBid.ToString());
+            pInfo.Add(CurrentBidderID.ToString());
+
+            return pInfo;
+        }
+
 
     }
 }
