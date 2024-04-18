@@ -19,17 +19,18 @@ namespace Bid501_Client
         public LoginForm()
         {
             InitializeComponent();
-            ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login");
+            ws = new WebSocketSharp.WebSocket("ws://10.130.160.19:8001/login");
             ws.OnMessage += MessageFromServer;
             ws.Connect();
         }
 
         private void MessageFromServer(object sender, MessageEventArgs e)
         {
-            if (e.Data.Equals("VALID"))
-            {
-                MessageBox.Show("Success");
-            }
+            MessageBox.Show(e.Data.ToString());
+            //if (e.Data.Equals("VALID"))
+            //{
+            //    MessageBox.Show("Success");
+            //}
             //throw new NotImplementedException();
         }
 
@@ -37,15 +38,16 @@ namespace Bid501_Client
         {
             string username = uxUsername.Text;
             string password = uxPassword.Text;
+            //MessageBox.Show("Username: " + username + "\nPassword: " + password);
             ws.Send("Username: "+username+"\nPassword: "+password);
 
         }
 
-        public bool MessageRecieved(string message)
-        {
-            Invoke(new Action(() => MessageBox.Show(message.ToString())));
-            return true;
-        }
+        //public bool MessageRecieved(string message)
+        //{
+        //    Invoke(new Action(() => MessageBox.Show(message.ToString())));
+        //    return true;
+        //}
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
