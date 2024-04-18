@@ -13,10 +13,10 @@ using WebSocketSharp;
 
 namespace Bid501_Client
 {
-    public partial class Form1 : Form
+    public partial class LoginForm : Form
     {
         private WebSocketSharp.WebSocket ws;
-        public Form1()
+        public LoginForm()
         {
             InitializeComponent();
             ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login");
