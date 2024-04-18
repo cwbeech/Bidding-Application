@@ -19,11 +19,12 @@ namespace Bid501_Server
 
         protected override void OnMessage(MessageEventArgs e)
         {
-            string[] tokens = e.Data.Split(':');
-            string User = tokens[0];
-            string Password = tokens[1];
-
-            _ctrl.LoginDel();
+            //string[] tokens = e.Data.Split(':');
+            //string User = tokens[0];
+            //string Password = tokens[1];
+            //string message = e.Data;
+            //Sessions.Broadcast(message);
+            //_ctrl.LoginDel();
         }
 
         public void sendResponse(bool result)
