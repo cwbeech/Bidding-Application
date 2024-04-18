@@ -23,7 +23,8 @@ namespace Bid501_Server
             string[] tokens = e.Data.Split(':');
             string User = tokens[0];
             string Password = tokens[1];
-
+            //string message = e.Data;
+            //Sessions.Broadcast(message);
             //_ctrl.LoginDel();
             //NOTE: the following lines below are for testing purposes
             sendResponse(true);
