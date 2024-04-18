@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using WebSocketSharp;
@@ -8,34 +9,31 @@ using WebSocketSharp.Server;
 
 namespace Bid501_Server
 {
+    /// <summary>
+    /// Login service for the server
+    /// </summary>
     public class Login : WebSocketBehavior
     {
-        private ServerCommunictionControl _ctrl;
+        private ServerCommunictionControl ctrl;
 
-        public Login(ServerCommunictionControl c)
+        public Login(ServerCommunictionControl ctrl)
         {
-            this._ctrl = c;
+            this.ctrl = ctrl;
         }
 
+        /// <summary>
+        /// Parses user data, attempts login, sends 0 to client for valid, -1 for invalid login.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnMessage(MessageEventArgs e)
         {
             string[] tokens = e.Data.Split(':');
-            string User = tokens[0];
-            string Password = tokens[1];
+            string user = tokens[0];
+            string password = tokens[1];
 
-            _ctrl.LoginDel();
-        }
+            int result = ctrl.LoginDel(user, password);
 
-        public void sendResponse(bool result)
-        {
-            if (result)
-            {
-                Send("Valid");
-            }
-            else
-            {
-                Send("Invalid");
-            }
+            Send(result.ToString());
         }
     }
 }
