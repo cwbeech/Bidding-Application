@@ -13,6 +13,7 @@ namespace Bid501_Server
         private ServerCommunictionControl _ctrl;
 
         public Login(ServerCommunictionControl c)
+        //public Login()
         {
             this._ctrl = c;
         }
@@ -23,7 +24,9 @@ namespace Bid501_Server
             string User = tokens[0];
             string Password = tokens[1];
 
-            _ctrl.LoginDel();
+            //_ctrl.LoginDel();
+            //NOTE: the following lines below are for testing purposes
+            sendResponse(true);
         }
 
         public void sendResponse(bool result)
