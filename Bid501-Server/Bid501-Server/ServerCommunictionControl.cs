@@ -17,7 +17,8 @@ namespace Bid501_Server
 		{
 			string msg = e.Data;
 			msg = msg + " Received in server.";
-			Sessions.Broadcast(msg);
+			//Sessions.Broadcast(msg);
+			Sessions.SendTo(ID, msg);
 		}
 	}
 }
