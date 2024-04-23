@@ -24,7 +24,6 @@ namespace Bid501_Server
         {
             string user = UxUserTextBox.Text;
             string pass = UxPasswordTextBox.Text;
-            string serverIp = UxServerIpTextBox.Text;
 
             LoginDel(user, pass);
         }
@@ -33,7 +32,6 @@ namespace Bid501_Server
         {
             UxUserTextBox.Clear();
             UxPasswordTextBox.Clear();
-            UxServerIpTextBox.Clear();
         }
     }
 }
