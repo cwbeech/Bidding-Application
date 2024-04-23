@@ -22,7 +22,6 @@ namespace Bid501_Client
             ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login");
             ws.OnMessage += MessageFromServer;
             ws.Connect();
-
         }
 
         private void MessageFromServer(object sender, MessageEventArgs e)
@@ -33,11 +32,6 @@ namespace Bid501_Client
             }
             //throw new NotImplementedException();
         }
-
-        //private void Close()
-        //{
-        //    ws.Close();
-        //}
 
         private void uxLogin_Click(object sender, EventArgs e)
         {
