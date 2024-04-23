@@ -25,7 +25,12 @@ namespace Bid501_Server
             string user = UxUserTextBox.Text;
             string pass = UxPasswordTextBox.Text;
 
-            LoginDel(user, pass);
+            int loginAttempt = LoginDel(user, pass);
+
+            if(loginAttempt == -1)
+            {
+                UxLoginStatus.Text = "Invalid Login";
+            }
         }
 
         private void UxLoginCancel_Click(object sender, EventArgs e)

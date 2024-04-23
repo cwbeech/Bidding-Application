@@ -36,18 +36,19 @@ namespace Bid501_Server
             this.label4 = new System.Windows.Forms.Label();
             this.UxLoginButton = new System.Windows.Forms.Button();
             this.UxLoginCancel = new System.Windows.Forms.Button();
+            this.UxLoginStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // UxUserTextBox
             // 
-            this.UxUserTextBox.Location = new System.Drawing.Point(93, 101);
+            this.UxUserTextBox.Location = new System.Drawing.Point(93, 66);
             this.UxUserTextBox.Name = "UxUserTextBox";
             this.UxUserTextBox.Size = new System.Drawing.Size(195, 20);
             this.UxUserTextBox.TabIndex = 0;
             // 
             // UxPasswordTextBox
             // 
-            this.UxPasswordTextBox.Location = new System.Drawing.Point(93, 140);
+            this.UxPasswordTextBox.Location = new System.Drawing.Point(93, 104);
             this.UxPasswordTextBox.Name = "UxPasswordTextBox";
             this.UxPasswordTextBox.Size = new System.Drawing.Size(195, 20);
             this.UxPasswordTextBox.TabIndex = 1;
@@ -55,7 +56,7 @@ namespace Bid501_Server
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(32, 104);
+            this.label1.Location = new System.Drawing.Point(32, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 3;
@@ -64,7 +65,7 @@ namespace Bid501_Server
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 143);
+            this.label2.Location = new System.Drawing.Point(34, 107);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 4;
@@ -74,7 +75,7 @@ namespace Bid501_Server
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(147, 48);
+            this.label4.Location = new System.Drawing.Point(149, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 31);
             this.label4.TabIndex = 6;
@@ -100,11 +101,21 @@ namespace Bid501_Server
             this.UxLoginCancel.UseVisualStyleBackColor = true;
             this.UxLoginCancel.Click += new System.EventHandler(this.UxLoginCancel_Click);
             // 
+            // UxLoginStatus
+            // 
+            this.UxLoginStatus.AutoSize = true;
+            this.UxLoginStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UxLoginStatus.Location = new System.Drawing.Point(152, 143);
+            this.UxLoginStatus.Name = "UxLoginStatus";
+            this.UxLoginStatus.Size = new System.Drawing.Size(0, 16);
+            this.UxLoginStatus.TabIndex = 9;
+            // 
             // LoginView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 239);
+            this.Controls.Add(this.UxLoginStatus);
             this.Controls.Add(this.UxLoginCancel);
             this.Controls.Add(this.UxLoginButton);
             this.Controls.Add(this.label4);
@@ -128,5 +139,6 @@ namespace Bid501_Server
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button UxLoginButton;
         private System.Windows.Forms.Button UxLoginCancel;
+        private System.Windows.Forms.Label UxLoginStatus;
     }
 }
