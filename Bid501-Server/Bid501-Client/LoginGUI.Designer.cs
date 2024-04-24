@@ -1,6 +1,6 @@
 ﻿namespace Bid501_Client
 {
-    partial class LoginForm
+    partial class LoginGUI
     {
         /// <summary>
         /// Required designer variable.

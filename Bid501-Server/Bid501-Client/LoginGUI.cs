@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bid501_Shared;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,15 +14,28 @@ using WebSocketSharp;
 
 namespace Bid501_Client
 {
-    public partial class LoginForm : Form
+    public partial class LoginGUI : Form
     {
         private WebSocketSharp.WebSocket ws;
-        public LoginForm()
+
+        public HandleLoginAttempt hla;
+        private ProductDatabaseProxy database;
+
+        public LoginGUI(IProductDB database, HandleLoginAttempt hla)
         {
             InitializeComponent();
-            ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login"); //NOTE: might not want to hardcode this, might want to ask user for ip address - Aidan
+
+            this.database = database as ProductDatabaseProxy;
+            this.hla = hla;
+
+            ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login");
             ws.OnMessage += MessageFromServer;
             ws.Connect();
+        }
+
+        public void UpdateLoginGUI()
+        {
+            //basically just redraw everything.
         }
 
         private void MessageFromServer(object sender, MessageEventArgs e)
@@ -36,11 +50,7 @@ namespace Bid501_Client
 
         private void uxLogin_Click(object sender, EventArgs e)
         {
-            string username = uxUsername.Text;
-            string password = uxPassword.Text;
-            //MessageBox.Show("Username: " + username + "\nPassword: " + password);
-            ws.Send("Username: "+username+"\nPassword: "+password);
-
+            hla(uxUsername.Text, uxPassword.Text);
         }
 
         //public bool MessageRecieved(string message)
@@ -52,7 +62,6 @@ namespace Bid501_Client
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             ws.Close();
-
         }
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Bid501_Client
 {
-    internal class ClientMainController
+    public class ClientMainController
     {
+
     }
 }
