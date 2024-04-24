@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace Bid501_Client
 {
-    public partial class BiddingForm : Form
+    public partial class ProductGUI : Form
     {
         //make list for products of whatever form
-        public BiddingForm()
+        public ProductGUI()
         {
             InitializeComponent();
             //Set up listbox

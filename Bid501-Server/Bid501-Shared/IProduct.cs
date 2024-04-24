@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bid501_Shared
 {
-    interface IProduct
+    public interface IProduct
     {
         string name { get; set; }
 
