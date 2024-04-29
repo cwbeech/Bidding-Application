@@ -6,6 +6,12 @@ using System.Windows.Forms;
 using WebSocketSharp.Server;
 namespace Bid501_Server
 {
+    public delegate int LoginAttempt(string user, string password);
+
+    public delegate bool PlaceBidAttempt(int userid, decimal bid, Product p);
+
+    public delegate List<string> SendProdInfo(Product p);
+
     internal static class Program
     {
         /// <summary>
@@ -21,10 +27,12 @@ namespace Bid501_Server
                 Login loginService = new Login(s);
                 return loginService;
             });
-            wss.Start();
-            Application.EnableVisualStyles();
+            //wss.Start(); //Note: getting a weird error here about my computer not liking using this number of sockets. Probably want to ask Jorge
+            Application.EnableVisualStyles(); //about it in class - Aidan, 4/29. 
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new ServerForm());
+            //***IMPORTANT NOTE*** Testing line. Delete in final version. 
+
         }
     }
 }

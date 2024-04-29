@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace Bid501_Server
 {
-    public partial class Form1 : Form
+    public partial class ServerForm : Form
     {
-        public Form1()
+        private AddProductForm apf = new AddProductForm();
+        public ServerForm()
         {
             InitializeComponent();
+
         }
-    }
+
+		private void uxAddButton_Click(object sender, EventArgs e)
+		{
+            apf.Show();
+		}
+	}
 }

@@ -13,6 +13,27 @@ namespace Bid501_Server
 {
 	public class ServerCommunictionControl : WebSocketBehavior
 	{
+		public LoginAttempt LoginDel;
+
+		public PlaceBidAttempt PlaceBidDel;
+
+		public SendProdInfo ProdInfoDel;
+
+		private WebSocketServer wss;
+
+		public ServerCommunictionControl()
+		{
+			wss = new WebSocketServer(8001);
+
+			wss.AddWebSocketService<Login>("/login", () =>
+			{
+				Login loginService = new Login(this);
+				return loginService;
+			});
+
+			wss.Start();
+		}
+
 		protected override void OnMessage(MessageEventArgs e)
 		{
 			string msg = e.Data;
