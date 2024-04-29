@@ -34,6 +34,7 @@
 			// 
 			// uxAddButton
 			// 
+			this.uxAddButton.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.uxAddButton.Location = new System.Drawing.Point(29, 372);
 			this.uxAddButton.Name = "uxAddButton";
 			this.uxAddButton.Size = new System.Drawing.Size(75, 23);
