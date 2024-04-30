@@ -19,18 +19,16 @@ namespace Bid501_Client
         private ProductDatabaseProxy database;
         public HandleLoginAttempt hla;
 
-        public LoginGUI(IProductDB database, HandleLoginAttempt hla)
+        public LoginGUI(HandleLoginAttempt hla)
         {
             //setup
             InitializeComponent();
-            this.database = database as ProductDatabaseProxy;
             this.hla = hla;
             //gui stuff
             uxPassword.Enabled = false;
             uxLogin.Enabled = false;
             uxUsername.TextChanged += UxUsername_TextChanged;
             uxPassword.TextChanged += UxPassword_TextChanged;
-
         }
 
         private void UxPassword_TextChanged(object sender, EventArgs e)
