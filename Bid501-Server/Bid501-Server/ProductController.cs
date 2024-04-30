@@ -78,6 +78,11 @@ namespace Bid501_Server
             pd.AddProduct(name, desc, price);
         }
 
+        public void AddProduct(Product p)
+        {
+            pd.AddProduct(p);
+        }
+
         /// <summary>
         /// Passes a request to close a bid to the product database
         /// </summary>

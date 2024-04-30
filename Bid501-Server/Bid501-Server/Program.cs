@@ -43,19 +43,21 @@ namespace Bid501_Server
             pc.StartBid(6);
             pc.StartBid(7);
 
-            WebSocketServer wss = new WebSocketServer(8001);
+            /*WebSocketServer wss = new WebSocketServer(8001);
             wss.AddWebSocketService<Login>("/login", () =>
             {
                 Login loginService = new Login(s);
                 return loginService;
-            });
+            });*/
 			//***IMPORTANT NOTE*** Uncomment this line after testing
 			//wss.Start(); //Note: getting a weird error here about my computer not liking using this number of sockets. Probably want to ask Jorge
 			Application.EnableVisualStyles(); //about it in class - Aidan, 4/29. 
             Application.SetCompatibleTextRenderingDefault(false);
             //Note: these next two lines are dummy delegates to just let the code run for now. Delete later - Aidan, 4/29
-            AddItemDel aid = new AddItemDel(Dummy);
-            BidCloseDel bcd = new BidCloseDel(Dummy);
+            //AddItemDel aid = new AddItemDel(Dummy);
+            //BidCloseDel bcd = new BidCloseDel(Dummy);
+            AddItemDel aid = new AddItemDel(pc.AddProduct);
+            BidCloseDel bcd = new BidCloseDel(pc.BidClosed);
             LoginAttempt ld = new LoginAttempt(ud.LoginAttempt);
             GetActiveProds gap = new GetActiveProds(pc.GetActiveProds);
             GetInactiveProds gip = new GetInactiveProds(pc.GetInactiveProds);
