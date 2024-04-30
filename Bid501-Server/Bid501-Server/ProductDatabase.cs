@@ -115,16 +115,49 @@ namespace Bid501_Server
         /// <param name="userID">The ID of the bidder</param>
         /// <param name="bid">The bidder's bid</param>
         /// <param name="p">The product that they bid on</param>
-        public void UpdateBid(int userID, decimal bid, Product p)
+        public void UpdateBid(int userID, decimal bid, int pID)
         {
-            foreach(var kp in  activeItems)
+            foreach(var kp in activeItems)
             {
-                if(kp.Key == p && bid > p.MinBid)
+                if(kp.Value == pID)
                 {
                     kp.Key.CurrentBidderID = userID;
                     kp.Key.MinBid = bid;
                 }
             }
+        }
+
+        /// <summary>
+        /// Validates a bid
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="bid"></param>
+        /// <param name="pID"></param>
+        /// <returns></returns>
+        public bool ValidateBid(int userID, decimal bid, int pID)
+        {
+            Product p = null;
+
+            foreach(var kp in activeItems)
+            {
+                if(kp.Value == pID)
+                {
+                    p = kp.Key;
+                }
+            }
+
+
+            if(p != null)
+            {
+                if (userID != p.CurrentBidderID && bid > p.MinBid)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            return false;
         }
 
         /// <summary>

@@ -9,7 +9,7 @@ namespace Bid501_Server
 {
     public delegate int LoginAttempt(string user, string password);
 
-    public delegate bool PlaceBidAttempt(int userid, decimal bid, int prodid);
+    public delegate bool PlaceBidAttempt(int userid, decimal bid, int pID);
 
     public delegate void AddItemDel(Product prod); //note: doesn't like it when I have question marks - Aidan, 4/29
 
@@ -36,6 +36,8 @@ namespace Bid501_Server
         [STAThread]
         static void Main()
         {
+
+
             ServerCommunictionControl s = new ServerCommunictionControl();
             UserDatabase ud = new UserDatabase();
             ProductDatabase pd = new ProductDatabase();
@@ -68,6 +70,9 @@ namespace Bid501_Server
             StartProdBid spb = new StartProdBid(pc.StartBid);
             GetActiveUsers gau = new GetActiveUsers(ud.GetActiveUsers);
             LoginView lv = new LoginView(ld);
+            PlaceBidAttempt pba = new PlaceBidAttempt(pc.PlaceBidAttempt);
+
+            s.SetDelegates(ld, pba, gap);
 
             Application.Run(lv);
 

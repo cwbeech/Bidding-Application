@@ -19,12 +19,13 @@ namespace Bid501_Server
 
 		public PlaceBidAttempt PlaceBidDel;
 
-		public SendProdInfo ProdInfoDel;
+		public GetActiveProds gap;
 
 		private WebSocketServer wss;
 
 		public ServerCommunictionControl()
-		{
+		{ 
+
 			wss = new WebSocketServer(8001);
 
 			wss.AddWebSocketService<Login>("/login", () =>
@@ -35,6 +36,19 @@ namespace Bid501_Server
 
 			wss.Start();
 		}
+
+		/// <summary>
+		/// Sets the delegates for hte server communication ctrl
+		/// </summary>
+		/// <param name="ld"></param>
+		/// <param name="pba"></param>
+		/// <param name="gap"></param>
+		public void SetDelegates(LoginAttempt ld, PlaceBidAttempt pba, GetActiveProds gap)
+		{
+            this.LoginDel = ld;
+            this.PlaceBidDel = pba;
+            this.gap = gap;
+        }
 
 		protected override void OnMessage(MessageEventArgs e)
 		{
@@ -59,7 +73,7 @@ namespace Bid501_Server
 				bool bidGood = PlaceBidDel(Convert.ToInt32(msg[1]), Convert.ToDecimal(msg[2]), Convert.ToInt32(msg[3]));
 				if (bidGood)
 				{
-					List<string> sendList = ProdInfoDel();
+					List<Product> sendList = gap().ToList<Product>();
 					string toSend = JsonConvert.SerializeObject(sendList);
 					Sessions.Broadcast(toSend);
 				}

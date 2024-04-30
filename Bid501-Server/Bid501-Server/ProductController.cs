@@ -28,28 +28,11 @@ namespace Bid501_Server
         /// <param name="bid">the bid amount they're attempting</param>
         /// <param name="p">the product that theyre bidding on</param>
         /// <returns>true if valid and bid was placed, false if not</returns>
-        public bool PlaceBidAttempt(int userID, decimal bid, Product p)
+        public bool PlaceBidAttempt(int userID, decimal bid, int pID)
         {
-            if(ValidateBid(userID, bid, p))
+            if(pd.ValidateBid(userID, bid, pID))
             {
-                UpdateCurrentBid(userID, bid, p);
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Checks if the attempted bid is greater than the minimum bid of the product, as well as checks if the bidder is already the highest bidder
-        /// </summary>
-        /// <param name="userID">the userID of the bidder</param>
-        /// <param name="bid">the bid amount they're attempting</param>
-        /// <param name="p">the product that theyre bidding on</param>
-        /// <returns>true if valid and user is not already the highest bidder, false if not</returns>
-        public bool ValidateBid(int userID, decimal bid, Product p)
-        {
-            if (userID != p.CurrentBidderID && bid > p.MinBid)
-            {
+                UpdateCurrentBid(userID, bid, pID);
                 return true;
             }
 
@@ -62,9 +45,9 @@ namespace Bid501_Server
         /// <param name="userID">the userID of the bidder</param>
         /// <param name="bid">the bid amount</param>
         /// <param name="p">the product</param>
-        public void UpdateCurrentBid(int userID, decimal bid, Product p) 
+        public void UpdateCurrentBid(int userID, decimal bid, int pID) 
         {
-            pd.UpdateBid(userID, bid, p);
+            pd.UpdateBid(userID, bid, pID);
         }
 
         /// <summary>
@@ -78,6 +61,10 @@ namespace Bid501_Server
             pd.AddProduct(name, desc, price);
         }
 
+        /// <summary>
+        /// Overloaded method for adding a product with a complete product object
+        /// </summary>
+        /// <param name="p"></param>
         public void AddProduct(Product p)
         {
             pd.AddProduct(p);

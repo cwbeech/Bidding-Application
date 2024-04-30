@@ -26,8 +26,6 @@ namespace Bid501_Server
 
         private BindingList<User> uList = new BindingList<User>();
 
-
-
         private AddItemDel aid;
 
         private BidCloseDel bcd;
