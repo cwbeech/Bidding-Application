@@ -14,21 +14,35 @@ namespace Bid501_Server
     {
         //private AddProductForm apf = new AddProductForm();
 
-        private BindingList<Product> pList = new BindingList<Product>();
+        private GetInactiveProds gip;
+
+        private GetActiveProds gap;
+
+        private BindingList<Product> pList = new BindingList<Product>(); 
 
         private BindingList<User> uList = new BindingList<User>();
+
+
 
         private AddItemDel aid;
 
         private BidCloseDel bcd;
 
-        public ServerForm(AddItemDel aid, BidCloseDel bcd)
+        public ServerForm(AddItemDel aid, BidCloseDel bcd, GetInactiveProds gip, GetActiveProds gap)
         {
             InitializeComponent();
-            uxProductBox.DataSource = pList;
-            uxUserBox.DataSource = uList;
+
             this.aid = aid;
             this.bcd = bcd;
+            this.gap = gap;
+            this.gip = gip;
+
+            pList = gap();
+
+            uxProductBox.DataSource = pList;
+            uxUserBox.DataSource = uList;
+
+
         }
 
         public void UpdateGUI(BindingList<Product> prodList, BindingList<User> clientList)
@@ -42,7 +56,7 @@ namespace Bid501_Server
 
 		private void uxAddButton_Click(object sender, EventArgs e)
 		{
-            AddProductForm apf = new AddProductForm();
+            AddProductForm apf = new AddProductForm(gip);
             apf.ShowDialog();
             if (apf.DialogResult == DialogResult.OK)
             {

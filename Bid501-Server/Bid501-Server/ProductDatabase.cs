@@ -72,6 +72,29 @@ namespace Bid501_Server
         }
 
         /// <summary>
+        /// Starts a bid based off product ID.
+        /// </summary>
+        /// <param name="pID"></param>
+        public void BidStarted(int pID)
+        {
+            Product prod = null;
+
+            foreach(var kp in allItems)
+            {
+                if(kp.Value == pID)
+                {
+                    prod = kp.Key;
+                }
+            }
+            
+            if(prod != null)
+            {
+                allItems.Remove(prod);
+                activeItems.Add(prod, prod.ID);
+            }
+        }
+
+        /// <summary>
         /// Updates a products current bidder id and minimum bid 
         /// </summary>
         /// <param name="userID">The ID of the bidder</param>
@@ -87,6 +110,41 @@ namespace Bid501_Server
                     kp.Key.MinBid = bid;
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets a list of all inactive items in the database
+        /// </summary>
+        /// <returns></returns>
+        public List<Product> GetInactiveItems()
+        {
+            List<Product> inactive = new List<Product>();
+
+            foreach(var kp in allItems)
+            {
+                if (!activeItems.ContainsKey(kp.Key))
+                {
+                    inactive.Add(kp.Key);
+                }
+            }
+
+            return inactive;
+        }
+
+        /// <summary>
+        /// Gets a list of all active products in the database
+        /// </summary>
+        /// <returns></returns>
+        public List<Product> GetActiveItems()
+        {
+            List<Product> active = new List<Product>();
+
+            foreach(var kp in activeItems)
+            {
+                active.Add(kp.Key);
+            }
+
+            return active;
         }
     }
 }

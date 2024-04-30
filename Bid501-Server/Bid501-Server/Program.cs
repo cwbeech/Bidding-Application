@@ -16,7 +16,11 @@ namespace Bid501_Server
     public delegate void BidCloseDel(Product prod); //note: doesn't like it when I have question marks - Aidan, 4/29
 
     public delegate void UpdateGUIDel(BindingList<Product> prodList, BindingList<User> clientList); //Note: 1. changed to BindingLists compared to diagram 
-				//to make updating GUIs easier. 2. In the diagram we have the second list as a list of Clients, which don't exist - Aidan, 4/29
+                                                                                                    //to make updating GUIs easier. 2. In the diagram we have the second list as a list of Clients, which don't exist - Aidan, 4/29
+
+    public delegate BindingList<Product> GetInactiveProds();
+
+    public delegate BindingList<Product> GetActiveProds();
 
 	public delegate List<string> SendProdInfo(Product p);
 
@@ -32,6 +36,13 @@ namespace Bid501_Server
             UserDatabase ud = new UserDatabase();
             ProductDatabase pd = new ProductDatabase();
             ProductController pc = new ProductController(pd);
+
+            //the starting 4 bids for the program
+            pc.StartBid(4);
+            pc.StartBid(5);
+            pc.StartBid(6);
+            pc.StartBid(7);
+
             WebSocketServer wss = new WebSocketServer(8001);
             wss.AddWebSocketService<Login>("/login", () =>
             {
@@ -46,13 +57,15 @@ namespace Bid501_Server
             AddItemDel aid = new AddItemDel(Dummy);
             BidCloseDel bcd = new BidCloseDel(Dummy);
             LoginAttempt ld = new LoginAttempt(ud.LoginAttempt);
+            GetActiveProds gap = new GetActiveProds(pc.GetActiveProds);
+            GetInactiveProds gip = new GetInactiveProds(pc.GetInactiveProds);
             LoginView lv = new LoginView(ld);
 
             Application.Run(lv);
 
             if (lv.isValid)
             {
-                Application.Run(new ServerForm(aid, bcd));
+                Application.Run(new ServerForm(aid, bcd, gip, gap));
             }
             
             

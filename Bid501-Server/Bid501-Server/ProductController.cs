@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,11 @@ namespace Bid501_Server
         public ProductController(ProductDatabase p)
         {
             this.pd = p;
+        }
+
+        public void StartBid(int pID)
+        {
+            pd.BidStarted(pID);
         }
 
         /// <summary>
@@ -89,6 +95,38 @@ namespace Bid501_Server
         public List<string> SendProdInfo(Product p)
         {
             return p.ToListString();
+        }
+
+        /// <summary>
+        /// Returns a list of all inactive items
+        /// </summary>
+        /// <returns></returns>
+        public BindingList<Product> GetInactiveProds()
+        {
+            BindingList<Product> bl = new BindingList<Product>();
+
+            foreach(var p in pd.GetInactiveItems())
+            {
+                bl.Add(p);
+            }
+
+            return bl;
+        }
+
+        /// <summary>
+        /// Returns a list of all active items
+        /// </summary>
+        /// <returns></returns>
+        public BindingList<Product> GetActiveProds()
+        {
+            BindingList<Product> bl = new BindingList<Product>();
+
+            foreach(var p in pd.GetActiveItems())
+            {
+                bl.Add(p);
+            }
+
+            return bl;
         }
     }
 }
