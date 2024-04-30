@@ -14,14 +14,17 @@ namespace Bid501_Server
 	{
 		private GetInactiveProds gip;
 
+		private StartProdBid spb;
+
 		private BindingList<Product> pList = new BindingList<Product>();
 
 		public Product toReturn;
 
-		public AddProductForm(GetInactiveProds gip)
+		public AddProductForm(GetInactiveProds gip, StartProdBid spb)
 		{
 			InitializeComponent();
 			this.gip = gip;
+			this.spb = spb;
 			pList = gip();
 			uxProductBox.DataSource = pList;
 		}
@@ -31,6 +34,7 @@ namespace Bid501_Server
 			//note: this needs to return something to the main form. 
 			toReturn = (Product)uxProductBox.SelectedItem;
 			//DialogResult.OK;
+			spb(toReturn.ID);
 			this.Close();
 		}
 	}

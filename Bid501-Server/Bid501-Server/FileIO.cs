@@ -96,7 +96,7 @@ namespace Bid501_Server
                 {
                     foreach (var kp in users)
                     {
-                        sw.WriteLine(kp.Key.ToString());
+                        sw.WriteLine(kp.Key.FileToString());
                     }
                 }
             }catch(IOException e)

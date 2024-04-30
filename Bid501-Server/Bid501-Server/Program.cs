@@ -22,6 +22,10 @@ namespace Bid501_Server
 
     public delegate BindingList<Product> GetActiveProds();
 
+    public delegate void StartProdBid(int pid);
+
+    public delegate BindingList<User> GetActiveUsers();
+
 	public delegate List<string> SendProdInfo();
 
     internal static class Program
@@ -59,13 +63,15 @@ namespace Bid501_Server
             LoginAttempt ld = new LoginAttempt(ud.LoginAttempt);
             GetActiveProds gap = new GetActiveProds(pc.GetActiveProds);
             GetInactiveProds gip = new GetInactiveProds(pc.GetInactiveProds);
+            StartProdBid spb = new StartProdBid(pc.StartBid);
+            GetActiveUsers gau = new GetActiveUsers(ud.GetActiveUsers);
             LoginView lv = new LoginView(ld);
 
             Application.Run(lv);
 
             if (lv.isValid)
             {
-                Application.Run(new ServerForm(aid, bcd, gip, gap));
+                Application.Run(new ServerForm(aid, bcd, gip, gap, spb, gau));
             }
             
             

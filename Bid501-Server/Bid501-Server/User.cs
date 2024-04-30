@@ -37,14 +37,23 @@ namespace Bid501_Server
         }
 
         /// <summary>
-        /// Overwritten for easy file I/O
+        /// toString function for easy file I/O
         /// </summary>
         /// <returns>a formatted string for use in FilIO</returns>
-        public override string ToString()
+        public string FileToString()
         {
             //sets string to 'Bidder' if bidder, 'Admin' if admin, had to add the throw arg at the end so vs would stop being angry at me, realistically will never be thrown
             string type = this.UserType == UserGroup.Bidder ? "Bidder" : this.UserType == UserGroup.Admin ? "Admin" : throw new ArgumentOutOfRangeException();
             return this.Username + ":" + this.Password + ":" + type + ":" + this.UserID;
+        }
+
+        /// <summary>
+        /// Overwritten toString for the GUI
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return Username;
         }
     }
 }
