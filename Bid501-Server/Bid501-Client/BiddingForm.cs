@@ -25,7 +25,7 @@ namespace Bid501_Client
 
         }
 
-        //When clicking to bid, first validate that amount is valid, then try to send bid
+        //When clicking to bid, first validate that amount is valid (> minBid), then try to send bid
         private void uxBidConfirm_Click(object sender, EventArgs e)
         {
 
