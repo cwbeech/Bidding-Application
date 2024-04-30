@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,12 +18,16 @@ namespace Bid501_Client
         private ProductDatabaseProxy database;
         public HandlePlaceBid hpb;
         public HandleProductSelected hps;
-        public ProductGUI(IProductDB database, HandlePlaceBid hpb, HandleProductSelected hps)
+        private int clientID;
+
+        public ProductGUI(IProductDB database, HandlePlaceBid hpb, HandleProductSelected hps, int cID)
         {
             InitializeComponent();
             this.database = database as ProductDatabaseProxy;
             this.hpb = hpb;
             this.hps = hps;
+            clientID = cID;
+
         }
 
         public void UpdateProductGUI()
@@ -41,6 +46,16 @@ namespace Bid501_Client
             //uxTimeLeft.Text = ((ProductProxy)uxProductBox.SelectedItem).time; THIS NEEDS TO BE IMPLEMENTED ON DATA STRUCTURE--------------------------------------------------
             uxMinBidAmount.Text = ((ProductProxy)uxProductBox.SelectedItem).minBid.ToString();
             uxDetail.Text = ((ProductProxy)uxProductBox.SelectedItem).description;
+            if (((ProductProxy)uxProductBox.SelectedItem).currBidID == clientID)
+            {
+                uxHighest.Visible = true;
+                uxBidConfirm.Visible = false;
+            }
+            else
+            {
+                uxHighest.Visible = false;
+                uxBidConfirm.Visible = true;
+            }
         }
 
         //When clicking to bid, first validate that amount is valid, then try to send bid

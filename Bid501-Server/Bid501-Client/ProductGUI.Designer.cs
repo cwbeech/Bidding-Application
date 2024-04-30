@@ -39,6 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.uxMinBidAmount = new System.Windows.Forms.Label();
             this.uxDetail = new System.Windows.Forms.TextBox();
+            this.uxHighest = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // uxProductName
@@ -141,11 +142,22 @@
             this.uxDetail.TabIndex = 11;
             this.uxDetail.UseWaitCursor = true;
             // 
+            // uxHighest
+            // 
+            this.uxHighest.AutoSize = true;
+            this.uxHighest.Location = new System.Drawing.Point(43, 215);
+            this.uxHighest.Name = "uxHighest";
+            this.uxHighest.Size = new System.Drawing.Size(113, 13);
+            this.uxHighest.TabIndex = 12;
+            this.uxHighest.Text = "Current Highest Bidder";
+            this.uxHighest.Visible = false;
+            // 
             // ProductGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 264);
+            this.Controls.Add(this.uxHighest);
             this.Controls.Add(this.uxDetail);
             this.Controls.Add(this.uxMinBidAmount);
             this.Controls.Add(this.label1);
@@ -177,5 +189,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label uxMinBidAmount;
         private System.Windows.Forms.TextBox uxDetail;
+        private System.Windows.Forms.Label uxHighest;
     }
 }
