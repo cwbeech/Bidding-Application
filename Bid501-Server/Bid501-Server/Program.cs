@@ -29,6 +29,7 @@ namespace Bid501_Server
         static void Main()
         {
             ServerCommunictionControl s = new ServerCommunictionControl();
+            UserDatabase ud = new UserDatabase();
             WebSocketServer wss = new WebSocketServer(8001);
             wss.AddWebSocketService<Login>("/login", () =>
             {
@@ -42,8 +43,19 @@ namespace Bid501_Server
             //Note: these next two lines are dummy delegates to just let the code run for now. Delete later - Aidan, 4/29
             AddItemDel aid = new AddItemDel(Dummy);
             BidCloseDel bcd = new BidCloseDel(Dummy);
+            LoginAttempt ld = new LoginAttempt(ud.LoginAttempt);
+            LoginView lv = new LoginView(ld);
 
-            Application.Run(new ServerForm(aid, bcd));
+            Application.Run(lv);
+
+            if (lv.isValid)
+            {
+                Application.Run(new ServerForm(aid, bcd));
+            }
+            
+            
+            
+
              
 
         }

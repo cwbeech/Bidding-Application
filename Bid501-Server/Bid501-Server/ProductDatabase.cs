@@ -25,16 +25,16 @@ namespace Bid501_Server
         public ProductDatabase()
         {
             activeItems = new Dictionary<Product, int>();
-            nextID = 1;
+            nextID = 5;
         }
 
         /// <summary>
         /// Adds a product to the activeItems list
         /// </summary>
         /// <param name="p">The product to add</param>
-        public void AddProduct(string name, string desc, decimal price)
+        public void AddProduct(Product p)
         {
-            Product p = new Product(name, desc, nextID, price);
+            p.ID = nextID;
             nextID++;
             activeItems.Add(p, p.ID);
         }

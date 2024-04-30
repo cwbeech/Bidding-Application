@@ -21,7 +21,7 @@ namespace Bid501_Server
         /// <summary>
         /// The product ID
         /// </summary>
-        public int ID { get; }
+        public int ID { get; set; }
 
         /// <summary>
         /// Starting price of the product
@@ -81,6 +81,15 @@ namespace Bid501_Server
 		{
             return Name;
 		}
+
+        /// <summary>
+        /// Returns a string separated by ':' containing the information of a product
+        /// </summary>
+        /// <returns></returns>
+        public string ToFileString()
+        {
+            return this.Name + ":" + this.Description + ":" + this.ID + ":" + this.Price.ToString();
+        }
 
 
 	}

@@ -9,15 +9,18 @@ namespace Bid501_Server
 {
     public class FileIO
     {
-        private string fileName;
+        private string userFileName;
+        private string prodFileName;
+        private ProductDatabase pd;
 
         /// <summary>
         /// an object for simple file io
         /// </summary>
         /// <param name="fn">the filename or path to the file</param>
-        public FileIO(string fn)
+        public FileIO(string un, string pn)
         {
-            fileName = fn; 
+            userFileName = un;
+            prodFileName = pn;
         }
 
         /// <summary>
@@ -32,7 +35,7 @@ namespace Bid501_Server
 
             try
             {
-                using(StreamReader sr = new StreamReader(fileName))
+                using(StreamReader sr = new StreamReader(userFileName))
                 {
                     string line;
                     string user;
@@ -84,7 +87,7 @@ namespace Bid501_Server
         {
             try
             {
-                using (StreamWriter sw = new StreamWriter(fileName))
+                using (StreamWriter sw = new StreamWriter(userFileName))
                 {
                     foreach (var kp in users)
                     {
@@ -94,6 +97,38 @@ namespace Bid501_Server
             }catch(IOException e)
             {
                 throw new Exception("Couldn't find / write to the file specified in fileName");
+            }
+        }
+
+        public void ReadProductFromFile()
+        {
+            List<Product> prods = new List<Product>();
+
+            try
+            {
+                using (StreamReader sr = new StreamReader(prodFileName))
+                {
+                    string line;
+
+                    string name;
+                    string desc;
+                    decimal price;
+
+                    while((line = sr.ReadLine()) != null)
+                    {
+                        string[] parts = line.Split(':');
+                        if(parts.Length == 3)
+                        {
+                            name = parts[0];
+                            desc = parts[1];
+                            price = Decimal.Parse(parts[2]);
+
+                            Product p = new Product()
+
+                            pd.AddProduct(name, desc, price);
+                        }
+                    }
+                }
             }
         }
     }
