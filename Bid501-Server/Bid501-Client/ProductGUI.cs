@@ -63,7 +63,7 @@ namespace Bid501_Client
         {
             if (int.Parse(uxBidAmount.Text) >= ((ProductProxy)uxProductBox.SelectedItem).minBid)
             {
-                //sEND bID
+                hpb((decimal)int.Parse(uxBidAmount.Text), ((ProductProxy)uxProductBox.SelectedItem).id);
             }
         }
     }

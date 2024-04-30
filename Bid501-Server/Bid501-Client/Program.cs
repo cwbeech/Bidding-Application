@@ -11,11 +11,11 @@ namespace Bid501_Client
     public delegate bool HandleLoginAttempt(string user, string pass);
     public delegate void UpdateLoginGUI();
     //product delegates
-    public delegate bool HandlePlaceBid(decimal bidAmt, int prodID);
+    public delegate void HandlePlaceBid(decimal bidAmt, int prodID);
     public delegate void HandleProductSelected(IProduct p);
     public delegate void UpdateProductGUI();
     //controller delegates
-    public delegate bool HandleBid(decimal bidAmt, int prodID);
+    public delegate void HandleBid(decimal bidAmt, int prodID);
     public delegate bool HandleLogin(string user, string pass);
     public delegate void UpdateControl(IProductDB database);
     public static class Program
