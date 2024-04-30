@@ -40,9 +40,9 @@ namespace Bid501_Client
             return false;
         }
 
-        public bool HandleBid(decimal bidAmt, int prodID)
+        public void HandleBid(decimal bidAmt, int prodID)
         {
-            return false;
+            
         }
 
     }
