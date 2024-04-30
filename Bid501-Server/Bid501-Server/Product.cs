@@ -87,7 +87,7 @@ namespace Bid501_Server
         /// <returns></returns>
         public string ToFileString()
         {
-            return this.Name + ":" + this.Description + ":" + this.ID + ":" + this.Price.ToString();
+            return this.Name + ":" + this.Description + ":" + this.Price.ToString();
         }
 
 

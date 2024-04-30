@@ -30,6 +30,8 @@ namespace Bid501_Server
         {
             ServerCommunictionControl s = new ServerCommunictionControl();
             UserDatabase ud = new UserDatabase();
+            ProductDatabase pd = new ProductDatabase();
+            ProductController pc = new ProductController(pd);
             WebSocketServer wss = new WebSocketServer(8001);
             wss.AddWebSocketService<Login>("/login", () =>
             {

@@ -16,7 +16,7 @@ namespace Bid501_Server
         /// <summary>
         /// A list of all products, active or inactive, and their ID
         /// </summary>
-        public Dictionary<Product, int> allItems;
+        public Dictionary<Product, int> allItems = new Dictionary<Product, int>();
 
         private FileIO fio;
 
@@ -32,8 +32,9 @@ namespace Bid501_Server
         public ProductDatabase()
         {
             activeItems = new Dictionary<Product, int>();
+            fio = new FileIO("products.txt", this);
             fio.ReadProductFromFile();
-            nextID = 5;
+            nextID = 1;
         }
 
         /// <summary>
@@ -42,6 +43,20 @@ namespace Bid501_Server
         /// <param name="p">The product to add</param>
         public void AddProduct(Product p)
         {
+            p.ID = nextID;
+            nextID++;
+            allItems.Add(p, p.ID);
+        }
+
+        /// <summary>
+        /// Overloaded method for AddProduct which takes raw data to create a new product
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="price"></param>
+        public void AddProduct(string name, string description, decimal price)
+        {
+            Product p = new Product(name, description, price);
             p.ID = nextID;
             nextID++;
             allItems.Add(p, p.ID);
