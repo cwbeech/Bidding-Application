@@ -100,6 +100,10 @@ namespace Bid501_Server
             }
         }
 
+        /// <summary>
+        /// Reads in all products from the file, adds them to the product list in ProductManager
+        /// </summary>
+        /// <exception cref="Exception"></exception>
         public void ReadProductFromFile()
         {
             List<Product> prods = new List<Product>();
@@ -123,12 +127,37 @@ namespace Bid501_Server
                             desc = parts[1];
                             price = Decimal.Parse(parts[2]);
 
-                            Product p = new Product()
+                            Product p = new Product(name, desc, price);
 
-                            pd.AddProduct(name, desc, price);
+                            pd.AddProduct(p);
                         }
                     }
                 }
+            } catch(IOException ex)
+            {
+                throw new Exception("Could not find the specified file.");
+            }
+        }
+
+        /// <summary>
+        /// Prints all product information to the a file.
+        /// </summary>
+        /// <param name="p">The list of all the products</param>
+        /// <exception cref="Exception"></exception>
+        public void PrintProductToFile(Dictionary<Product, int> p)
+        {
+            try
+            {
+                using(StreamWriter sw = new StreamWriter(prodFileName))
+                {
+                    foreach(var kp in p)
+                    {
+                        sw.WriteLine(kp.Key.ToFileString());
+                    }
+                }
+            } catch(Exception ex)
+            {
+                throw new Exception("Could not find the specified file.");
             }
         }
     }

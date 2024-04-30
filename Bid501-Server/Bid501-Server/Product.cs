@@ -21,7 +21,7 @@ namespace Bid501_Server
         /// <summary>
         /// The product ID
         /// </summary>
-        public int ID { get; set; }
+        public int ID { get; set; } = 0;
 
         /// <summary>
         /// Starting price of the product
@@ -45,11 +45,10 @@ namespace Bid501_Server
         /// <param name="description">A description of the product</param>
         /// <param name="id">The id of the product</param>
         /// <param name="price">The initial price of the product</param>
-        public Product(string name, string description, int id, decimal price)
+        public Product(string name, string description, decimal price)
         {
             Name = name;
             Description = description;
-            ID = id;
             Price = price;
 
             MinBid = price;

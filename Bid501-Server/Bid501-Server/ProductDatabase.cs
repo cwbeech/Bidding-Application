@@ -14,6 +14,13 @@ namespace Bid501_Server
         public Dictionary<Product, int> activeItems;
 
         /// <summary>
+        /// A list of all products, active or inactive, and their ID
+        /// </summary>
+        public Dictionary<Product, int> allItems;
+
+        private FileIO fio;
+
+        /// <summary>
         /// the nextID to assign to a product (not sure if we need this as of rn 04/18)
         /// </summary>
         private int nextID;
@@ -25,6 +32,7 @@ namespace Bid501_Server
         public ProductDatabase()
         {
             activeItems = new Dictionary<Product, int>();
+            fio.ReadProductFromFile();
             nextID = 5;
         }
 
@@ -36,7 +44,7 @@ namespace Bid501_Server
         {
             p.ID = nextID;
             nextID++;
-            activeItems.Add(p, p.ID);
+            allItems.Add(p, p.ID);
         }
 
         /// <summary>
