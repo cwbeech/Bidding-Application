@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,15 +27,18 @@ namespace Bid501_Client
 
         public void UpdateProductGUI()
         {
-
+            uxProductBox.Refresh();
         }
-
-        //When selected index changed, update pretty much everything: ProductName, timeLeft, minBidAmount, NumofBids, match current item selected
+        
+        /// <summary>
+        /// Selected index of list box changed, update everything on GUI to represent current product selected: ProductName, MinBidAmount, Detail, TimeLeft
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxProductBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //TWO ITEMS ARE NOT IMPLEMENTED ON THIS LIST
             uxProductName.Text = ((ProductProxy)uxProductBox.SelectedItem).name;
-            //uxTimeLeft.Text = ((ProductProxy)uxProductBox.SelectedItem).time;
+            //uxTimeLeft.Text = ((ProductProxy)uxProductBox.SelectedItem).time; THIS NEEDS TO BE IMPLEMENTED ON DATA STRUCTURE--------------------------------------------------
             uxMinBidAmount.Text = ((ProductProxy)uxProductBox.SelectedItem).minBid.ToString();
             uxDetail.Text = ((ProductProxy)uxProductBox.SelectedItem).description;
         }
