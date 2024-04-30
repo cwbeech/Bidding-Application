@@ -76,11 +76,21 @@ namespace Bid501_Server
             }
 		}
 
+        /// <summary>
+        /// Closes a bid 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 		private void uxCloseBid_Click(object sender, EventArgs e)
 		{
             //I fucking swear we had to close the bids somehow, but I don't see it in the final project pdf.
             //Might just need to delete this and the button. - Aidan, 4/29. 
-            bcd((Product)uxProductBox.SelectedItem);
+            Product p = uxProductBox.SelectedItem as Product;
+
+            bcd(p.ID);
+
+            pList = gap();
+            uxProductBox.DataSource = pList;
 		}
 	}
 }

@@ -13,7 +13,7 @@ namespace Bid501_Server
 
     public delegate void AddItemDel(Product prod); //note: doesn't like it when I have question marks - Aidan, 4/29
 
-    public delegate void BidCloseDel(Product p); //note: doesn't like it when I have question marks - Aidan, 4/29
+    public delegate void BidCloseDel(int pID); //note: doesn't like it when I have question marks - Aidan, 4/29
 
     public delegate void UpdateGUIDel(BindingList<Product> prodList, BindingList<User> clientList); //Note: 1. changed to BindingLists compared to diagram 
                                                                                                     //to make updating GUIs easier. 2. In the diagram we have the second list as a list of Clients, which don't exist - Aidan, 4/29
@@ -59,7 +59,7 @@ namespace Bid501_Server
             Application.SetCompatibleTextRenderingDefault(false);
             //Note: these next two lines are dummy delegates to just let the code run for now. Delete later - Aidan, 4/29
             AddItemDel aid = new AddItemDel(Dummy);
-            BidCloseDel bcd = new BidCloseDel(Dummy);
+            BidCloseDel bcd = new BidCloseDel(pc.BidClosed);
             LoginAttempt ld = new LoginAttempt(ud.LoginAttempt);
             GetActiveProds gap = new GetActiveProds(pc.GetActiveProds);
             GetInactiveProds gip = new GetInactiveProds(pc.GetInactiveProds);

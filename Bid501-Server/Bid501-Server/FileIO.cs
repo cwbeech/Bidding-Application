@@ -22,6 +22,11 @@ namespace Bid501_Server
             userFileName = un;
         }
 
+        /// <summary>
+        /// Overloaded constructor for use within ProductController
+        /// </summary>
+        /// <param name="pn"></param>
+        /// <param name="pd"></param>
         public FileIO(string pn, ProductDatabase pd)
         {
             prodFileName = pn;
