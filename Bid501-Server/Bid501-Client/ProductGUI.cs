@@ -36,7 +36,8 @@ namespace Bid501_Client
         }
         
         /// <summary>
-        /// Selected index of list box changed, update everything on GUI to represent current product selected: ProductName, MinBidAmount, Detail, TimeLeft
+        /// Selected index of list box changed, update everything on GUI to represent current product selected: ProductName, MinBidAmount, Detail, TimeLeft.
+        /// Also updates if client is the current highest bidder.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
