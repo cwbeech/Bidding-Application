@@ -23,9 +23,9 @@ namespace Bid501_Client
             this.hb = hb;
         }
 
-        public bool HandleLoginAttempt(string user, string pass)
+        public void HandleLoginAttempt(string user, string pass)
         {
-            return hl(user, pass);
+            hl(user, pass);
         }
 
         public void HandlePlaceBid(decimal bidAmt, int prodID)
@@ -42,11 +42,11 @@ namespace Bid501_Client
         {
             this.ulgui = ulgui;
         }
-        //might not need
-        public void UpdateControl(IProductDB database)
+        public void UpdateControl(IProductDB database, int clientID)
         {
 
         }
+        //might not need
         public void HandleProductSelected(IProduct p)
         {
 
