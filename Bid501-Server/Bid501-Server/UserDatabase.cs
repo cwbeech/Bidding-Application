@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,6 +73,22 @@ namespace Bid501_Server
             {
                 activeUsers.Remove(u);
             }
+        }
+
+        /// <summary>
+        /// Returns a bindinglist of all active users for use within the gui
+        /// </summary>
+        /// <returns></returns>
+        public BindingList<User> GetActiveUsers()
+        {
+            BindingList<User> bl = new BindingList<User>();
+
+            foreach(var u in activeUsers)
+            {
+                bl.Add(u);
+            }
+
+            return bl;
         }
     }
 }

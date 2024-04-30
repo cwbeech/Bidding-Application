@@ -66,9 +66,24 @@ namespace Bid501_Server
         /// 'Closes' a bid by removing it from the activeItems list
         /// </summary>
         /// <param name="p">The product to close</param>
-        public void BidClosed(Product p)
+        public void BidClosed(int pID)
         {
-            activeItems.Remove(p);
+            Product prod = null;
+
+            foreach (var kp in activeItems)
+            {
+                if (kp.Value == pID)
+                {
+                    prod = kp.Key;
+                }
+            }
+
+            if (prod != null)
+            {
+                allItems.Add(prod, prod.ID);
+                activeItems.Remove(prod);
+            }
+
         }
 
         /// <summary>

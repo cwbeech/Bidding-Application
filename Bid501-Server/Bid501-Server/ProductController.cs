@@ -87,9 +87,9 @@ namespace Bid501_Server
         /// Passes a request to close a bid to the product database
         /// </summary>
         /// <param name="p">The product to close</param>
-        public void BidClosed(Product p)
+        public void BidClosed(int pID)
         {
-            pd.BidClosed(p);
+            pd.BidClosed(pID);
         }
 
         /// <summary>
