@@ -19,7 +19,7 @@ namespace Bid501_Client
         public LoginForm()
         {
             InitializeComponent();
-            ws = new WebSocketSharp.WebSocket("ws://10.130.160.19:8001/login"); //NOTE: might not want to hardcode this, might want to ask user for ip address - Aidan
+            ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login"); //NOTE: might not want to hardcode this, might want to ask user for ip address - Aidan
             ws.OnMessage += MessageFromServer;
             ws.Connect();
         }

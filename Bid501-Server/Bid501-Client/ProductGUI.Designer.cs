@@ -1,6 +1,6 @@
 ﻿namespace Bid501_Client
 {
-    partial class BiddingForm
+    partial class ProductGUI
     {
         /// <summary>
         /// Required designer variable.
