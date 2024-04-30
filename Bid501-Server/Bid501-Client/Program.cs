@@ -37,6 +37,11 @@ namespace Bid501_Client
             cmc.SetUpdateLoginGUI(lg.UpdateLoginGUI);
             cmc.SetUpdateProductGUI(pg.UpdateProductGUI);
             Application.Run(lg);
+            if (lg.ShowDialog() == DialogResult.OK)
+            {
+                //Can acess data from LG post-mortem in here
+
+            }
         }
     }
 }

@@ -51,5 +51,9 @@ namespace Bid501_Client
             hla(uxUsername.Text, uxPassword.Text);
         }
 
+        private void LoginGUI_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+        }
     }
 }

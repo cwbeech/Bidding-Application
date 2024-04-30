@@ -87,7 +87,7 @@
             this.uxLogin.UseVisualStyleBackColor = true;
             this.uxLogin.Click += new System.EventHandler(this.uxLogin_Click);
             // 
-            // Form1
+            // LoginGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -98,8 +98,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.uxPassword);
             this.Controls.Add(this.uxUsername);
-            this.Name = "Form1";
+            this.Name = "LoginGUI";
             this.Text = "Login501";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LoginGUI_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
