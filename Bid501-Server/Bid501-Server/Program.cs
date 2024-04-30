@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -10,7 +11,14 @@ namespace Bid501_Server
 
     public delegate bool PlaceBidAttempt(int userid, decimal bid, Product p);
 
-    public delegate List<string> SendProdInfo(Product p);
+    public delegate void AddItemDel(Product prod); //note: doesn't like it when I have question marks - Aidan, 4/29
+
+    public delegate void BidCloseDel(Product prod); //note: doesn't like it when I have question marks - Aidan, 4/29
+
+    public delegate void UpdateGUIDel(BindingList<Product> prodList, BindingList<User> clientList); //Note: 1. changed to BindingLists compared to diagram 
+				//to make updating GUIs easier. 2. In the diagram we have the second list as a list of Clients, which don't exist - Aidan, 4/29
+
+	public delegate List<string> SendProdInfo(Product p);
 
     internal static class Program
     {
@@ -27,12 +35,20 @@ namespace Bid501_Server
                 Login loginService = new Login(s);
                 return loginService;
             });
-            //wss.Start(); //Note: getting a weird error here about my computer not liking using this number of sockets. Probably want to ask Jorge
-            Application.EnableVisualStyles(); //about it in class - Aidan, 4/29. 
+			//***IMPORTANT NOTE*** Uncomment this line after testing
+			//wss.Start(); //Note: getting a weird error here about my computer not liking using this number of sockets. Probably want to ask Jorge
+			Application.EnableVisualStyles(); //about it in class - Aidan, 4/29. 
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ServerForm());
-            //***IMPORTANT NOTE*** Testing line. Delete in final version. 
+            //Note: these next two lines are dummy delegates to just let the code run for now. Delete later - Aidan, 4/29
+            AddItemDel aid = new AddItemDel(Dummy);
+            BidCloseDel bcd = new BidCloseDel(Dummy);
+
+            Application.Run(new ServerForm(aid, bcd));
+             
 
         }
+
+        //dummy method, delete in final version - Aidan, 4/29.
+        static void Dummy(Product p) { }
     }
 }
