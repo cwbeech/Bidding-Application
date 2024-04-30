@@ -9,11 +9,11 @@ namespace Bid501_Server
 {
     public delegate int LoginAttempt(string user, string password);
 
-    public delegate bool PlaceBidAttempt(int userid, decimal bid, Product p);
+    public delegate bool PlaceBidAttempt(int userid, decimal bid, int prodid);
 
     public delegate void AddItemDel(Product prod); //note: doesn't like it when I have question marks - Aidan, 4/29
 
-    public delegate void BidCloseDel(Product prod); //note: doesn't like it when I have question marks - Aidan, 4/29
+    public delegate void BidCloseDel(Product p); //note: doesn't like it when I have question marks - Aidan, 4/29
 
     public delegate void UpdateGUIDel(BindingList<Product> prodList, BindingList<User> clientList); //Note: 1. changed to BindingLists compared to diagram 
                                                                                                     //to make updating GUIs easier. 2. In the diagram we have the second list as a list of Clients, which don't exist - Aidan, 4/29
@@ -22,7 +22,7 @@ namespace Bid501_Server
 
     public delegate BindingList<Product> GetActiveProds();
 
-	public delegate List<string> SendProdInfo(Product p);
+	public delegate List<string> SendProdInfo();
 
     internal static class Program
     {
