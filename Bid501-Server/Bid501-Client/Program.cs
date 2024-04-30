@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace Bid501_Client
 {
     //login delegates
-    public delegate void HandleLoginAttempt(string user, string pass);
+    public delegate bool HandleLoginAttempt(string user, string pass);
     public delegate void UpdateLoginGUI();
     //product delegates
     public delegate void HandlePlaceBid(decimal bidAmt, int prodID);
@@ -28,7 +28,12 @@ namespace Bid501_Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginGUI());
+
+            ClientCommunicationController ccc = new ClientCommunicationController();
+            ClientMainController cmc = new ClientMainController(ccc.database, ccc.HandleLogin, ccc.HandleBid);
+
+
+            Application.Run(new LoginGUI(new ProductDatabaseProxy(), cmc.HandleLoginAttempt));
         }
     }
 }
