@@ -24,6 +24,7 @@ namespace Bid501_Client
         {
             InitializeComponent();
             this.database = database as ProductDatabaseProxy;
+            uxProductBox.DataSource = this.database;
             this.hpb = hpb;
             this.hps = hps;
             clientID = cID;

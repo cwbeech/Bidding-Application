@@ -32,8 +32,8 @@ namespace Bid501_Client
             ClientCommunicationController ccc = new ClientCommunicationController();
             ClientMainController cmc = new ClientMainController(ccc.database, ccc.HandleLogin, ccc.HandleBid);
 
-            LoginGUI lg = new LoginGUI(ccc.database, cmc.HandleLoginAttempt);
-            ProductGUI pg = new ProductGUI(ccc.database, cmc.HandlePlaceBid, cmc.HandleProductSelected);
+            LoginGUI lg = new LoginGUI(cmc.HandleLoginAttempt);
+            ProductGUI pg = new ProductGUI(ccc.database, cmc.HandlePlaceBid, cmc.HandleProductSelected,-1);
             cmc.SetUpdateLoginGUI(lg.UpdateLoginGUI);
             cmc.SetUpdateProductGUI(pg.UpdateProductGUI);
             Application.Run(lg);
