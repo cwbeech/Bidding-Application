@@ -63,5 +63,6 @@ namespace Bid501_Client
         {
             ws.Close();
         }
+        //
     }
 }
