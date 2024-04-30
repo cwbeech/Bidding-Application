@@ -21,11 +21,26 @@ namespace Bid501_Client
 
         public LoginGUI(IProductDB database, HandleLoginAttempt hla)
         {
+            //setup
             InitializeComponent();
-
             this.database = database as ProductDatabaseProxy;
             this.hla = hla;
+            //gui stuff
+            uxPassword.Enabled = false;
+            uxLogin.Enabled = false;
+            uxUsername.TextChanged += UxUsername_TextChanged;
+            uxPassword.TextChanged += UxPassword_TextChanged;
 
+        }
+
+        private void UxPassword_TextChanged(object sender, EventArgs e)
+        {
+            uxLogin.Enabled = true;
+        }
+
+        private void UxUsername_TextChanged(object sender, EventArgs e)
+        {
+            uxPassword.Enabled = true;
         }
 
         public void UpdateLoginGUI()

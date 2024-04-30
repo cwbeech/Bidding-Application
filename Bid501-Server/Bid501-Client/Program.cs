@@ -11,7 +11,7 @@ namespace Bid501_Client
     public delegate bool HandleLoginAttempt(string user, string pass);
     public delegate void UpdateLoginGUI();
     //product delegates
-    public delegate void HandlePlaceBid(decimal bidAmt, int prodID);
+    public delegate bool HandlePlaceBid(decimal bidAmt, int prodID);
     public delegate void HandleProductSelected(IProduct p);
     public delegate void UpdateProductGUI();
     //controller delegates
@@ -32,8 +32,11 @@ namespace Bid501_Client
             ClientCommunicationController ccc = new ClientCommunicationController();
             ClientMainController cmc = new ClientMainController(ccc.database, ccc.HandleLogin, ccc.HandleBid);
 
-
-            Application.Run(new LoginGUI(new ProductDatabaseProxy(), cmc.HandleLoginAttempt));
+            LoginGUI lg = new LoginGUI(ccc.database, cmc.HandleLoginAttempt);
+            ProductGUI pg = new ProductGUI(ccc.database, cmc.HandlePlaceBid, cmc.HandleProductSelected);
+            cmc.SetUpdateLoginGUI(lg.UpdateLoginGUI);
+            cmc.SetUpdateProductGUI(pg.UpdateProductGUI);
+            Application.Run(lg);
         }
     }
 }

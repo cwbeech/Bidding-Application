@@ -13,7 +13,7 @@ namespace Bid501_Client
     {
         private WebSocketSharp.WebSocket ws;
         private int clientID;
-        private ProductDatabaseProxy database;
+        public ProductDatabaseProxy database;
         public KeyValuePair<IProduct, decimal> bids;
         public UpdateControl uc;
 

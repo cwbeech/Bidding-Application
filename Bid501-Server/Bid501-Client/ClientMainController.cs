@@ -19,8 +19,6 @@ namespace Bid501_Client
         public ClientMainController(IProductDB database, HandleLogin hl, HandleBid hb)
         {
             this.database = database as ProductDatabaseProxy;
-            this.upgui = upgui;
-            this.ulgui = ulgui;
             this.hl = hl;
             this.hb = hb;
         }
