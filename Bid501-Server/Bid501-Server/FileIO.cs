@@ -17,10 +17,15 @@ namespace Bid501_Server
         /// an object for simple file io
         /// </summary>
         /// <param name="fn">the filename or path to the file</param>
-        public FileIO(string un, string pn)
+        public FileIO(string un)
         {
             userFileName = un;
+        }
+
+        public FileIO(string pn, ProductDatabase pd)
+        {
             prodFileName = pn;
+            this.pd = pd;
         }
 
         /// <summary>

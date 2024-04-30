@@ -28,7 +28,7 @@ namespace Bid501_Server
         /// </summary>
         public UserDatabase()
         {
-            registeredUsers = fio.ReadUsersFromFile();
+           registeredUsers = fio.ReadUsersFromFile();
         }
 
         /// <summary>
