@@ -40,11 +40,18 @@ namespace Bid501_Client
             uxPassword.Enabled = true;
         }
 
-        public void UpdateLoginGUI()
+        public void UpdateLoginGUI(bool result)
         {
             //this only runs if client is properly set, therefore a login was successful and this can be closed
-            DialogResult = DialogResult.OK;
-            this.Close();
+            if (result)
+            {
+                DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                this.loginFail.Visible = true;
+            }
         }
 
         private void uxLogin_Click(object sender, EventArgs e)

@@ -53,12 +53,9 @@ namespace Bid501_Client
             this.database = database as ProductDatabaseProxy;
             if (this.clientID != clientID) //if client is being set for the first time
             {
-               // if (clientID != -1) { //checks if the client is valid. NOTE: this is unnecessary because the clientID defaults to -1.
-                ucl(this.clientID); 
-                ulgui(); 
-              //  }
+                ucl(this.clientID);
             }
-            
+            ulgui(clientID != -1);
         }
 
     }

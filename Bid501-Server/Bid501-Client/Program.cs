@@ -9,7 +9,7 @@ namespace Bid501_Client
 {
     //login delegates
     public delegate void HandleLoginAttempt(string user, string pass);
-    public delegate void UpdateLoginGUI();
+    public delegate void UpdateLoginGUI(bool result);
     //product delegates
     public delegate void HandlePlaceBid(decimal bidAmt, int prodID);
     public delegate void UpdateClient(int clientID);
