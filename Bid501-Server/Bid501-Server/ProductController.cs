@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bid501_Shared;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -68,6 +69,11 @@ namespace Bid501_Server
         public void AddProduct(Product p)
         {
             pd.AddProduct(p);
+        }
+
+        public IProductDB ReturnDatabase()
+        {
+            return pd;
         }
 
         /// <summary>

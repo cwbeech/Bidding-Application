@@ -5,9 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WebSocketSharp.Server;
+using Bid501_Shared;
 namespace Bid501_Server
 {
     public delegate int LoginAttempt(string user, string password);
+
+    public delegate IProductDB ReturnDatabase();
 
     public delegate bool PlaceBidAttempt(int userid, decimal bid, int pID);
 
@@ -16,7 +19,7 @@ namespace Bid501_Server
     public delegate void BidCloseDel(int pID); //note: doesn't like it when I have question marks - Aidan, 4/29
 
     public delegate void UpdateGUIDel(BindingList<Product> prodList, BindingList<User> clientList); //Note: 1. changed to BindingLists compared to diagram 
-                                                                                                    //to make updating GUIs easier. 2. In the diagram we have the second list as a list of Clients, which don't exist - Aidan, 4/29
+                                 //to make updating GUIs easier. 2. In the diagram we have the second list as a list of Clients, which don't exist - Aidan, 4/29
 
     public delegate BindingList<Product> GetInactiveProds();
 

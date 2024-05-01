@@ -10,6 +10,7 @@ using WebSocketSharp;
 using WebSocketSharp.Server;
 using Newtonsoft.Json;
 using System.Net.Configuration;
+using Bid501_Shared;
 
 namespace Bid501_Server
 {
@@ -20,6 +21,8 @@ namespace Bid501_Server
 		public PlaceBidAttempt PlaceBidDel;
 
 		public GetActiveProds gap;
+
+		public ReturnDatabase rd;
 
 		private WebSocketServer wss;
 
@@ -43,11 +46,12 @@ namespace Bid501_Server
 		/// <param name="ld"></param>
 		/// <param name="pba"></param>
 		/// <param name="gap"></param>
-		public void SetDelegates(LoginAttempt ld, PlaceBidAttempt pba, GetActiveProds gap)
+		public void SetDelegates(LoginAttempt ld, PlaceBidAttempt pba, GetActiveProds gap, ReturnDatabase rd)
 		{
             this.LoginDel = ld;
             this.PlaceBidDel = pba;
             this.gap = gap;
+			this.rd = rd;
         }
 
 		protected override void OnMessage(MessageEventArgs e)
@@ -69,12 +73,15 @@ namespace Bid501_Server
 			else if (Convert.ToInt32(msg[0]) == 1)
 			{//place bid attempt from client
 				bool bidGood = PlaceBidDel(Convert.ToInt32(msg[1]), Convert.ToDecimal(msg[2]), Convert.ToInt32(msg[3]));
-				if (bidGood)
-				{
-					List<Product> sendList = gap().ToList<Product>();
-					string toSend = JsonConvert.SerializeObject(sendList);
+				//if (bidGood)
+				//{
+				//**Note** Client side wants the database regardless of whether the bid went through or not, so I commented out these liens - Aidan, 5/1
+					//List<Product> sendList = gap().ToList<Product>();
+					IProductDB sendDB = rd();
+					string toSend = JsonConvert.SerializeObject(sendDB);
+					toSend = "1:" + toSend;
 					Sessions.Broadcast(toSend);
-				}
+				//}
 
 			}
 			
