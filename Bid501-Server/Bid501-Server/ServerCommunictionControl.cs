@@ -58,14 +58,12 @@ namespace Bid501_Server
 			Sessions.SendTo(ID, msg);*/
 
 			//string[] msg = e.Data.Split(':');
-			string blah = JsonConvert.DeserializeObject(e.Data).ToString();
-			string[] msg = blah.Split(':');
+			string[] msg = e.Data.Split(':');
 			if (Convert.ToInt32(msg[0]) == 0)
 			{//login attempt from client
 			 //bool toReturn = PlaceBidDel(Convert.ToInt32(msg[0]), Convert.ToDecimal(msg[1]), Convert.ToInt32(msg[2]));
 				int toReturn = LoginDel(msg[1], msg[2]); //NOTE: LoginDel needs to return userid which I don't believe it currently does - Aidan, 4/30
 				string sendString = "0:" + toReturn;
-				sendString = JsonConvert.SerializeObject(sendString);
 				Sessions.SendTo(ID, sendString);
 			}
 			else if (Convert.ToInt32(msg[0]) == 1)
