@@ -13,9 +13,9 @@ namespace Bid501_Client
         private ProductDatabaseProxy database;
         public UpdateProductGUI upgui;
         public UpdateLoginGUI ulgui;
+        public UpdateClient ucl;
         public HandleLogin hl;
         public HandleBid hb;
-        public UpdateClient ucl;
 
         public ClientMainController(IProductDB database, HandleLogin hl, HandleBid hb)
         {

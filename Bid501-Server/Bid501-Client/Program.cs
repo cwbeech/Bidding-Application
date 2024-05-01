@@ -12,7 +12,7 @@ namespace Bid501_Client
     public delegate void UpdateLoginGUI();
     //product delegates
     public delegate void HandlePlaceBid(decimal bidAmt, int prodID);
-    public delegate void UpdateClient(int client);
+    public delegate void UpdateClient(int clientID);
     public delegate void UpdateProductGUI();
     //controller delegates
     public delegate void HandleBid(decimal bidAmt, int prodID);

@@ -16,7 +16,6 @@ namespace Bid501_Client
 {
     public partial class LoginGUI : Form
     {
-        private ProductDatabaseProxy database;
         public HandleLoginAttempt hla;
 
         public LoginGUI(HandleLoginAttempt hla)

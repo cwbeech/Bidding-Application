@@ -16,8 +16,9 @@ namespace Bid501_Client
     public partial class ProductGUI : Form
     {
         private ProductDatabaseProxy database;
-        public HandlePlaceBid hpb;
         private int clientID;
+
+        public HandlePlaceBid hpb;
 
         public ProductGUI(IProductDB database, HandlePlaceBid hpb)
         {
@@ -33,14 +34,14 @@ namespace Bid501_Client
             uxProductBox.Refresh();
         }
 
-        public void UpdateClient(int client)
+        public void UpdateClient(int clientID)
         {
-            clientID = client;
+            this.clientID = clientID;
         }
         
         /// <summary>
         /// Selected index of list box changed, update everything on GUI to represent current product selected: ProductName, MinBidAmount, Detail, TimeLeft.
-        /// Also updates if client is the current highest bidder.
+        /// Also updates if clientID is the current highest bidder.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
