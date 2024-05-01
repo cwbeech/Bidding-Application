@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bid501_Shared;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,46 +14,49 @@ using WebSocketSharp;
 
 namespace Bid501_Client
 {
-    public partial class LoginForm : Form
+    public partial class LoginGUI : Form
     {
-        private WebSocketSharp.WebSocket ws;
-        public LoginForm()
+        public HandleLoginAttempt hla;
+
+        public LoginGUI(HandleLoginAttempt hla)
         {
+            //setup
             InitializeComponent();
-            ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login"); //NOTE: might not want to hardcode this, might want to ask user for ip address - Aidan
-            ws.OnMessage += MessageFromServer;
-            ws.Connect();
+            this.hla = hla;
+            //gui stuff
+            uxPassword.Enabled = false;
+            uxLogin.Enabled = false;
+            uxUsername.TextChanged += UxUsername_TextChanged;
+            uxPassword.TextChanged += UxPassword_TextChanged;
         }
 
-        private void MessageFromServer(object sender, MessageEventArgs e)
+        private void UxPassword_TextChanged(object sender, EventArgs e)
         {
-            MessageBox.Show(e.Data.ToString());
-            //if (e.Data.Equals("VALID"))
-            //{
-            //    MessageBox.Show("Success");
-            //}
-            //throw new NotImplementedException();
+            uxLogin.Enabled = true;
+        }
+
+        private void UxUsername_TextChanged(object sender, EventArgs e)
+        {
+            uxPassword.Enabled = true;
+        }
+
+        public void UpdateLoginGUI(bool result)
+        {
+            //this only runs if client is properly set, therefore a login was successful and this can be closed
+            if (result)
+            {
+                DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                this.loginFail.Visible = true;
+            }
         }
 
         private void uxLogin_Click(object sender, EventArgs e)
         {
-            string username = uxUsername.Text;
-            string password = uxPassword.Text;
-            //MessageBox.Show("Username: " + username + "\nPassword: " + password);
-            ws.Send("Username: "+username+"\nPassword: "+password);
-
-        }
-
-        //public bool MessageRecieved(string message)
-        //{
-        //    Invoke(new Action(() => MessageBox.Show(message.ToString())));
-        //    return true;
-        //}
-
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            ws.Close();
-
+            hla(uxUsername.Text, uxPassword.Text);
         }
     }
 }
