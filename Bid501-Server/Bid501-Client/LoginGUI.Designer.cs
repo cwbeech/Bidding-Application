@@ -100,7 +100,6 @@
             this.Controls.Add(this.uxUsername);
             this.Name = "LoginGUI";
             this.Text = "Login501";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LoginGUI_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -43,17 +43,14 @@ namespace Bid501_Client
 
         public void UpdateLoginGUI()
         {
-            
+            //this only runs if client is properly set, therefore a login was successful and this can be closed
+            DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void uxLogin_Click(object sender, EventArgs e)
         {
             hla(uxUsername.Text, uxPassword.Text);
-        }
-
-        private void LoginGUI_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            DialogResult = DialogResult.OK;
         }
     }
 }

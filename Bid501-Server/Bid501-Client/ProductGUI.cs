@@ -17,23 +17,25 @@ namespace Bid501_Client
     {
         private ProductDatabaseProxy database;
         public HandlePlaceBid hpb;
-        public HandleProductSelected hps;
         private int clientID;
 
-        public ProductGUI(IProductDB database, HandlePlaceBid hpb, HandleProductSelected hps, int cID)
+        public ProductGUI(IProductDB database, HandlePlaceBid hpb)
         {
             InitializeComponent();
             this.database = database as ProductDatabaseProxy;
             uxProductBox.DataSource = this.database;
             this.hpb = hpb;
-            this.hps = hps;
-            clientID = cID;
-
+            clientID = -1;
         }
 
         public void UpdateProductGUI()
         {
             uxProductBox.Refresh();
+        }
+
+        public void UpdateClient(int client)
+        {
+            clientID = client;
         }
         
         /// <summary>

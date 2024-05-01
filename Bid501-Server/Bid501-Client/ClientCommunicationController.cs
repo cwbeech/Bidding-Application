@@ -14,9 +14,11 @@ namespace Bid501_Client
     public class ClientCommunicationController
     {
         private WebSocketSharp.WebSocket ws;
+
         private int clientID;
         public ProductDatabaseProxy database;
         public KeyValuePair<IProduct, decimal> bids;
+
         public UpdateControl uc;
 
         public ClientCommunicationController()
@@ -52,7 +54,7 @@ namespace Bid501_Client
         public void HandleLogin(string user, string pass)
         {
             ws.Send("0:" + user + ":" + pass);
-
+            uc(database, 1);
         }
 
         public void HandleBid(decimal bidAmt, int prodID)

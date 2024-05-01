@@ -15,6 +15,7 @@ namespace Bid501_Client
         public UpdateLoginGUI ulgui;
         public HandleLogin hl;
         public HandleBid hb;
+        public UpdateClient ucl;
 
         public ClientMainController(IProductDB database, HandleLogin hl, HandleBid hb)
         {
@@ -42,14 +43,22 @@ namespace Bid501_Client
         {
             this.ulgui = ulgui;
         }
+
+        public void SetUpdateClient(UpdateClient uc)
+        {
+            this.ucl = uc;
+        }
         public void UpdateControl(IProductDB database, int clientID)
         {
-
-        }
-        //might not need
-        public void HandleProductSelected(IProduct p)
-        {
-
+            this.database = database as ProductDatabaseProxy;
+            if (this.clientID != clientID) //if client is being set for the first time
+            {
+               // if (clientID != -1) { //checks if the client is valid. NOTE: this is unnecessary because the clientID defaults to -1.
+                ucl(this.clientID); 
+                ulgui(); 
+              //  }
+            }
+            
         }
 
     }

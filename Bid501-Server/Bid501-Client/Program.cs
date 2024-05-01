@@ -12,7 +12,7 @@ namespace Bid501_Client
     public delegate void UpdateLoginGUI();
     //product delegates
     public delegate void HandlePlaceBid(decimal bidAmt, int prodID);
-    public delegate void HandleProductSelected(IProduct p);
+    public delegate void UpdateClient(int client);
     public delegate void UpdateProductGUI();
     //controller delegates
     public delegate void HandleBid(decimal bidAmt, int prodID);
@@ -34,14 +34,13 @@ namespace Bid501_Client
             ccc.SetUpdateControl(cmc.UpdateControl);
 
             LoginGUI lg = new LoginGUI(cmc.HandleLoginAttempt);
-            ProductGUI pg = new ProductGUI(ccc.database, cmc.HandlePlaceBid, cmc.HandleProductSelected,-1);
+            ProductGUI pg = new ProductGUI(ccc.database, cmc.HandlePlaceBid);
             cmc.SetUpdateLoginGUI(lg.UpdateLoginGUI);
             cmc.SetUpdateProductGUI(pg.UpdateProductGUI);
+            cmc.SetUpdateClient(pg.UpdateClient);
             Application.Run(lg);
-            if (lg.ShowDialog() == DialogResult.OK)
-            {
-                //Can acess data from LG post-mortem in here
-
+            if (lg.DialogResult == DialogResult.OK) {
+                Application.Run(pg); 
             }
         }
     }
