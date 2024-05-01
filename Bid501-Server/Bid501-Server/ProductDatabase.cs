@@ -12,12 +12,14 @@ namespace Bid501_Server
         /// <summary>
         /// A list of all active products and their ID
         /// </summary>
-        public Dictionary<Product, int> activeItems;
+        public Dictionary<Product, int> actualActiveItems;
 
         /// <summary>
         /// A list of all products, active or inactive, and their ID
         /// </summary>
         public Dictionary<Product, int> allItems = new Dictionary<Product, int>();
+
+        public Dictionary<int, IProduct> activeItems { get; set; }
 
         private FileIO fio;
 
@@ -32,10 +34,19 @@ namespace Bid501_Server
         /// <param name="p">A ProductController</param>
         public ProductDatabase()
         {
-            activeItems = new Dictionary<Product, int>();
+            actualActiveItems = new Dictionary<Product, int>();
             fio = new FileIO("products.txt", this);
             fio.ReadProductFromFile();
             nextID = 1;
+        }
+
+        public Dictionary<int, IProduct> ReturnSendList()
+        {
+            foreach (KeyValuePair<Product, int> kvp in actualActiveItems)
+            {
+                activeItems.Add(kvp.Value, kvp.Key);
+            }
+            return activeItems;
         }
 
         /// <summary>
@@ -44,9 +55,9 @@ namespace Bid501_Server
         /// <param name="p">The product to add</param>
         public void AddProduct(Product p)
         {
-            p.ID = nextID;
+            p.id = nextID;
             nextID++;
-            allItems.Add(p, p.ID);
+            allItems.Add(p, p.id);
         }
 
         /// <summary>
@@ -58,9 +69,9 @@ namespace Bid501_Server
         public void AddProduct(string name, string description, decimal price)
         {
             Product p = new Product(name, description, price);
-            p.ID = nextID;
+            p.id = nextID;
             nextID++;
-            allItems.Add(p, p.ID);
+            allItems.Add(p, p.id);
         }
 
         /// <summary>
@@ -71,7 +82,7 @@ namespace Bid501_Server
         {
             Product prod = null;
 
-            foreach (var kp in activeItems)
+            foreach (var kp in actualActiveItems)
             {
                 if (kp.Value == pID)
                 {
@@ -81,8 +92,8 @@ namespace Bid501_Server
 
             if (prod != null)
             {
-                allItems.Add(prod, prod.ID);
-                activeItems.Remove(prod);
+                allItems.Add(prod, prod.id);
+                actualActiveItems.Remove(prod);
             }
 
         }
@@ -106,7 +117,7 @@ namespace Bid501_Server
             if(prod != null)
             {
                 allItems.Remove(prod);
-                activeItems.Add(prod, prod.ID);
+                actualActiveItems.Add(prod, prod.id);
             }
         }
 
@@ -118,12 +129,12 @@ namespace Bid501_Server
         /// <param name="p">The product that they bid on</param>
         public void UpdateBid(int userID, decimal bid, int pID)
         {
-            foreach(var kp in activeItems)
+            foreach(var kp in actualActiveItems)
             {
                 if(kp.Value == pID)
                 {
-                    kp.Key.CurrentBidderID = userID;
-                    kp.Key.MinBid = bid;
+                    kp.Key.currBidID = userID;
+                    kp.Key.minBid = bid;
                 }
             }
         }
@@ -139,7 +150,7 @@ namespace Bid501_Server
         {
             Product p = null;
 
-            foreach(var kp in activeItems)
+            foreach(var kp in actualActiveItems)
             {
                 if(kp.Value == pID)
                 {
@@ -150,7 +161,7 @@ namespace Bid501_Server
 
             if(p != null)
             {
-                if (userID != p.CurrentBidderID && bid > p.MinBid)
+                if (userID != p.currBidID && bid > p.minBid)
                 {
                     return true;
                 }
@@ -171,7 +182,7 @@ namespace Bid501_Server
 
             foreach(var kp in allItems)
             {
-                if (!activeItems.ContainsKey(kp.Key))
+                if (!actualActiveItems.ContainsKey(kp.Key))
                 {
                     inactive.Add(kp.Key);
                 }
@@ -188,7 +199,7 @@ namespace Bid501_Server
         {
             List<Product> active = new List<Product>();
 
-            foreach(var kp in activeItems)
+            foreach(var kp in actualActiveItems)
             {
                 active.Add(kp.Key);
             }

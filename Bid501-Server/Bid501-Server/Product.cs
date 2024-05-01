@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bid501_Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,40 +7,40 @@ using System.Threading.Tasks;
 
 namespace Bid501_Server
 {
-    public class Product
+    public class Product :IProduct
     {
         /// <summary>
         /// The name of the product
         /// </summary>
-        public string Name { get; }
+        public string name { get; set; }
 
         /// <summary>
         /// A brief description of the product
         /// </summary>
-        public string Description { get; }
+        public string description { get; set; }
 
         /// <summary>
         /// The product ID
         /// </summary>
-        public int ID { get; set; } = 0;
+        public int id { get; set; } = 0;
 
         /// <summary>
         /// Starting price of the product
         /// </summary>
-        public decimal Price { get; }  
+        public decimal price { get; set; }  
 
         /// <summary>
         /// Current minimum bid allowed on the product
         /// </summary>
-        public decimal MinBid { get; set; }
+        public decimal minBid { get; set; }
 
         /// <summary>
         /// The id of the bidder who currently has the highest bid on the product
         /// </summary>
-        public int CurrentBidderID { get; set; }
+        public int currBidID { get; set; }
 
         /// <summary>
-        /// Constructor for a Product object, initially it will set MinBid to price, and CurrentBidderID to 0.
+        /// Constructor for a Product object, initially it will set MinBid to price, and CurrentBidderid to 0.
         /// </summary>
         /// <param name="name">The name of the product</param>
         /// <param name="description">A description of the product</param>
@@ -47,12 +48,12 @@ namespace Bid501_Server
         /// <param name="price">The initial price of the product</param>
         public Product(string name, string description, decimal price)
         {
-            Name = name;
-            Description = description;
-            Price = price;
+            this.name = name;
+            this.description = description;
+            this.price = price;
 
-            MinBid = price;
-            CurrentBidderID = 0;
+            minBid = price;
+			currBidID = 0;
         }
 
         /// <summary>
@@ -63,11 +64,11 @@ namespace Bid501_Server
         {
             List<string> pInfo = new List<string>();
 
-            pInfo.Add(Name);
-            pInfo.Add(Description);
-            pInfo.Add(Price.ToString());
-            pInfo.Add(MinBid.ToString());
-            pInfo.Add(CurrentBidderID.ToString());
+            pInfo.Add(name);
+            pInfo.Add(description);
+            pInfo.Add(price.ToString());
+            pInfo.Add(minBid.ToString());
+            pInfo.Add(currBidID.ToString());
 
             return pInfo;
         }
@@ -78,7 +79,7 @@ namespace Bid501_Server
         /// <returns>The Product's name.</returns>
 		public override string ToString()
 		{
-            return Name;
+            return name;
 		}
 
         /// <summary>
@@ -87,7 +88,7 @@ namespace Bid501_Server
         /// <returns></returns>
         public string ToFileString()
         {
-            return this.Name + ":" + this.Description + ":" + this.Price.ToString();
+            return this.name + ":" + this.description + ":" + this.price.ToString();
         }
 
 
