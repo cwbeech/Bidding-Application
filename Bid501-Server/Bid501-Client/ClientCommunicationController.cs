@@ -24,14 +24,15 @@ namespace Bid501_Client
         public ClientCommunicationController()
         {
             //websocket stuff
-            ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login");
+            //ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login");
+            ws = new WebSocketSharp.WebSocket("ws://10.150.109.119:8001/login");
             ws.OnMessage += MessageFromServer;
             ws.Connect();
         }
 
         private void MessageFromServer(object sender, MessageEventArgs e)
         {
-            Deserialize(e.Data.ToString());
+            Deserialize(e.Data);
         }
 
         public void Deserialize(string message)
@@ -43,10 +44,11 @@ namespace Bid501_Client
             else if (message[0] == '1')
             {
                 database = JsonConvert.DeserializeObject(message.Split(':')[1]) as IProductDB as ProductDatabaseProxy;
+                //database = message.Split(':')[1] as IProductDB as ProductDatabaseProxy;
             }
             else
             {
-                throw new Exception("Deserialization fail");
+                //throw new Exception("Deserialization fail");
             }
             uc(database, clientID);
         }
