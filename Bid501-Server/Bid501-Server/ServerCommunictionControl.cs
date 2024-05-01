@@ -10,6 +10,7 @@ using WebSocketSharp;
 using WebSocketSharp.Server;
 using Newtonsoft.Json;
 using System.Net.Configuration;
+using Bid501_Shared;
 
 namespace Bid501_Server
 {
@@ -72,6 +73,7 @@ namespace Bid501_Server
 				if (bidGood)
 				{
 					List<Product> sendList = gap().ToList<Product>();
+
 					string toSend = JsonConvert.SerializeObject(sendList);
 					Sessions.Broadcast(toSend);
 				}
