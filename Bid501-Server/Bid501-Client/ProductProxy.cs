@@ -77,6 +77,11 @@ namespace Bid501_Client
             }
         }
 
+        public override string ToString()
+        {
+            return name;
+        }
+
         public ProductProxy(string n, string d, int i, decimal p)
         {
             name = n;

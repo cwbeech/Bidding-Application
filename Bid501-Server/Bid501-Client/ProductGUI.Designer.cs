@@ -31,7 +31,6 @@
             this.uxProductName = new System.Windows.Forms.Label();
             this.uxTimeLeft = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.uxNumBids = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.uxBidConfirm = new System.Windows.Forms.Button();
             this.uxBidAmount = new System.Windows.Forms.TextBox();
@@ -39,6 +38,8 @@
             this.uxProductBox = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.uxMinBidAmount = new System.Windows.Forms.Label();
+            this.uxDetail = new System.Windows.Forms.TextBox();
+            this.uxHighest = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // uxProductName
@@ -62,25 +63,16 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 91);
+            this.label3.Location = new System.Drawing.Point(28, 80);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Status: ";
-            // 
-            // uxNumBids
-            // 
-            this.uxNumBids.AutoSize = true;
-            this.uxNumBids.Location = new System.Drawing.Point(134, 133);
-            this.uxNumBids.Name = "uxNumBids";
-            this.uxNumBids.Size = new System.Drawing.Size(53, 13);
-            this.uxNumBids.TabIndex = 3;
-            this.uxNumBids.Text = "(___ bids)";
+            this.label3.Text = "Details:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(28, 171);
+            this.label5.Location = new System.Drawing.Point(25, 181);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 13);
             this.label5.TabIndex = 4;
@@ -98,7 +90,7 @@
             // 
             // uxBidAmount
             // 
-            this.uxBidAmount.Location = new System.Drawing.Point(48, 130);
+            this.uxBidAmount.Location = new System.Drawing.Point(46, 148);
             this.uxBidAmount.Name = "uxBidAmount";
             this.uxBidAmount.Size = new System.Drawing.Size(71, 20);
             this.uxBidAmount.TabIndex = 6;
@@ -124,7 +116,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 133);
+            this.label1.Location = new System.Drawing.Point(27, 151);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(13, 13);
             this.label1.TabIndex = 9;
@@ -133,17 +125,40 @@
             // uxMinBidAmount
             // 
             this.uxMinBidAmount.AutoSize = true;
-            this.uxMinBidAmount.Location = new System.Drawing.Point(100, 171);
+            this.uxMinBidAmount.Location = new System.Drawing.Point(97, 181);
             this.uxMinBidAmount.Name = "uxMinBidAmount";
             this.uxMinBidAmount.Size = new System.Drawing.Size(78, 13);
             this.uxMinBidAmount.TabIndex = 10;
             this.uxMinBidAmount.Text = "___amount___";
             // 
-            // BiddingForm
+            // uxDetail
+            // 
+            this.uxDetail.Enabled = false;
+            this.uxDetail.Location = new System.Drawing.Point(70, 80);
+            this.uxDetail.Multiline = true;
+            this.uxDetail.Name = "uxDetail";
+            this.uxDetail.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.uxDetail.Size = new System.Drawing.Size(165, 62);
+            this.uxDetail.TabIndex = 11;
+            this.uxDetail.UseWaitCursor = true;
+            // 
+            // uxHighest
+            // 
+            this.uxHighest.AutoSize = true;
+            this.uxHighest.Location = new System.Drawing.Point(43, 215);
+            this.uxHighest.Name = "uxHighest";
+            this.uxHighest.Size = new System.Drawing.Size(113, 13);
+            this.uxHighest.TabIndex = 12;
+            this.uxHighest.Text = "Current Highest Bidder";
+            this.uxHighest.Visible = false;
+            // 
+            // ProductGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 264);
+            this.Controls.Add(this.uxHighest);
+            this.Controls.Add(this.uxDetail);
             this.Controls.Add(this.uxMinBidAmount);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.uxProductBox);
@@ -151,11 +166,10 @@
             this.Controls.Add(this.uxBidAmount);
             this.Controls.Add(this.uxBidConfirm);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.uxNumBids);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.uxTimeLeft);
             this.Controls.Add(this.uxProductName);
-            this.Name = "BiddingForm";
+            this.Name = "ProductGUI";
             this.Text = "Bid501";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -167,7 +181,6 @@
         private System.Windows.Forms.Label uxProductName;
         private System.Windows.Forms.Label uxTimeLeft;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label uxNumBids;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button uxBidConfirm;
         private System.Windows.Forms.TextBox uxBidAmount;
@@ -175,5 +188,7 @@
         private System.Windows.Forms.ListBox uxProductBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label uxMinBidAmount;
+        private System.Windows.Forms.TextBox uxDetail;
+        private System.Windows.Forms.Label uxHighest;
     }
 }
