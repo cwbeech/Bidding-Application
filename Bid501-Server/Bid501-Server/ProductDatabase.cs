@@ -40,14 +40,15 @@ namespace Bid501_Server
             nextID = 1;
         }
 
-        public Dictionary<int, IProduct> ReturnSendList()
+        /*public IProductDB ReturnSendList()
         {
             foreach (KeyValuePair<Product, int> kvp in actualActiveItems)
             {
                 activeItems.Add(kvp.Value, kvp.Key);
             }
-            return activeItems;
-        }
+            IProductDB toReturn = new IProductDB();
+            return new IProductDB(activeItems);
+        }*/
 
         /// <summary>
         /// Adds a product to the activeItems list
