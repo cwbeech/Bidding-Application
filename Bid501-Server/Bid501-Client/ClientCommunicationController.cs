@@ -37,18 +37,17 @@ namespace Bid501_Client
 
         public void Deserialize(string message)
         {
-            if (message[0] == '0') //login accepted
+            if (message[0] == '0') //login
             {
                 clientID = int.Parse(message.Split(':')[1]);
             }
-            else if (message[0] == '1')
+            else if (message[0] == '1') //bid
             {
                 database = JsonConvert.DeserializeObject(message.Split(':')[1]) as IProductDB as ProductDatabaseProxy;
-                //database = message.Split(':')[1] as IProductDB as ProductDatabaseProxy;
             }
             else
             {
-                //throw new Exception("Deserialization fail");
+                throw new Exception("Deserialization fail");
             }
             uc(database, clientID);
         }
