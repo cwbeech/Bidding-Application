@@ -42,11 +42,13 @@ namespace Bid501_Client
             {
                 clientID = int.Parse(message.Split('&')[1]);
                 string toDeserialize = message.Split('&')[2];
-                database = new ProductDatabaseProxy(JsonConvert.DeserializeObject<IProductDB>(toDeserialize));
+                database.activeItems = (JsonConvert.DeserializeObject<ProductDatabaseProxy>(toDeserialize)).activeItems;
+                //database.activeItems = JsonConvert.DeserializeObject<Dictionary<int, IProduct>>(toDeserialize);
             }
             else if (message[0] == '1') //bid
             {
-               // database = JsonConvert.DeserializeObject<IProductDB>(message.Split('&')[1]) as IProductDB as ProductDatabaseProxy;
+                //string toDeserialize = message.Split('&')[1];
+                //database.activeItems = JsonConvert.DeserializeObject<ProductDatabaseProxy>(toDeserialize).activeItems;
             }
             else
             {
