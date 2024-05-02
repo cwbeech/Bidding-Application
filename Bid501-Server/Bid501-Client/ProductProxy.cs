@@ -77,6 +77,8 @@ namespace Bid501_Client
             }
         }
 
+        public DateTime timeLeft { get; set; }
+
         public override string ToString()
         {
             return name;
@@ -98,7 +100,8 @@ namespace Bid501_Client
             description = p.description;
             id = p.id;
             price = p.price;
-            currBidID = currBidID;
+            currBidID = p.currBidID;
+            timeLeft = p.timeLeft;
 
         }
     }
