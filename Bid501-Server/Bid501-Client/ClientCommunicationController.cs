@@ -25,7 +25,8 @@ namespace Bid501_Client
         {
             //websocket stuff
             //ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login");
-            ws = new WebSocketSharp.WebSocket("ws://10.150.109.119:8001/login");
+            //ws = new WebSocketSharp.WebSocket("ws://10.150.109.119:8001/login");
+            ws = new WebSocketSharp.WebSocket("ws://192.168.1.91:8001/login");
             ws.OnMessage += MessageFromServer;
             ws.Connect();
         }

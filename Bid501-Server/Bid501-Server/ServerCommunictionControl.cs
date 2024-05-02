@@ -31,10 +31,14 @@ namespace Bid501_Server
 
 			wss = new WebSocketServer(8001);
 
-			wss.AddWebSocketService<Login>("/login", () =>
+			//wss.AddWebSocketService<Login>("/login", () =>
+			//{
+			//	Login loginService = new Login(this);
+			//	return loginService;
+			//});
+			wss.AddWebSocketService("/login", () =>
 			{
-				Login loginService = new Login(this);
-				return loginService;
+				return this;
 			});
 
 			wss.Start();
