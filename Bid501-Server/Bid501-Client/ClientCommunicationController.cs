@@ -24,8 +24,8 @@ namespace Bid501_Client
         public ClientCommunicationController()
         {
             //websocket stuff
-            ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login");
-            //ws = new WebSocketSharp.WebSocket("ws://10.150.109.119:8001/login");
+            //ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login"); //personal machine's IP
+            ws = new WebSocketSharp.WebSocket("ws://10.150.109.119:8001/login"); //Aidan's IP
             database = new ProductDatabaseProxy();
             ws.OnMessage += MessageFromServer;
             ws.Connect();
@@ -58,9 +58,9 @@ namespace Bid501_Client
         {
             ws.Send("0:" + user + ":" + pass);
             // For testing ProductGUI
-            clientID = 1;
-            database.activeItems = DummyValues.GetDatabase().activeItems;
-            uc(database, clientID);
+            //clientID = 1;
+            //database.activeItems = DummyValues.GetDatabase().activeItems;
+            //uc(database, clientID);
         }
 
         public void HandleBid(decimal bidAmt, int prodID)
