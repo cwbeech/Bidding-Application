@@ -38,5 +38,15 @@ namespace Bid501_Client
                 return result;
             }
         }
+
+        public ProductDatabaseProxy()
+        {
+
+        }
+
+        public ProductDatabaseProxy(IProductDB pd)
+        {
+            activeItems = pd.activeItems;
+        }
     }
 }

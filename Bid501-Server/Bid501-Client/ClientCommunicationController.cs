@@ -41,11 +41,12 @@ namespace Bid501_Client
             if (message[0] == '0') //login
             {
                 clientID = int.Parse(message.Split('&')[1]);
-                database = JsonConvert.DeserializeObject<IProductDB>(message.Split('&')[2]) as ProductDatabaseProxy;
+                string toDeserialize = message.Split('&')[2];
+                database = new ProductDatabaseProxy(JsonConvert.DeserializeObject<IProductDB>(toDeserialize));
             }
             else if (message[0] == '1') //bid
             {
-                database = JsonConvert.DeserializeObject<IProductDB>(message.Split('&')[1]) as IProductDB as ProductDatabaseProxy;
+               // database = JsonConvert.DeserializeObject<IProductDB>(message.Split('&')[1]) as IProductDB as ProductDatabaseProxy;
             }
             else
             {

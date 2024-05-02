@@ -21,6 +21,8 @@ namespace Bid501_Client
 
         public int currBidID { get; set; }
 
+        public DateTime timeLeft { get; set; }
+
         public Product(string name, string desc, decimal price)
         {
             this.name = name;
@@ -29,6 +31,7 @@ namespace Bid501_Client
             this.price = price;
             this.minBid = price;
             this.currBidID = -1;
+            this.timeLeft = DateTime.Now;
         }
     }
     
