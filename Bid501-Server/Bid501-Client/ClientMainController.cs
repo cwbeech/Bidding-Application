@@ -50,7 +50,7 @@ namespace Bid501_Client
         }
         public void UpdateControl(IProductDB database, int clientID)
         {
-            this.database = database as ProductDatabaseProxy;
+            this.database.activeItems = database.activeItems;
             if (this.clientID != clientID) //if client is being set for the first time
             {
                 ucl(this.clientID);

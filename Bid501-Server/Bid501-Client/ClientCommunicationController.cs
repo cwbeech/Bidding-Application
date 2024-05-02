@@ -24,8 +24,8 @@ namespace Bid501_Client
         public ClientCommunicationController()
         {
             //websocket stuff
-            ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login");
-            //ws = new WebSocketSharp.WebSocket("ws://10.150.109.119:8001/login");
+            //ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login"); //personal machine's IP
+            ws = new WebSocketSharp.WebSocket("ws://10.150.109.119:8001/login"); //Aidan's IP
             database = new ProductDatabaseProxy();
             ws.OnMessage += MessageFromServer;
             ws.Connect();
@@ -41,11 +41,14 @@ namespace Bid501_Client
             if (message[0] == '0') //login
             {
                 clientID = int.Parse(message.Split('&')[1]);
-                database = JsonConvert.DeserializeObject<IProductDB>(message.Split('&')[2]) as ProductDatabaseProxy;
+                string toDeserialize = message.Split('&')[2];
+                database.activeItems = (JsonConvert.DeserializeObject<ProductDatabaseProxy>(toDeserialize)).activeItems;
+                //database.activeItems = JsonConvert.DeserializeObject<Dictionary<int, IProduct>>(toDeserialize);
             }
             else if (message[0] == '1') //bid
             {
-                database = JsonConvert.DeserializeObject<IProductDB>(message.Split('&')[1]) as IProductDB as ProductDatabaseProxy;
+                //string toDeserialize = message.Split('&')[1];
+                //database.activeItems = JsonConvert.DeserializeObject<ProductDatabaseProxy>(toDeserialize).activeItems;
             }
             else
             {

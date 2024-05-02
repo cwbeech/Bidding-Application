@@ -17,7 +17,7 @@ namespace Bid501_Server
         /// <summary>
         /// Dictionary containing all valid Users along with their ID
         /// </summary>
-        private Dictionary<User, int> registeredUsers;
+        private Dictionary<User, int> registeredUsers = new Dictionary<User, int>();
 
         /// <summary>
         /// FileIO object for reading in / saving user credentials
@@ -82,7 +82,7 @@ namespace Bid501_Server
             registeredUsers.Add(newUser, newUser.UserID);
             fio.PrintCredsToFile(registeredUsers);
 
-            return 0;
+            return newUser.UserID; //note: this was returning 0, should return new user ID - Aidan, 5/2
         }
 
         /// <summary>

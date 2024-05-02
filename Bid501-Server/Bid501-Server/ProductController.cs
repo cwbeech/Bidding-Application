@@ -73,7 +73,7 @@ namespace Bid501_Server
 
         public IProductDB ReturnDatabase()
         {
-            return pd;
+            return (IProductDB)pd;
         }
 
         /// <summary>

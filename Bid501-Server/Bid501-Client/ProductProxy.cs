@@ -77,6 +77,8 @@ namespace Bid501_Client
             }
         }
 
+        public DateTime timeLeft { get; set; }
+
         public override string ToString()
         {
             return name;
@@ -92,5 +94,15 @@ namespace Bid501_Client
             currBidID = 0; //may want to change how we handle no bid ID
         }
         */
+        public ProductProxy(IProduct p)
+        {
+            name = p.name;
+            description = p.description;
+            id = p.id;
+            price = p.price;
+            currBidID = p.currBidID;
+            timeLeft = p.timeLeft;
+
+        }
     }
 }
