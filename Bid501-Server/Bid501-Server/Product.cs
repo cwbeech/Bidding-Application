@@ -39,6 +39,8 @@ namespace Bid501_Server
         /// </summary>
         public int currBidID { get; set; }
 
+        public DateTime timeLeft { get; set; }
+
         /// <summary>
         /// Constructor for a Product object, initially it will set MinBid to price, and CurrentBidderid to 0.
         /// </summary>
@@ -54,6 +56,7 @@ namespace Bid501_Server
 
             minBid = price;
 			currBidID = 0;
+            timeLeft = DateTime.Now; //NOTE: whenever you display this, probably want to use ToShortDateString or something like it - Aidan, 5/2
         }
 
         /// <summary>
@@ -69,6 +72,7 @@ namespace Bid501_Server
             pInfo.Add(price.ToString());
             pInfo.Add(minBid.ToString());
             pInfo.Add(currBidID.ToString());
+            pInfo.Add(timeLeft.ToShortDateString());
 
             return pInfo;
         }

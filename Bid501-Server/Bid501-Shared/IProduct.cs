@@ -20,5 +20,7 @@ namespace Bid501_Shared
         //allow you to return price in the getter here - Aidan
 
         int currBidID { get; set; }
+
+        DateTime timeLeft { get; set; }
     }
 }
