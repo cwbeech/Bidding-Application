@@ -56,7 +56,7 @@ namespace Bid501_Client
                 ucl(this.clientID);
             }
             ulgui(clientID != -1);
-            upgui(database);
+            upgui(this.database);
         }
 
     }
