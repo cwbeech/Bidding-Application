@@ -70,7 +70,7 @@ namespace Bid501_Server
 			if (Convert.ToInt32(msg[0]) == 0)
 			{//login attempt from client
 			 //bool toReturn = PlaceBidDel(Convert.ToInt32(msg[0]), Convert.ToDecimal(msg[1]), Convert.ToInt32(msg[2]));
-				int toReturn = LoginDel(msg[1], msg[2]); //NOTE: LoginDel needs to return userid which I don't believe it currently does - Aidan, 4/30
+				int toReturn = LoginDel(msg[1], msg[2], 0); //NOTE: LoginDel needs to return userid which I don't believe it currently does - Aidan, 4/30
 				string aaa = JsonConvert.SerializeObject(rd());
 				string sendString = "0&" + toReturn + "&" + aaa;
 				Sessions.SendTo(ID, sendString);

@@ -70,7 +70,7 @@ namespace Bid501_Server
                 g = UserGroup.Bidder;
             }
 
-            //creates a new user in the case the provided user/pass does not exist. userid is calculated by taking the count of all activeUsers + 1
+            //creates a new user in the case the provided user/pass does not exist. 
             User newUser = new User(user, pass, g, nextID);
             nextID++;
             activeUsers.Add(newUser);

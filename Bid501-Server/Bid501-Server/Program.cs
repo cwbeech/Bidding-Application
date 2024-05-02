@@ -8,7 +8,7 @@ using WebSocketSharp.Server;
 using Bid501_Shared;
 namespace Bid501_Server
 {
-    public delegate int LoginAttempt(string user, string password);
+    public delegate int LoginAttempt(string user, string password, int type);
 
     public delegate IProductDB ReturnDatabase();
 

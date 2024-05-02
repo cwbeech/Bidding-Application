@@ -27,7 +27,7 @@ namespace Bid501_Server
             string user = UxUserTextBox.Text;
             string pass = UxPasswordTextBox.Text;
 
-            int loginAttempt = LoginDel(user, pass);
+            int loginAttempt = LoginDel(user, pass, 1);
 
             if(loginAttempt == -1)
             {
