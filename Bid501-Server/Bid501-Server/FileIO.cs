@@ -12,14 +12,16 @@ namespace Bid501_Server
         private string userFileName;
         private string prodFileName;
         private ProductDatabase pd;
+        private UserDatabase ud;
 
         /// <summary>
         /// an object for simple file io
         /// </summary>
         /// <param name="fn">the filename or path to the file</param>
-        public FileIO(string un)
+        public FileIO(string un, UserDatabase ud)
         {
             userFileName = un;
+            this.ud = ud;
         }
 
         /// <summary>
@@ -38,9 +40,9 @@ namespace Bid501_Server
         /// </summary>
         /// <returns>A dictionary containing the user/userid combinations</returns>
         /// <exception cref="Exception">Thrown if the filename is invalid</exception>
-        public Dictionary<User, int> ReadUsersFromFile()
+        public void ReadUsersFromFile()
         {
-            Dictionary<User, int> users = new Dictionary<User, int>();
+            
 
 
             try
@@ -72,9 +74,7 @@ namespace Bid501_Server
 
                             userID = int.Parse(parts[3]);
 
-                            User u = new User(user, pass, userType, userID);
-
-                            users[u] = userID;
+                            ud.AddUser(user, pass, userType);
                         }
 
                         
@@ -85,7 +85,7 @@ namespace Bid501_Server
                 throw new Exception("Couldn't find / read the file specified in fileName");
             }
 
-            return users;
+           
         }
 
         /// <summary>

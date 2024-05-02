@@ -22,14 +22,18 @@ namespace Bid501_Server
         /// <summary>
         /// FileIO object for reading in / saving user credentials
         /// </summary>
-        private FileIO fio = new FileIO("users.txt");
+        private FileIO fio;
+
+        private int nextID;
 
         /// <summary>
         /// Constructor for UserDatabase
         /// </summary>
         public UserDatabase()
         {
-           registeredUsers = fio.ReadUsersFromFile();
+            fio = new FileIO("users.txt", this);
+            nextID = 1;
+            fio.ReadUsersFromFile();
         }
 
         /// <summary>
@@ -73,6 +77,19 @@ namespace Bid501_Server
             {
                 activeUsers.Remove(u);
             }
+        }
+
+        /// <summary>
+        /// Adds a new User to the registered user list
+        /// </summary>
+        /// <param name="name">Name of the user</param>
+        /// <param name="pass">Password for the user</param>
+        /// <param name="type">The type of user (admin/bidder)</param>
+        public void AddUser(string name, string pass, UserGroup type)
+        {
+            User u = new User(name, pass, type, nextID);
+            nextID++;
+            registeredUsers.Add(u, u.UserID);
         }
 
         /// <summary>
