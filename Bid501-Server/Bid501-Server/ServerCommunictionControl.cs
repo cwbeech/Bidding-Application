@@ -80,10 +80,13 @@ namespace Bid501_Server
 					lo(-1 * toReturn);
 					Sessions.CloseSession(ID);
 				}
+				else
+				{
+                    string aaa = JsonConvert.SerializeObject(rd());
+                    string sendString = "0&" + toReturn + "&" + aaa;
+                    Sessions.SendTo(ID, sendString);
+                }
 
-				string aaa = JsonConvert.SerializeObject(rd());
-				string sendString = "0&" + toReturn + "&" + aaa;
-				Sessions.SendTo(ID, sendString);
 			}
 			else if (Convert.ToInt32(msg[0]) == 1)
 			{//place bid attempt from client
