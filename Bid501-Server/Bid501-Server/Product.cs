@@ -77,6 +77,8 @@ namespace Bid501_Server
             return pInfo;
         }
 
+
+        
         /// <summary>
         /// Overrides the ToString to return the Product's name.
         /// </summary>
@@ -85,6 +87,7 @@ namespace Bid501_Server
 		{
             return name;
 		}
+        
 
         /// <summary>
         /// Returns a string separated by ':' containing the information of a product

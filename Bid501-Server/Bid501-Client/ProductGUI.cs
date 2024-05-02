@@ -51,7 +51,7 @@ namespace Bid501_Client
         {
             
             uxProductName.Text = (uxProductBox.SelectedItem as IProduct).name;
-            //uxTimeLeft.Text = (uxProductBox.SelectedItem as IProduct).timeLeft.ToString(); //THIS NEEDS TO BE IMPLEMENTED ON DATA STRUCTURE--------------------------------------------------
+            uxTimeLeft.Text = (uxProductBox.SelectedItem as IProduct).timeLeft.ToString(); //THIS NEEDS TO BE IMPLEMENTED ON DATA STRUCTURE--------------------------------------------------
             uxMinBidAmount.Text = (uxProductBox.SelectedItem as IProduct).minBid.ToString();
             uxDetail.Text = (uxProductBox.SelectedItem as IProduct).description;
             if ((uxProductBox.SelectedItem as IProduct).currBidID == clientID)

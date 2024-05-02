@@ -73,6 +73,7 @@ namespace Bid501_Server
 
         public IProductDB ReturnDatabase()
         {
+            pd.ReturnSendList();
             return (IProductDB)pd;
         }
 

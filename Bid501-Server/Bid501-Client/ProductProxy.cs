@@ -94,6 +94,17 @@ namespace Bid501_Client
             currBidID = 0; //may want to change how we handle no bid ID
         }
         */
+
+        public ProductProxy()
+        {
+            name = "";
+            description = "";
+            id = 0;
+            price = 0;
+            currBidID = 0;
+            timeLeft = DateTime.Now;
+        }
+        
         public ProductProxy(IProduct p)
         {
             name = p.name;
