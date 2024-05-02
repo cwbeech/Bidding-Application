@@ -41,8 +41,9 @@ namespace Bid501_Server
         /// </summary>
         /// <param name="user">The attempted username</param>
         /// <param name="pass">The attempted password</param>
+        /// <param name="type">Determines the type of user, 0 for bidder, 1 for admin</param>
         /// <returns>0 for a valid login, -1 for valid user, invalid password</returns>
-        public int LoginAttempt(string user, string pass)
+        public int LoginAttempt(string user, string pass, int type)
         {
             foreach(var kp in registeredUsers)
             {
@@ -58,8 +59,20 @@ namespace Bid501_Server
                 }
             }
 
+            UserGroup g;
+
+            if(type == 1)
+            {
+                g = UserGroup.Admin;
+            }
+            else
+            {
+                g = UserGroup.Bidder;
+            }
+
             //creates a new user in the case the provided user/pass does not exist. userid is calculated by taking the count of all activeUsers + 1
-            User newUser = new User(user, pass, UserGroup.Bidder, activeUsers.Count + 1);
+            User newUser = new User(user, pass, g, nextID);
+            nextID++;
             activeUsers.Add(newUser);
             registeredUsers.Add(newUser, newUser.UserID);
             fio.PrintCredsToFile(registeredUsers);
