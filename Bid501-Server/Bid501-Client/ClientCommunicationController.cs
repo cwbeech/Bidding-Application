@@ -24,8 +24,9 @@ namespace Bid501_Client
         public ClientCommunicationController()
         {
             //websocket stuff
-            //ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login");
-            ws = new WebSocketSharp.WebSocket("ws://10.150.109.119:8001/login");
+            ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login");
+            database = new ProductDatabaseProxy();
+            //ws = new WebSocketSharp.WebSocket("ws://10.150.109.119:8001/login");
             ws.OnMessage += MessageFromServer;
             ws.Connect();
         }
@@ -43,7 +44,7 @@ namespace Bid501_Client
             }
             else if (message[0] == '1') //bid
             {
-                database = JsonConvert.DeserializeObject(message.Split(':')[1]) as IProductDB as ProductDatabaseProxy;
+                //database = JsonConvert.DeserializeObject(message.Split(':')[1]) as IProductDB as ProductDatabaseProxy;
             }
             else
             {
@@ -55,6 +56,9 @@ namespace Bid501_Client
         public void HandleLogin(string user, string pass)
         {
             ws.Send("0:" + user + ":" + pass);
+            //clientID = 1;
+            //database.activeItems = DummyValues.GetDatabase().activeItems;
+            //uc(database, clientID);
         }
 
         public void HandleBid(decimal bidAmt, int prodID)

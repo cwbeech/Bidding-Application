@@ -24,13 +24,14 @@ namespace Bid501_Client
         {
             InitializeComponent();
             this.database = database as ProductDatabaseProxy;
-            uxProductBox.DataSource = this.database;
+            uxProductBox.DataSource = this.database.activeItems;
             this.hpb = hpb;
             clientID = -1;
         }
 
-        public void UpdateProductGUI()
+        public void UpdateProductGUI(IProductDB database)
         {
+            this.database = database as ProductDatabaseProxy;
             uxProductBox.Refresh();
         }
 

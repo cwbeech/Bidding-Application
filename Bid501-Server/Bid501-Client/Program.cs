@@ -13,7 +13,7 @@ namespace Bid501_Client
     //product delegates
     public delegate void HandlePlaceBid(decimal bidAmt, int prodID);
     public delegate void UpdateClient(int clientID);
-    public delegate void UpdateProductGUI();
+    public delegate void UpdateProductGUI(IProductDB database);
     //controller delegates
     public delegate void HandleBid(decimal bidAmt, int prodID);
     public delegate void HandleLogin(string user, string pass);
