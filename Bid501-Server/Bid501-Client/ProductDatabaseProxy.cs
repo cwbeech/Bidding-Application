@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,22 @@ namespace Bid501_Client
             set
             {
                 _activeItems = value;
+            }
+        }
+
+        public BindingList<IProduct> itemsView
+        {
+            get
+            {
+                BindingList<IProduct> result = new BindingList<IProduct>();
+                if (activeItems != null)
+                {
+                    foreach (KeyValuePair<int, IProduct> i in activeItems)
+                    {
+                        result.Add(i.Value);
+                    }
+                }
+                return result;
             }
         }
     }

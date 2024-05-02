@@ -25,8 +25,8 @@ namespace Bid501_Client
         {
             //websocket stuff
             ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login");
-            database = new ProductDatabaseProxy();
             //ws = new WebSocketSharp.WebSocket("ws://10.150.109.119:8001/login");
+            database = new ProductDatabaseProxy();
             ws.OnMessage += MessageFromServer;
             ws.Connect();
         }
@@ -57,6 +57,7 @@ namespace Bid501_Client
         public void HandleLogin(string user, string pass)
         {
             ws.Send("0:" + user + ":" + pass);
+            // For testing ProductGUI
             //clientID = 1;
             //database.activeItems = DummyValues.GetDatabase().activeItems;
             //uc(database, clientID);

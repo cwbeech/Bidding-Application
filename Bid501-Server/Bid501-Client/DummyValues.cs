@@ -8,6 +8,7 @@ using Bid501_Shared;
 
 namespace Bid501_Client
 {
+    
     public class Product : IProduct
     {
         public static int ID;
@@ -30,6 +31,7 @@ namespace Bid501_Client
             this.currBidID = -1;
         }
     }
+    
 
     public class Database : IProductDB
     {
@@ -40,7 +42,7 @@ namespace Bid501_Client
             activeItems = new Dictionary<int, IProduct>();
         }
 
-        public void Add(Product p)
+        public void Add(IProduct p)
         {
             activeItems.Add(p.id, p);
         }
@@ -70,7 +72,7 @@ namespace Bid501_Client
                             desc = parts[1];
                             price = Decimal.Parse(parts[2]);
 
-                            Product p = new Product(name, desc, price);
+                            IProduct p = new Product(name, desc, price);
 
                             d.Add(p);
                         }

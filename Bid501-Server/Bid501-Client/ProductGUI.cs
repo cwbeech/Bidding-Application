@@ -24,7 +24,7 @@ namespace Bid501_Client
         {
             InitializeComponent();
             this.database = database as ProductDatabaseProxy;
-            uxProductBox.DataSource = this.database.activeItems;
+            uxProductBox.DataSource = this.database.itemsView;
             this.hpb = hpb;
             clientID = -1;
         }
@@ -32,6 +32,7 @@ namespace Bid501_Client
         public void UpdateProductGUI(IProductDB database)
         {
             this.database = database as ProductDatabaseProxy;
+            uxProductBox.DataSource = this.database.itemsView;
             uxProductBox.Refresh();
         }
 
@@ -48,11 +49,12 @@ namespace Bid501_Client
         /// <param name="e"></param>
         private void uxProductBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            uxProductName.Text = ((ProductProxy)uxProductBox.SelectedItem).name;
-            //uxTimeLeft.Text = ((ProductProxy)uxProductBox.SelectedItem).time; THIS NEEDS TO BE IMPLEMENTED ON DATA STRUCTURE--------------------------------------------------
-            uxMinBidAmount.Text = ((ProductProxy)uxProductBox.SelectedItem).minBid.ToString();
-            uxDetail.Text = ((ProductProxy)uxProductBox.SelectedItem).description;
-            if (((ProductProxy)uxProductBox.SelectedItem).currBidID == clientID)
+            
+            uxProductName.Text = (uxProductBox.SelectedItem as IProduct).name;
+            //uxTimeLeft.Text = (uxProductBox.SelectedItem as IProduct).time; THIS NEEDS TO BE IMPLEMENTED ON DATA STRUCTURE--------------------------------------------------
+            uxMinBidAmount.Text = (uxProductBox.SelectedItem as IProduct).minBid.ToString();
+            uxDetail.Text = (uxProductBox.SelectedItem as IProduct).description;
+            if ((uxProductBox.SelectedItem as IProduct).currBidID == clientID)
             {
                 uxHighest.Visible = true;
                 uxBidConfirm.Visible = false;
@@ -62,14 +64,15 @@ namespace Bid501_Client
                 uxHighest.Visible = false;
                 uxBidConfirm.Visible = true;
             }
+            
         }
 
         //When clicking to bid, first validate that amount is valid (> minBid), then try to send bid
         private void uxBidConfirm_Click(object sender, EventArgs e)
         {
-            if (int.Parse(uxBidAmount.Text) >= ((ProductProxy)uxProductBox.SelectedItem).minBid)
+            if (int.Parse(uxBidAmount.Text) >= (uxProductBox.SelectedItem as IProduct).minBid)
             {
-                hpb((decimal)int.Parse(uxBidAmount.Text), ((ProductProxy)uxProductBox.SelectedItem).id);
+                hpb((decimal)int.Parse(uxBidAmount.Text), (uxProductBox.SelectedItem as IProduct).id);
             }
         }
     }
