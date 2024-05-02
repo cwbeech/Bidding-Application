@@ -10,6 +10,8 @@ namespace Bid501_Server
 {
     public delegate int LoginAttempt(string user, string password, int type);
 
+    public delegate void Logout(int userID);
+
     public delegate IProductDB ReturnDatabase();
 
     public delegate bool PlaceBidAttempt(int userid, decimal bid, int pID);
@@ -68,6 +70,7 @@ namespace Bid501_Server
             AddItemDel aid = new AddItemDel(pc.AddProduct);
             BidCloseDel bcd = new BidCloseDel(pc.BidClosed);
             LoginAttempt ld = new LoginAttempt(ud.LoginAttempt);
+            Logout lo = new Logout(ud.Logout);
             GetActiveProds gap = new GetActiveProds(pc.GetActiveProds);
             GetInactiveProds gip = new GetInactiveProds(pc.GetInactiveProds);
             StartProdBid spb = new StartProdBid(pc.StartBid);
@@ -75,7 +78,7 @@ namespace Bid501_Server
             LoginView lv = new LoginView(ld);
             PlaceBidAttempt pba = new PlaceBidAttempt(pc.PlaceBidAttempt);
             ReturnDatabase rd = new ReturnDatabase(pc.ReturnDatabase);
-            s.SetDelegates(ld, pba, gap, rd);
+            s.SetDelegates(ld, pba, gap, rd, lo);
 
             Application.Run(lv);
 

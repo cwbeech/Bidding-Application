@@ -24,6 +24,8 @@ namespace Bid501_Server
 
 		public ReturnDatabase rd;
 
+		public Logout lo;
+
 		private WebSocketServer wss;
 
 		public ServerCommunictionControl()
@@ -50,12 +52,13 @@ namespace Bid501_Server
 		/// <param name="ld"></param>
 		/// <param name="pba"></param>
 		/// <param name="gap"></param>
-		public void SetDelegates(LoginAttempt ld, PlaceBidAttempt pba, GetActiveProds gap, ReturnDatabase rd)
+		public void SetDelegates(LoginAttempt ld, PlaceBidAttempt pba, GetActiveProds gap, ReturnDatabase rd, Logout lo)
 		{
             this.LoginDel = ld;
             this.PlaceBidDel = pba;
             this.gap = gap;
 			this.rd = rd;
+			this.lo = lo;
         }
 
 		protected override void OnMessage(MessageEventArgs e)
@@ -71,6 +74,13 @@ namespace Bid501_Server
 			{//login attempt from client
 			 //bool toReturn = PlaceBidDel(Convert.ToInt32(msg[0]), Convert.ToDecimal(msg[1]), Convert.ToInt32(msg[2]));
 				int toReturn = LoginDel(msg[1], msg[2], 0); //NOTE: LoginDel needs to return userid which I don't believe it currently does - Aidan, 4/30
+
+				if(toReturn < -1)
+				{
+					lo(-1 * toReturn);
+					Sessions.CloseSession(ID);
+				}
+
 				string aaa = JsonConvert.SerializeObject(rd());
 				string sendString = "0&" + toReturn + "&" + aaa;
 				Sessions.SendTo(ID, sendString);
