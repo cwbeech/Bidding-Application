@@ -51,7 +51,7 @@ namespace Bid501_Server
                     if(kp.Key.Password == pass)
                     { 
                         activeUsers.Add(kp.Key);
-                        return 0;
+                        return kp.Key.UserID;
                     }
 
                     return -1;
