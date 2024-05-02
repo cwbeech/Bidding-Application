@@ -46,7 +46,7 @@ namespace Bid501_Client
             if (result)
             {
                 DialogResult = DialogResult.OK;
-                this.Close();
+                this.Invoke(new Action(() => this.Close()));
             }
             else
             {

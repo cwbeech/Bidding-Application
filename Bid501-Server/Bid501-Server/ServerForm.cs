@@ -85,7 +85,7 @@ namespace Bid501_Server
             //Might just need to delete this and the button. - Aidan, 4/29. 
             Product p = uxProductBox.SelectedItem as Product;
 
-            bcd(p.ID);
+            bcd(p.id);
 
             pList = gap();
             uxProductBox.DataSource = pList;

@@ -34,7 +34,7 @@ namespace Bid501_Server
 			//note: this needs to return something to the main form. 
 			toReturn = (Product)uxProductBox.SelectedItem;
 			//DialogResult.OK;
-			spb(toReturn.ID);
+			spb(toReturn.id);
 			this.Close();
 		}
 	}

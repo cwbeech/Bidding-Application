@@ -74,8 +74,8 @@ namespace Bid501_Server
             GetActiveUsers gau = new GetActiveUsers(ud.GetActiveUsers);
             LoginView lv = new LoginView(ld);
             PlaceBidAttempt pba = new PlaceBidAttempt(pc.PlaceBidAttempt);
-
-            s.SetDelegates(ld, pba, gap);
+            ReturnDatabase rd = new ReturnDatabase(pc.ReturnDatabase);
+            s.SetDelegates(ld, pba, gap, rd);
 
             Application.Run(lv);
 

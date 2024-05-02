@@ -31,10 +31,14 @@ namespace Bid501_Server
 
 			wss = new WebSocketServer(8001);
 
-			wss.AddWebSocketService<Login>("/login", () =>
+			//wss.AddWebSocketService<Login>("/login", () =>
+			//{
+			//	Login loginService = new Login(this);
+			//	return loginService;
+			//});
+			wss.AddWebSocketService("/login", () =>
 			{
-				Login loginService = new Login(this);
-				return loginService;
+				return this;
 			});
 
 			wss.Start();
@@ -67,7 +71,8 @@ namespace Bid501_Server
 			{//login attempt from client
 			 //bool toReturn = PlaceBidDel(Convert.ToInt32(msg[0]), Convert.ToDecimal(msg[1]), Convert.ToInt32(msg[2]));
 				int toReturn = LoginDel(msg[1], msg[2]); //NOTE: LoginDel needs to return userid which I don't believe it currently does - Aidan, 4/30
-				string sendString = "0:" + toReturn;
+				string aaa = JsonConvert.SerializeObject(rd);
+				string sendString = "0:" + toReturn + ":" + aaa;
 				Sessions.SendTo(ID, sendString);
 			}
 			else if (Convert.ToInt32(msg[0]) == 1)
