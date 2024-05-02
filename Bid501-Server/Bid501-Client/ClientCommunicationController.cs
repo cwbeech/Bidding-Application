@@ -58,9 +58,9 @@ namespace Bid501_Client
         {
             ws.Send("0:" + user + ":" + pass);
             // For testing ProductGUI
-            //clientID = 1;
-            //database.activeItems = DummyValues.GetDatabase().activeItems;
-            //uc(database, clientID);
+            clientID = 1;
+            database.activeItems = DummyValues.GetDatabase().activeItems;
+            uc(database, clientID);
         }
 
         public void HandleBid(decimal bidAmt, int prodID)
