@@ -42,17 +42,22 @@ namespace Bid501_Server
         /// <param name="user">The attempted username</param>
         /// <param name="pass">The attempted password</param>
         /// <param name="type">Determines the type of user, 0 for bidder, 1 for admin</param>
-        /// <returns>0 for a valid login, -1 for valid user, invalid password</returns>
+        /// <returns>returns userid for a valid login, -1 for valid user, invalid password, and 2 for a valid user/pass but already logged in</returns>
         public int LoginAttempt(string user, string pass, int type)
         {
             foreach(var kp in registeredUsers)
             {
-                if(kp.Key.Username == user && !activeUsers.Contains(kp.Key))
+                if(kp.Key.Username == user)
                 {
                     if(kp.Key.Password == pass)
-                    { 
-                        activeUsers.Add(kp.Key);
-                        return kp.Key.UserID;
+                    {
+                        if (!activeUsers.Contains(kp.Key))
+                        {
+                            activeUsers.Add(kp.Key);
+                            return kp.Key.UserID;
+                        }
+
+                        return kp.Key.UserID * -1;
                     }
 
                     return -1;
@@ -84,9 +89,11 @@ namespace Bid501_Server
         /// Handles a log out, currently just removes from active list, not sure if this needs to be something more 
         /// </summary>
         /// <param name="u">The user that is logging out</param>
-        public void Logout(User u)
+        public void Logout(int userID)
         {
-            if (activeUsers.Contains(u))
+            User u = activeUsers.First(x => x.UserID == userID);
+
+            if(u != null)
             {
                 activeUsers.Remove(u);
             }
