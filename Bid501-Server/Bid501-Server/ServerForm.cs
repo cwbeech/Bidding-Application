@@ -57,6 +57,10 @@ namespace Bid501_Server
             {
                 uxProductBox.Invoke((MethodInvoker)(() => UpdateGUI(prodList, clientList)));
             }
+            else if (uxUserBox.InvokeRequired)
+            {
+                uxUserBox.Invoke((MethodInvoker)(() => UpdateGUI(prodList, clientList)));
+            }
             else
             {
                 foreach (Product p in prodList)
