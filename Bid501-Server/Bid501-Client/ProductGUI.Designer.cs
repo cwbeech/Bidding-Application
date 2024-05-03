@@ -171,6 +171,7 @@
             this.Controls.Add(this.uxProductName);
             this.Name = "ProductGUI";
             this.Text = "Bid501";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProductGUI_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

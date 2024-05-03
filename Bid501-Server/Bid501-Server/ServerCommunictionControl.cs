@@ -84,6 +84,7 @@ namespace Bid501_Server
 				if(toReturn < -1)
 				{
 					lo(-1 * toReturn);
+					ugui(gap(), gau());
 					Sessions.CloseSession(ID);
 				}
 

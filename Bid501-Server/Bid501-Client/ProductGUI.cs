@@ -20,15 +20,16 @@ namespace Bid501_Client
         private int clientID;
 
         public HandlePlaceBid hpb;
-
+        //public HandleLoginAttempt hla;//ADD TO GUI
         public BindingList<ProductProxy> prods;
 
-        public ProductGUI(IProductDB database, HandlePlaceBid hpb)
+        public ProductGUI(IProductDB database, HandlePlaceBid hpb/*, HandleLoginAttempt hla*/)
         {
             InitializeComponent();
             this.database = database as ProductDatabaseProxy;
             //uxProductBox.DataSource = this.database.itemsView;
             this.hpb = hpb;
+            //this.hla = hla;
             clientID = -1;
         }
 
@@ -123,6 +124,12 @@ namespace Bid501_Client
             {
                 hpb((decimal)int.Parse(uxBidAmount.Text), p.id);
             }
+        }
+
+        private void ProductGUI_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //need logout
+
         }
     }
 }

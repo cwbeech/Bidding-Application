@@ -50,6 +50,9 @@ namespace Bid501_Server
 
         public void UpdateGUI(BindingList<Product> prodList, BindingList<User> clientList)
         { //note: might not need to be public - Aidan, 4/29
+            List<Product> prod = pList.ToList<Product>();
+            List<User> user = uList.ToList<User>();
+
             if (uxProductBox.InvokeRequired)
             {
                 uxProductBox.Invoke((MethodInvoker)(() => UpdateGUI(prodList, clientList)));
@@ -58,24 +61,25 @@ namespace Bid501_Server
             {
                 foreach (Product p in prodList)
                 {
-                    if (!pList.Contains(p))
+                    if (!prod.Contains(p))
                         pList.Add(p);
                 }
-                foreach (Product p in pList)
+                foreach (Product p in prod)
                 {
-                    if (!prodList.Contains(p))
+                    if (!prod.Contains(p))
                         pList.Remove(p);
                 }
                 foreach (User u in clientList)
                 {
-                    if (!uList.Contains(u))
+                    if (!user.Contains(u))
                         uList.Add(u);
                 }
-                foreach (User u in uList)
+                foreach (User u in user)
                 {
-                    if (!clientList.Contains(u))
+                    if (!user.Contains(u))
                         uList.Remove(u);
                 }
+
 
                 uxProductBox.Refresh();
                 uxUserBox.Refresh();
@@ -83,7 +87,7 @@ namespace Bid501_Server
             //note: Refresh method might not work, might need to reset data sources - Aidan, 4/29. 
         }
 
-		private void uxAddButton_Click(object sender, EventArgs e)
+        private void uxAddButton_Click(object sender, EventArgs e)
 		{
             AddProductForm apf = new AddProductForm(gip, spb);
             apf.ShowDialog();
