@@ -9,6 +9,7 @@ using WebSocketSharp;
 using Newtonsoft.Json;
 using System.Net.WebSockets;
 using Newtonsoft.Json.Linq;
+using System.Net.Sockets;
 
 namespace Bid501_Client
 {
@@ -127,16 +128,19 @@ namespace Bid501_Client
             this.user = user;
             this.pass = pass;
             ws.Send("0:" + user + ":" + pass);
-            // For testing ProductGUI
-            //clientID = 1;
-            //database.activeItems = DummyValues.GetDatabase().activeItems;
-            //uc(database, clientID);
         }
 
         public void HandleBid(decimal bidAmt, int prodID)
         {
-            if (bidAmt == -1 && prodID == -1) { ws.Send("0:" + user + ":" + pass); }
-            else { ws.Send("1:" + clientID + ":" + bidAmt + ":" + prodID); }
+            if (bidAmt == -1 && prodID == -1) 
+            { 
+                ws.Send("0:" + user + ":" + pass);
+                ws.Close();
+            }
+            else 
+            { 
+                ws.Send("1:" + clientID + ":" + bidAmt + ":" + prodID); 
+            }
         }
 
         public void SetUpdateControl(UpdateControl uc)

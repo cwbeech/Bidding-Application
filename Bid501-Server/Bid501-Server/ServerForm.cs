@@ -70,7 +70,7 @@ namespace Bid501_Server
                 }
                 foreach (Product p in prod)
                 {
-                    if (!prod.Contains(p))
+                    if (!prodList.Contains(p))
                         pList.Remove(p);
                 }
                 foreach (User u in clientList)
@@ -80,7 +80,7 @@ namespace Bid501_Server
                 }
                 foreach (User u in user)
                 {
-                    if (!user.Contains(u))
+                    if (!clientList.Contains(u))
                         uList.Remove(u);
                 }
 

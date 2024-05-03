@@ -81,17 +81,17 @@ namespace Bid501_Server
 			 //bool toReturn = PlaceBidDel(Convert.ToInt32(msg[0]), Convert.ToDecimal(msg[1]), Convert.ToInt32(msg[2]));
 				int toReturn = LoginDel(msg[1], msg[2], 0); //NOTE: LoginDel needs to return userid which I don't believe it currently does - Aidan, 4/30
 
-				if(toReturn < -1)
+				if (toReturn < -1)
 				{
 					lo(-1 * toReturn);
 					ugui(gap(), gau());
 					Sessions.CloseSession(ID);
 				}
-
 				string aaa = JsonConvert.SerializeObject(rd());
 				string sendString = "0&" + toReturn + "&" + aaa;
 				Sessions.SendTo(ID, sendString);
 				ugui(gap(), gau());
+				
 			}
 			else if (Convert.ToInt32(msg[0]) == 1)
 			{//place bid attempt from client
