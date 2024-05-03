@@ -31,7 +31,7 @@ namespace Bid501_Client
             this.hpb = hpb;
             //this.hla = hla;
             clientID = -1;
-            FormClosed += ProductGUI_FormClosed;
+            //FormClosed += ProductGUI_FormClosed;
         }
 
         private void ProductGUI_FormClosed(object sender, FormClosedEventArgs e)
@@ -130,12 +130,6 @@ namespace Bid501_Client
             {
                 hpb((decimal)int.Parse(uxBidAmount.Text), p.id);
             }
-        }
-
-        private void ProductGUI_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            //need logout
-
         }
     }
 }
