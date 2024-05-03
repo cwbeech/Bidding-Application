@@ -53,9 +53,11 @@ namespace Bid501_Client
             this.database.activeItems = database.activeItems;
             if (this.clientID != clientID) //if client is being set for the first time
             {
-                ucl(this.clientID);
+                ucl(clientID);
+                ulgui(clientID != -1);
+                this.clientID = clientID;
             }
-            ulgui(clientID != -1);
+            
             upgui(this.database);
         }
 

@@ -33,7 +33,7 @@ namespace Bid501_Client
         {
             this.database.activeItems = database.activeItems;
             uxProductBox.DataSource = this.database.itemsView;
-            uxProductBox.Refresh();
+            //uxProductBox.Refresh();
         }
 
         public void UpdateClient(int clientID)

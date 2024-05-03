@@ -88,14 +88,9 @@ namespace Bid501_Server
 			else if (Convert.ToInt32(msg[0]) == 1)
 			{//place bid attempt from client
 				bool bidGood = PlaceBidDel(Convert.ToInt32(msg[1]), Convert.ToDecimal(msg[2]), Convert.ToInt32(msg[3]));
-				//if (bidGood)
-				//{
-				//**Note** Client side wants the database regardless of whether the bid went through or not, so I commented out these liens - Aidan, 5/1
-					//List<Product> sendList = gap().ToList<Product>();
-					IProductDB sendDB = rd();
-					string toSend = JsonConvert.SerializeObject(sendDB);
-					toSend = "1&" + toSend;
-					Sessions.Broadcast(toSend);
+				string toSend = JsonConvert.SerializeObject(rd());
+				toSend = "1&" + toSend;
+				Sessions.Broadcast(toSend);
 				//}
 
 			}

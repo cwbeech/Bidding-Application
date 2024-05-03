@@ -43,6 +43,8 @@ namespace Bid501_Server
 
         public void ReturnSendList()
         {
+            activeItems.Clear();
+
             foreach (KeyValuePair<Product, int> kvp in actualActiveItems)
             {
                 activeItems.Add(kvp.Value, (IProduct)kvp.Key);
@@ -134,7 +136,7 @@ namespace Bid501_Server
                 if(kp.Value == pID)
                 {
                     kp.Key.currBidID = userID;
-                    kp.Key.minBid = bid;
+                    kp.Key.price = bid;
                 }
             }
         }
