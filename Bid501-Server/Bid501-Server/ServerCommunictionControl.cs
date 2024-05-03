@@ -16,6 +16,10 @@ namespace Bid501_Server
 {
 	public class ServerCommunictionControl : WebSocketBehavior
 	{
+		public UpdateGUI ugui;
+
+		public GetActiveUsers gau;
+
 		public LoginAttempt LoginDel;
 
 		public PlaceBidAttempt PlaceBidDel;
@@ -52,13 +56,15 @@ namespace Bid501_Server
 		/// <param name="ld"></param>
 		/// <param name="pba"></param>
 		/// <param name="gap"></param>
-		public void SetDelegates(LoginAttempt ld, PlaceBidAttempt pba, GetActiveProds gap, ReturnDatabase rd, Logout lo)
+		public void SetDelegates(LoginAttempt ld, PlaceBidAttempt pba, GetActiveProds gap, ReturnDatabase rd, Logout lo, UpdateGUI ugui, GetActiveUsers gau)
 		{
             this.LoginDel = ld;
             this.PlaceBidDel = pba;
             this.gap = gap;
 			this.rd = rd;
 			this.lo = lo;
+			this.ugui = ugui;
+			this.gau = gau;
         }
 
 		protected override void OnMessage(MessageEventArgs e)
@@ -84,6 +90,7 @@ namespace Bid501_Server
 				string aaa = JsonConvert.SerializeObject(rd());
 				string sendString = "0&" + toReturn + "&" + aaa;
 				Sessions.SendTo(ID, sendString);
+				ugui(gap(), gau());
 			}
 			else if (Convert.ToInt32(msg[0]) == 1)
 			{//place bid attempt from client

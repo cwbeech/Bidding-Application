@@ -31,6 +31,8 @@ namespace Bid501_Server
 
     public delegate BindingList<User> GetActiveUsers();
 
+    public delegate void UpdateGUI(BindingList<Product> prods, BindingList<User> users);
+
     internal static class Program
     {
         /// <summary>
@@ -43,6 +45,7 @@ namespace Bid501_Server
             UserDatabase ud = new UserDatabase();
             ProductDatabase pd = new ProductDatabase();
             ProductController pc = new ProductController(pd);
+            
 
             //the starting 4 bids for the program
             pc.StartBid(4);
@@ -63,13 +66,18 @@ namespace Bid501_Server
             LoginView lv = new LoginView(ld);
             PlaceBidAttempt pba = new PlaceBidAttempt(pc.PlaceBidAttempt);
             ReturnDatabase rd = new ReturnDatabase(pc.ReturnDatabase);
-            s.SetDelegates(ld, pba, gap, rd, lo);
+            
+            ServerForm sf = new ServerForm(aid, bcd, gip, gap, spb, gau);
+
+            UpdateGUI ugui = new UpdateGUI(sf.UpdateGUI);
+
+            s.SetDelegates(ld, pba, gap, rd, lo, ugui, gau);
 
             Application.Run(lv);
 
             if (lv.isValid)
             {
-                Application.Run(new ServerForm(aid, bcd, gip, gap, spb, gau));
+                Application.Run(sf);
             }
         }
     }
