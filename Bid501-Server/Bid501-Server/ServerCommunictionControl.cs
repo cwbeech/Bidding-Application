@@ -32,6 +32,8 @@ namespace Bid501_Server
 
 		private WebSocketServer wss;
 
+		private List<WebSocketSharp.WebSocket> activeConnections = new List<WebSocketSharp.WebSocket>();
+
 		public ServerCommunictionControl()
 		{ 
 
@@ -50,13 +52,25 @@ namespace Bid501_Server
 			wss.Start();
 		}
 
-		/// <summary>
-		/// Sets the delegates for hte server communication ctrl
-		/// </summary>
-		/// <param name="ld"></param>
-		/// <param name="pba"></param>
-		/// <param name="gap"></param>
-		public void SetDelegates(LoginAttempt ld, PlaceBidAttempt pba, GetActiveProds gap, ReturnDatabase rd, Logout lo, UpdateGUI ugui, GetActiveUsers gau)
+        protected override void OnOpen()
+        {
+			base.OnOpen();
+			activeConnections.Add(Context.WebSocket);
+        }
+
+        protected override void OnClose(CloseEventArgs e)
+        {
+			base.OnClose(e);
+			activeConnections.Remove(Context.WebSocket);
+        }
+
+        /// <summary>
+        /// Sets the delegates for hte server communication ctrl
+        /// </summary>
+        /// <param name="ld"></param>
+        /// <param name="pba"></param>
+        /// <param name="gap"></param>
+        public void SetDelegates(LoginAttempt ld, PlaceBidAttempt pba, GetActiveProds gap, ReturnDatabase rd, Logout lo, UpdateGUI ugui, GetActiveUsers gau)
 		{
             this.LoginDel = ld;
             this.PlaceBidDel = pba;
