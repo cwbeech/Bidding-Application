@@ -135,7 +135,7 @@ namespace Bid501_Client
             if (bidAmt == -1 && prodID == -1) 
             { 
                 ws.Send("0:" + user + ":" + pass);
-                
+                ws.Close();
             }
             else 
             { 
