@@ -27,6 +27,12 @@ namespace Bid501_Client
             uxProductBox.DataSource = this.database.itemsView;
             this.hpb = hpb;
             clientID = -1;
+            this.FormClosed += ProductGUI_FormClosed;
+        }
+
+        private void ProductGUI_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            hpb(-1, -1);
         }
 
         public void UpdateProductGUI(IProductDB database)
