@@ -18,16 +18,15 @@ namespace Bid501_Client
 
         private int clientID;
         public ProductDatabaseProxy database;
-        public KeyValuePair<IProduct, decimal> bids;
 
         public UpdateControl uc;
 
         public ClientCommunicationController()
         {
             //websocket stuff
-            //ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login"); //personal machine's IP
+            ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login"); //personal machine's IP
             //ws = new WebSocketSharp.WebSocket("ws://10.150.109.119:8001/login"); //Aidan's IP
-            ws = new WebSocketSharp.WebSocket("ws://192.168.0.63:8001/login");
+            //ws = new WebSocketSharp.WebSocket("ws://192.168.0.63:8001/login");
             database = new ProductDatabaseProxy();
             ws.OnMessage += MessageFromServer;
             ws.Connect();
