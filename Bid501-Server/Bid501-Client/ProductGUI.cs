@@ -28,7 +28,6 @@ namespace Bid501_Client
             this.database = database as ProductDatabaseProxy;
             this.hpb = hpb;
             clientID = -1;
-            uxProductBox.SelectedIndex = 0;//mebby delete this
             FormClosed += ProductGUI_FormClosed;
         }
 
@@ -39,11 +38,6 @@ namespace Bid501_Client
 
         public void UpdateProductGUI(IProductDB database)
         {
-            /*uxBidAmount.Show();
-            //uxBidConfirm.Show();
-            uxProductName.Show();
-            uxTimeLeft.Show();*/
-            //uxMinBidAmount.Show();
             this.database.activeItems = database.activeItems;
 
             if (uxProductBox.InvokeRequired)
@@ -55,12 +49,10 @@ namespace Bid501_Client
                 BindingList<ProductProxy> pNew = this.database.itemsView;
                 List<ProductProxy> i = new List<ProductProxy>();
 
-
-
                 foreach (IProduct p in pNew)
                 {
                     IProduct old = prods.First(prod => prod.id == p.id);
-                    IProduct modified;
+                    IProduct modified; //why is this here, delete it
 
                     if (old != null)
                     {
@@ -80,10 +72,6 @@ namespace Bid501_Client
                 prods = this.database.itemsView;
                 uxProductBox.DataSource = prods;
             }
-
-
-            //await Task.Delay(500);
-            //uxProductBox.Refresh();
         }
 
         public void UpdateClient(int clientID)
@@ -100,31 +88,30 @@ namespace Bid501_Client
         /// <param name="e"></param>
         private void uxProductBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-			//uxBidAmount.Show();
-			//uxBidConfirm.Show();
-			//uxProductName.Show();
-			//uxTimeLeft.Show();
-            //uxMinBidAmount.Show();
 			try
             {
+                //Set up gui
                 int index = uxProductBox.SelectedIndex;
                 IProduct p = uxProductBox.Items[index] as IProduct;
                 uxProductName.Text = p.name;
-                uxTimeLeft.Text = p.timeLeft.ToString(); //THIS NEEDS TO BE IMPLEMENTED ON DATA STRUCTURE--------------------------------------------------
+                uxTimeLeft.Text = p.timeLeft.ToString();
                 uxMinBidAmount.Text = p.minBid.ToString();
                 uxDetail.Text = p.description;
+
+                //Show highest bidder
                 if (p.currBidID == clientID)
                 {
                     MessageBox.Show("You are current highest bidder");
-                    //uxHighest.Visible = true;
-                    //uxBidConfirm.Visible = false;
                 }
                 else
                 {
                     uxHighest.Visible = false;
                     uxBidConfirm.Visible = true;
                 }
-            } catch(Exception ex)
+            }
+
+            //sussy catch
+            catch(Exception ex)
             {
                 new Exception();
             }
@@ -134,8 +121,11 @@ namespace Bid501_Client
         //When clicking to bid, first validate that amount is valid (> minBid), then try to send bid
         private void uxBidConfirm_Click(object sender, EventArgs e)
         {
+            //get bid info
             int index = uxProductBox.SelectedIndex;
             IProduct p = uxProductBox.Items[index] as IProduct;
+
+            //send bid info
             if (int.Parse(uxBidAmount.Text) >= p.minBid)
             {
                 hpb((decimal)int.Parse(uxBidAmount.Text), p.id);

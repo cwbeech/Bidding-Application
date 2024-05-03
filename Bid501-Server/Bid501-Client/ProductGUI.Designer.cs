@@ -48,8 +48,9 @@
             this.uxProductName.Location = new System.Drawing.Point(42, 34);
             this.uxProductName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.uxProductName.Name = "uxProductName";
-            this.uxProductName.Size = new System.Drawing.Size(0, 20);
+            this.uxProductName.Size = new System.Drawing.Size(178, 20);
             this.uxProductName.TabIndex = 0;
+            this.uxProductName.Text = "Please Select a Product";
             // 
             // uxTimeLeft
             // 
