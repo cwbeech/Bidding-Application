@@ -9,17 +9,19 @@ using WebSocketSharp;
 using Newtonsoft.Json;
 using System.Net.WebSockets;
 using Newtonsoft.Json.Linq;
+using System.Net.Sockets;
 
 namespace Bid501_Client
 {
     public class ClientCommunicationController
     {
         private WebSocketSharp.WebSocket ws;
-
         private int clientID;
-        public ProductDatabaseProxy database;
-        public KeyValuePair<IProduct, decimal> bids;
 
+        private string user;
+        private string pass;
+
+        public ProductDatabaseProxy database;
         public UpdateControl uc;
 
         public ClientCommunicationController()
@@ -28,6 +30,7 @@ namespace Bid501_Client
             //ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login"); //personal machine's IP
             //ws = new WebSocketSharp.WebSocket("ws://10.150.109.119:8001/login"); //Aidan's IP
             ws = new WebSocketSharp.WebSocket("ws://192.168.0.63:8001/login");
+            //ws = new WebSocketSharp.WebSocket("ws://10.150.103.258:8001/login");//Dennis's IP
             database = new ProductDatabaseProxy();
             ws.OnMessage += MessageFromServer;
             ws.Connect();
@@ -121,16 +124,22 @@ namespace Bid501_Client
 
         public void HandleLogin(string user, string pass)
         {
+            this.user = user;
+            this.pass = pass;
             ws.Send("0:" + user + ":" + pass);
-            // For testing ProductGUI
-            //clientID = 1;
-            //database.activeItems = DummyValues.GetDatabase().activeItems;
-            //uc(database, clientID);
         }
 
         public void HandleBid(decimal bidAmt, int prodID)
         {
-            ws.Send("1:" + clientID + ":" + bidAmt + ":" + prodID);
+            if (bidAmt == -1 && prodID == -1) //special case: client closes ProductGUI
+            { 
+                ws.Send("0:" + user + ":" + pass);
+                ws.Close();
+            }
+            else 
+            { 
+                ws.Send("1:" + clientID + ":" + bidAmt + ":" + prodID); 
+            }
         }
 
         public void SetUpdateControl(UpdateControl uc)

@@ -16,6 +16,10 @@ namespace Bid501_Server
 {
 	public class ServerCommunictionControl : WebSocketBehavior
 	{
+		public UpdateGUI ugui;
+
+		public GetActiveUsers gau;
+
 		public LoginAttempt LoginDel;
 
 		public PlaceBidAttempt PlaceBidDel;
@@ -27,6 +31,8 @@ namespace Bid501_Server
 		public Logout lo;
 
 		private WebSocketServer wss;
+
+		private List<WebSocketSharp.WebSocket> activeConnections = new List<WebSocketSharp.WebSocket>();
 
 		public ServerCommunictionControl()
 		{ 
@@ -46,19 +52,33 @@ namespace Bid501_Server
 			wss.Start();
 		}
 
-		/// <summary>
-		/// Sets the delegates for hte server communication ctrl
-		/// </summary>
-		/// <param name="ld"></param>
-		/// <param name="pba"></param>
-		/// <param name="gap"></param>
-		public void SetDelegates(LoginAttempt ld, PlaceBidAttempt pba, GetActiveProds gap, ReturnDatabase rd, Logout lo)
+        protected override void OnOpen()
+        {
+			base.OnOpen();
+			activeConnections.Add(Context.WebSocket);
+        }
+
+        protected override void OnClose(CloseEventArgs e)
+        {
+			base.OnClose(e);
+			activeConnections.Remove(Context.WebSocket);
+        }
+
+        /// <summary>
+        /// Sets the delegates for hte server communication ctrl
+        /// </summary>
+        /// <param name="ld"></param>
+        /// <param name="pba"></param>
+        /// <param name="gap"></param>
+        public void SetDelegates(LoginAttempt ld, PlaceBidAttempt pba, GetActiveProds gap, ReturnDatabase rd, Logout lo, UpdateGUI ugui, GetActiveUsers gau)
 		{
             this.LoginDel = ld;
             this.PlaceBidDel = pba;
             this.gap = gap;
 			this.rd = rd;
 			this.lo = lo;
+			this.ugui = ugui;
+			this.gau = gau;
         }
 
 		protected override void OnMessage(MessageEventArgs e)
@@ -75,18 +95,17 @@ namespace Bid501_Server
 			 //bool toReturn = PlaceBidDel(Convert.ToInt32(msg[0]), Convert.ToDecimal(msg[1]), Convert.ToInt32(msg[2]));
 				int toReturn = LoginDel(msg[1], msg[2], 0); //NOTE: LoginDel needs to return userid which I don't believe it currently does - Aidan, 4/30
 
-				if(toReturn < -1)
+				if (toReturn < -1)
 				{
 					lo(-1 * toReturn);
+					ugui(gap(), gau());
 					Sessions.CloseSession(ID);
 				}
-				else
-				{
-                    string aaa = JsonConvert.SerializeObject(rd());
-                    string sendString = "0&" + toReturn + "&" + aaa;
-                    Sessions.SendTo(ID, sendString);
-                }
-
+				string aaa = JsonConvert.SerializeObject(rd());
+				string sendString = "0&" + toReturn + "&" + aaa;
+				Sessions.SendTo(ID, sendString);
+				ugui(gap(), gau());
+				
 			}
 			else if (Convert.ToInt32(msg[0]) == 1)
 			{//place bid attempt from client

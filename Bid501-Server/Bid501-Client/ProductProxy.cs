@@ -67,8 +67,8 @@ namespace Bid501_Client
                 
                 decimal toAdd = price / 10;
                 decimal oldPrice = price;
-                price = oldPrice + toAdd;
-                return oldPrice + toAdd; //idk what this is supposed to be
+                //price = oldPrice + toAdd;
+                return oldPrice + toAdd;
             }
         }
 
@@ -91,17 +91,6 @@ namespace Bid501_Client
         {
             return name;
         }
-
-        /*
-        public ProductProxy(string n, string d, int i, decimal p)
-        {
-            name = n;
-            description = d;
-            id = i;
-            price = p;
-            currBidID = 0; //may want to change how we handle no bid ID
-        }
-        */
 
         public ProductProxy()
         {
