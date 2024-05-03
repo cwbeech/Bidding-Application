@@ -49,15 +49,15 @@ namespace Bid501_Client
         /// <param name="e"></param>
         private void uxProductBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
             uxProductName.Text = (uxProductBox.SelectedItem as IProduct).name;
             uxTimeLeft.Text = (uxProductBox.SelectedItem as IProduct).timeLeft.ToString(); //THIS NEEDS TO BE IMPLEMENTED ON DATA STRUCTURE--------------------------------------------------
             uxMinBidAmount.Text = (uxProductBox.SelectedItem as IProduct).minBid.ToString();
             uxDetail.Text = (uxProductBox.SelectedItem as IProduct).description;
             if ((uxProductBox.SelectedItem as IProduct).currBidID == clientID)
             {
-                uxHighest.Visible = true;
-                uxBidConfirm.Visible = false;
+                MessageBox.Show("You are current highest bidder");
+                //uxHighest.Visible = true;
+                //uxBidConfirm.Visible = false;
             }
             else
             {
