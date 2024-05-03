@@ -16,9 +16,18 @@ namespace Bid501_Server
 
         public bool isValid = false;
 
-        public LoginView(LoginAttempt ld)
+        public UpdateGUI ugui;
+
+        public GetActiveUsers gau;
+
+        public GetActiveProds gap;
+
+        public LoginView(LoginAttempt ld, UpdateGUI ugui, GetActiveUsers gau, GetActiveProds gap)
         {
             this.LoginDel = ld;
+            this.ugui = ugui;
+            this.gau = gau;
+            this.gap = gap;
             InitializeComponent();
         }
 
@@ -37,6 +46,7 @@ namespace Bid501_Server
             else
             {
                 isValid = true;
+                ugui(gap(), gau());
                 this.Close();
             }
         }

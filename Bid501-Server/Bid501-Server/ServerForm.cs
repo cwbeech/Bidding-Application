@@ -50,10 +50,36 @@ namespace Bid501_Server
 
         public void UpdateGUI(BindingList<Product> prodList, BindingList<User> clientList)
         { //note: might not need to be public - Aidan, 4/29
-            pList = prodList;
-            uList = clientList;
-            uxProductBox.Refresh();
-            uxUserBox.Refresh();
+            if (uxProductBox.InvokeRequired)
+            {
+                uxProductBox.Invoke((MethodInvoker)(() => UpdateGUI(prodList, clientList)));
+            }
+            else
+            {
+                foreach (Product p in prodList)
+                {
+                    if (!pList.Contains(p))
+                        pList.Add(p);
+                }
+                foreach (Product p in pList)
+                {
+                    if (!prodList.Contains(p))
+                        pList.Remove(p);
+                }
+                foreach (User u in clientList)
+                {
+                    if (!uList.Contains(u))
+                        uList.Add(u);
+                }
+                foreach (User u in uList)
+                {
+                    if (!clientList.Contains(u))
+                        uList.Remove(u);
+                }
+
+                uxProductBox.Refresh();
+                uxUserBox.Refresh();
+            }
             //note: Refresh method might not work, might need to reset data sources - Aidan, 4/29. 
         }
 

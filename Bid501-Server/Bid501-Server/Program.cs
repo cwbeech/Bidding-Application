@@ -63,13 +63,15 @@ namespace Bid501_Server
             GetInactiveProds gip = new GetInactiveProds(pc.GetInactiveProds);
             StartProdBid spb = new StartProdBid(pc.StartBid);
             GetActiveUsers gau = new GetActiveUsers(ud.GetActiveUsers);
-            LoginView lv = new LoginView(ld);
+            
             PlaceBidAttempt pba = new PlaceBidAttempt(pc.PlaceBidAttempt);
             ReturnDatabase rd = new ReturnDatabase(pc.ReturnDatabase);
             
             ServerForm sf = new ServerForm(aid, bcd, gip, gap, spb, gau);
 
             UpdateGUI ugui = new UpdateGUI(sf.UpdateGUI);
+
+            LoginView lv = new LoginView(ld, ugui, gau, gap);
 
             s.SetDelegates(ld, pba, gap, rd, lo, ugui, gau);
 
