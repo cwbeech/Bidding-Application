@@ -49,10 +49,10 @@ namespace Bid501_Client
                 DialogResult = DialogResult.OK;
                 this.Invoke(new Action(() => this.Close()));
             }
-            else
+            /*else
             {
                 this.Invoke(new Action(() => this.loginFail.Visible = true));
-            }
+            }*/
         }
 
         private void uxLogin_Click(object sender, EventArgs e)

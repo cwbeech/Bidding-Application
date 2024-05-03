@@ -57,7 +57,7 @@ namespace Bid501_Server
                             return kp.Key.UserID;
                         }
 
-                        return kp.Key.UserID * -1;
+                        return kp.Key.UserID * -2;
                     }
 
                     return -1;
