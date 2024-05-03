@@ -79,8 +79,38 @@ namespace Bid501_Client
             }
             else if (message[0] == '1') //bid
             {
-                //string toDeserialize = message.Split('&')[1];
-                //database.activeItems = JsonConvert.DeserializeObject<ProductDatabaseProxy>(toDeserialize).activeItems;
+                string toDeserialize = message.Split('&')[1];
+                JObject jObject = JObject.Parse(toDeserialize);
+                JObject activeItemsJson = (JObject)jObject["activeItems"];
+                Dictionary<int, IProduct> items = new Dictionary<int, IProduct>();
+
+                foreach (JProperty j in activeItemsJson.Properties())
+                {
+                    JObject pData = (JObject)j.Value;
+
+                    string name = (string)pData["name"];
+                    string description = (string)pData["description"];
+                    int productID = (int)pData["id"];
+                    decimal price = (decimal)pData["price"];
+                    int currBidID = (int)pData["currBidID"];
+                    DateTime timeLeft = (DateTime)pData["timeLeft"];
+
+                    ProductProxy p = new ProductProxy()
+                    {
+                        name = name,
+                        description = description,
+                        id = productID,
+                        price = price,
+                        currBidID = currBidID,
+                        timeLeft = timeLeft,
+                    };
+
+                    items.Add(productID, (IProduct)p);
+                }
+
+
+
+                database.activeItems = items;
             }
             else
             {

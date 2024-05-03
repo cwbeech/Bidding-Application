@@ -32,7 +32,14 @@ namespace Bid501_Server
         /// <summary>
         /// Current minimum bid allowed on the product
         /// </summary>
-        public decimal minBid { get; set; }
+        public decimal minBid
+        {
+            get
+            {
+                decimal toAdd = price / 10;
+                return price + toAdd;
+            }
+        }
 
         /// <summary>
         /// The id of the bidder who currently has the highest bid on the product
@@ -53,8 +60,6 @@ namespace Bid501_Server
             this.name = name;
             this.description = description;
             this.price = price;
-
-            minBid = price;
 			currBidID = 0;
             timeLeft = DateTime.Now; //NOTE: whenever you display this, probably want to use ToShortDateString or something like it - Aidan, 5/2
         }
