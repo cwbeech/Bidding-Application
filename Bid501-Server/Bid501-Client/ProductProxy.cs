@@ -92,17 +92,6 @@ namespace Bid501_Client
             return name;
         }
 
-        /*
-        public ProductProxy(string n, string d, int i, decimal p)
-        {
-            name = n;
-            description = d;
-            id = i;
-            price = p;
-            currBidID = 0; //may want to change how we handle no bid ID
-        }
-        */
-
         public ProductProxy()
         {
             name = "";
