@@ -20,17 +20,15 @@ namespace Bid501_Client
         private int clientID;
 
         public HandlePlaceBid hpb;
-        //public HandleLoginAttempt hla;//ADD TO GUI
         public BindingList<ProductProxy> prods;
 
-        public ProductGUI(IProductDB database, HandlePlaceBid hpb/*, HandleLoginAttempt hla*/)
+        public ProductGUI(IProductDB database, HandlePlaceBid hpb)
         {
             InitializeComponent();
             this.database = database as ProductDatabaseProxy;
-            //uxProductBox.DataSource = this.database.itemsView;
             this.hpb = hpb;
-            //this.hla = hla;
             clientID = -1;
+            uxProductBox.SelectedIndex = 0;//mebby delete this
             //FormClosed += ProductGUI_FormClosed;
         }
 
@@ -39,7 +37,7 @@ namespace Bid501_Client
             hpb(-1, -1);
         }
 
-        public void UpdateProductGUI(IProductDB database)
+        public async void UpdateProductGUI(IProductDB database)
         {
             this.database.activeItems = database.activeItems;
 
@@ -78,13 +76,15 @@ namespace Bid501_Client
                 uxProductBox.DataSource = prods;
             }
 
-            
+
+            //await Task.Delay(500);
             //uxProductBox.Refresh();
         }
 
         public void UpdateClient(int clientID)
         {
             this.clientID = clientID;
+
         }
         
         /// <summary>
