@@ -10,13 +10,13 @@ namespace Bid501_Server
 {
     public delegate int LoginAttempt(string user, string password, int type);
 
+    public delegate void AddItemDel(Product p);
+
     public delegate void Logout(int userID);
 
     public delegate IProductDB ReturnDatabase();
 
     public delegate bool PlaceBidAttempt(int userid, decimal bid, int pID);
-
-    public delegate void AddItemDel(Product prod); //note: doesn't like it when I have question marks - Aidan, 4/29
 
     public delegate void BidCloseDel(int pID); //note: doesn't like it when I have question marks - Aidan, 4/29
 
@@ -31,8 +31,6 @@ namespace Bid501_Server
 
     public delegate BindingList<User> GetActiveUsers();
 
-	public delegate List<string> SendProdInfo();
-
     internal static class Program
     {
         /// <summary>
@@ -41,8 +39,6 @@ namespace Bid501_Server
         [STAThread]
         static void Main()
         {
-
-
             ServerCommunictionControl s = new ServerCommunictionControl();
             UserDatabase ud = new UserDatabase();
             ProductDatabase pd = new ProductDatabase();
@@ -54,19 +50,8 @@ namespace Bid501_Server
             pc.StartBid(6);
             pc.StartBid(7);
 
-            /*WebSocketServer wss = new WebSocketServer(8001);
-            wss.AddWebSocketService<Login>("/login", () =>
-            {
-                Login loginService = new Login(s);
-                return loginService;
-            });*/
-			//***IMPORTANT NOTE*** Uncomment this line after testing
-			//wss.Start(); //Note: getting a weird error here about my computer not liking using this number of sockets. Probably want to ask Jorge
-			Application.EnableVisualStyles(); //about it in class - Aidan, 4/29. 
+			Application.EnableVisualStyles(); 
             Application.SetCompatibleTextRenderingDefault(false);
-            //Note: these next two lines are dummy delegates to just let the code run for now. Delete later - Aidan, 4/29
-            //AddItemDel aid = new AddItemDel(Dummy);
-            //BidCloseDel bcd = new BidCloseDel(Dummy);
             AddItemDel aid = new AddItemDel(pc.AddProduct);
             BidCloseDel bcd = new BidCloseDel(pc.BidClosed);
             LoginAttempt ld = new LoginAttempt(ud.LoginAttempt);
@@ -86,15 +71,6 @@ namespace Bid501_Server
             {
                 Application.Run(new ServerForm(aid, bcd, gip, gap, spb, gau));
             }
-            
-            
-            
-
-             
-
         }
-
-        //dummy method, delete in final version - Aidan, 4/29.
-        static void Dummy(Product p) { }
     }
 }
