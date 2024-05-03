@@ -19,7 +19,8 @@ namespace Bid501_Server
         /// </summary>
         public Dictionary<Product, int> allItems = new Dictionary<Product, int>();
 
-        public Dictionary<int, IProduct> activeItems { get; set; }
+        public Dictionary<int, IProduct> activeItems { get; set; } = new Dictionary<int, IProduct>();
+
 
         private FileIO fio;
 
@@ -40,15 +41,13 @@ namespace Bid501_Server
             nextID = 1;
         }
 
-        /*public IProductDB ReturnSendList()
+        public void ReturnSendList()
         {
             foreach (KeyValuePair<Product, int> kvp in actualActiveItems)
             {
-                activeItems.Add(kvp.Value, kvp.Key);
+                activeItems.Add(kvp.Value, (IProduct)kvp.Key);
             }
-            IProductDB toReturn = new IProductDB();
-            return new IProductDB(activeItems);
-        }*/
+        }
 
         /// <summary>
         /// Adds a product to the activeItems list
