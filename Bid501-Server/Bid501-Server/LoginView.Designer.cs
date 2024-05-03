@@ -93,6 +93,7 @@ namespace Bid501_Server
             // 
             // UxLoginCancel
             // 
+            this.UxLoginCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.UxLoginCancel.Location = new System.Drawing.Point(93, 189);
             this.UxLoginCancel.Name = "UxLoginCancel";
             this.UxLoginCancel.Size = new System.Drawing.Size(75, 23);
@@ -112,8 +113,10 @@ namespace Bid501_Server
             // 
             // LoginView
             // 
+            this.AcceptButton = this.UxLoginButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.UxLoginCancel;
             this.ClientSize = new System.Drawing.Size(384, 239);
             this.Controls.Add(this.UxLoginStatus);
             this.Controls.Add(this.UxLoginCancel);

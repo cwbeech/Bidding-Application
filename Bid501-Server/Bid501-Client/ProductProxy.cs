@@ -67,8 +67,8 @@ namespace Bid501_Client
                 
                 decimal toAdd = price / 10;
                 decimal oldPrice = price;
-                price = oldPrice + toAdd;
-                return oldPrice + toAdd; //idk what this is supposed to be
+                //price = oldPrice + toAdd;
+                return oldPrice + toAdd;
             }
         }
 
