@@ -29,7 +29,7 @@ namespace Bid501_Client
             this.hpb = hpb;
             clientID = -1;
             uxProductBox.SelectedIndex = 0;//mebby delete this
-            //FormClosed += ProductGUI_FormClosed;
+            FormClosed += ProductGUI_FormClosed;
         }
 
         private void ProductGUI_FormClosed(object sender, FormClosedEventArgs e)
@@ -37,7 +37,7 @@ namespace Bid501_Client
             hpb(-1, -1);
         }
 
-        public async void UpdateProductGUI(IProductDB database)
+        public void UpdateProductGUI(IProductDB database)
         {
             this.database.activeItems = database.activeItems;
 
