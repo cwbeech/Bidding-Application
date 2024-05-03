@@ -182,7 +182,6 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ProductGUI";
             this.Text = "Bid501";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProductGUI_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

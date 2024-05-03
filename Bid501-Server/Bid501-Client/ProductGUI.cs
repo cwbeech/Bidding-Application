@@ -39,6 +39,11 @@ namespace Bid501_Client
 
         public void UpdateProductGUI(IProductDB database)
         {
+            /*uxBidAmount.Show();
+            //uxBidConfirm.Show();
+            uxProductName.Show();
+            uxTimeLeft.Show();*/
+            //uxMinBidAmount.Show();
             this.database.activeItems = database.activeItems;
 
             if (uxProductBox.InvokeRequired)
@@ -95,7 +100,12 @@ namespace Bid501_Client
         /// <param name="e"></param>
         private void uxProductBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+			//uxBidAmount.Show();
+			//uxBidConfirm.Show();
+			//uxProductName.Show();
+			//uxTimeLeft.Show();
+            //uxMinBidAmount.Show();
+			try
             {
                 int index = uxProductBox.SelectedIndex;
                 IProduct p = uxProductBox.Items[index] as IProduct;
