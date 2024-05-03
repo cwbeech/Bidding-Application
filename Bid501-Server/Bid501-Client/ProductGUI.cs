@@ -31,6 +31,12 @@ namespace Bid501_Client
             this.hpb = hpb;
             //this.hla = hla;
             clientID = -1;
+            FormClosed += ProductGUI_FormClosed;
+        }
+
+        private void ProductGUI_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            hpb(-1, -1);
         }
 
         public void UpdateProductGUI(IProductDB database)

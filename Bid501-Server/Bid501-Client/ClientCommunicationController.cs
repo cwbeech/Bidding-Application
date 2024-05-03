@@ -19,6 +19,9 @@ namespace Bid501_Client
         private int clientID;
         public ProductDatabaseProxy database;
 
+        private string user;
+        private string pass;
+
         public UpdateControl uc;
 
         public ClientCommunicationController()
@@ -121,6 +124,8 @@ namespace Bid501_Client
 
         public void HandleLogin(string user, string pass)
         {
+            this.user = user;
+            this.pass = pass;
             ws.Send("0:" + user + ":" + pass);
             // For testing ProductGUI
             //clientID = 1;
@@ -130,7 +135,8 @@ namespace Bid501_Client
 
         public void HandleBid(decimal bidAmt, int prodID)
         {
-            ws.Send("1:" + clientID + ":" + bidAmt + ":" + prodID);
+            if (bidAmt == -1 && prodID == -1) { ws.Send("0:" + user + ":" + pass); }
+            else { ws.Send("1:" + clientID + ":" + bidAmt + ":" + prodID); }
         }
 
         public void SetUpdateControl(UpdateControl uc)
