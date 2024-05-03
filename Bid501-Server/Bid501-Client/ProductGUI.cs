@@ -24,7 +24,7 @@ namespace Bid501_Client
         {
             InitializeComponent();
             this.database = database as ProductDatabaseProxy;
-            uxProductBox.DataSource = this.database.itemsView;
+            //uxProductBox.DataSource = this.database.itemsView;
             this.hpb = hpb;
             clientID = -1;
         }
@@ -57,8 +57,9 @@ namespace Bid501_Client
                 uxDetail.Text = (uxProductBox.SelectedItem as IProduct).description;
                 if ((uxProductBox.SelectedItem as IProduct).currBidID == clientID)
                 {
-                    uxHighest.Visible = true;
-                    uxBidConfirm.Visible = false;
+                    MessageBox.Show("You are current highest bidder");
+                    //uxHighest.Visible = true;
+                    //uxBidConfirm.Visible = false;
                 }
                 else
                 {
