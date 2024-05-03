@@ -16,6 +16,10 @@ namespace Bid501_Client
         private WebSocketSharp.WebSocket ws;
 
         private int clientID;
+
+        private string user;
+        private string pass;
+
         public ProductDatabaseProxy database;
         public KeyValuePair<IProduct, decimal> bids;
 
@@ -60,6 +64,8 @@ namespace Bid501_Client
         public void HandleLogin(string user, string pass)
         {
             ws.Send("0:" + user + ":" + pass);
+            this.user = user;
+            this.pass = pass;
             // For testing ProductGUI
             //clientID = 1;
             //database.activeItems = DummyValues.GetDatabase().activeItems;
@@ -68,7 +74,11 @@ namespace Bid501_Client
 
         public void HandleBid(decimal bidAmt, int prodID)
         {
-            ws.Send("1:" + clientID + ":" + bidAmt + ":" + prodID);
+            if (bidAmt == -1 && prodID == -1) //special case: logout
+            {
+                ws.Send("0:" + user + ":" + pass);
+            }
+            else { ws.Send("1:" + clientID + ":" + bidAmt + ":" + prodID); }
         }
 
         public void SetUpdateControl(UpdateControl uc)
