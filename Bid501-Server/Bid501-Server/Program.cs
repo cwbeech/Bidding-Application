@@ -43,11 +43,12 @@ namespace Bid501_Server
         [STAThread]
         static void Main()
         {
-            ServerCommunictionControl s = new ServerCommunictionControl();
+            
             UserDatabase ud = new UserDatabase();
             ProductDatabase pd = new ProductDatabase();
             ProductController pc = new ProductController(pd);
-            Ping pi = new Ping(s.SendPing);
+			ServerCommunictionControl s = new ServerCommunictionControl(pc);
+			Ping pi = new Ping(s.SendPing);
             
 
             //the starting 4 bids for the program

@@ -31,7 +31,8 @@ namespace Bid501_Server
 
 		public void DatabaseUpdateRequired(object sender, EventArgs e)
 		{
-			ctrl.pingAllConnections();
+			//ctrl.pingAllConnections();
+			Sessions.Broadcast("");
 		}
 
         /// <summary>

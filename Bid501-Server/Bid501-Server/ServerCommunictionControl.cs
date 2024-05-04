@@ -59,9 +59,9 @@ namespace Bid501_Server
 
         public void pingAllConnections()
         {
-            foreach(WebSocketSharp.WebSocket ws in wss.WebSocketServices["/login"].Sessions.Sessions)
+            foreach(Login ws in wss.WebSocketServices["/login"].Sessions.Sessions)
             {
-                ws.Ping();
+                ws.Context.WebSocket.Ping();
             }
         }
 

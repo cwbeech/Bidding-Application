@@ -44,7 +44,7 @@ namespace Bid501_Server
             pd.BidStarted(pID);
         }
 
-        public void 
+         
 
         /// <summary>
         /// Validates the bid revieved from the ServerCommunicationControl, if valid, places it
