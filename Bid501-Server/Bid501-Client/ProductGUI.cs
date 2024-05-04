@@ -64,7 +64,12 @@ namespace Bid501_Client
                         prods.Add((ProductProxy)p);
                     }
                 }
-
+                int index = uxProductBox.SelectedIndex;
+                IProduct pp = uxProductBox.Items[index] as IProduct;
+                uxProductName.Text = pp.name;
+                uxTimeLeft.Text = pp.timeLeft.ToString();
+                uxMinBidAmount.Text = pp.minBid.ToString();
+                uxDetail.Text = pp.description;
                 uxProductBox.Refresh();
             }
             else
