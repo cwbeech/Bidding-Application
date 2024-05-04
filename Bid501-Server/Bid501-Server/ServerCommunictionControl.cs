@@ -39,15 +39,16 @@ namespace Bid501_Server
 
 			wss = new WebSocketServer(8001);
 
-			//wss.AddWebSocketService<Login>("/login", () =>
-			//{
-			//	Login loginService = new Login(this);
-			//	return loginService;
-			//});
-			wss.AddWebSocketService("/login", () =>
-			{
-				return this;
-			});
+            wss.AddWebSocketService<Login>("/login", () =>
+            {
+            	Login loginService = new Login(this);
+            	return loginService;
+            });
+            //wss.AddWebSocketService("/login", () =>
+            //{
+            //	return this;
+            //});
+            //wss.AddWebSocketService<Login>("/login");
 
 			wss.Start();
 		}
@@ -81,7 +82,7 @@ namespace Bid501_Server
 			this.gau = gau;
         }
 
-		protected override void OnMessage(MessageEventArgs e)
+		/*protected override void OnMessage(MessageEventArgs e)
 		{
             Task.Run(() =>
             {
@@ -119,7 +120,7 @@ namespace Bid501_Server
 
                 }
             });
-
-		}
+            
+		}*/
 	}
 }
