@@ -36,8 +36,16 @@ namespace Bid501_Server
         {
             get
             {
-                decimal toAdd = price / 10;
-                return price + toAdd;
+                if(currBidID == 0)
+                {
+                    return price;
+                }
+
+                return price * 1.1m;
+            }
+            set 
+            {
+                minBid = value;
             }
         }
 
