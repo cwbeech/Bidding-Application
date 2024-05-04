@@ -8,7 +8,7 @@ using WebSocketSharp.Server;
 using Bid501_Shared;
 namespace Bid501_Server
 {
-    public delegate int LoginAttempt(string user, string password, int type, out bool logout);
+    public delegate int LoginAttempt(string user, string password, int type, string loc, out bool logout);
 
     public delegate void AddItemDel(Product p);
 
