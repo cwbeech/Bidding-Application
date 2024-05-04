@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System.Net.WebSockets;
 using Newtonsoft.Json.Linq;
 using System.Net.Sockets;
+using System.Net.NetworkInformation;
 
 namespace Bid501_Client
 {
@@ -33,6 +34,7 @@ namespace Bid501_Client
             //ws = new WebSocketSharp.WebSocket("ws://10.150.103.258:8001/login");//Dennis's IP
             database = new ProductDatabaseProxy();
             ws.OnMessage += MessageFromServer;
+            
             ws.Connect();
 			if (ws.ReadyState == WebSocketSharp.WebSocketState.Open)
             {
