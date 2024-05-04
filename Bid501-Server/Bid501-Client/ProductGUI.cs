@@ -69,7 +69,7 @@ namespace Bid501_Client
                 uxTimeLeft.Text = pp.timeLeft.ToString();
                 uxMinBidAmount.Text = pp.minBid.ToString();
                 uxDetail.Text = pp.description;
-                uxBidAmount2.Value = pp.minBid;
+                uxBidAmount2.Value = Decimal.Ceiling(pp.minBid);
                 uxProductBox.Refresh();
 
                 //Show highest bidder
