@@ -60,7 +60,11 @@ namespace Bid501_Client
         {
             get
             {
-                return price; //idk what this is supposed to be
+                if (currBidID == 0)
+                {
+                    return price;
+                }
+                return price * 1.1m;
             }
         }
 

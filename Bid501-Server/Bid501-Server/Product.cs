@@ -32,7 +32,22 @@ namespace Bid501_Server
         /// <summary>
         /// Current minimum bid allowed on the product
         /// </summary>
-        public decimal minBid { get; set; }
+        public decimal minBid
+        {
+            get
+            {
+                if(currBidID == 0)
+                {
+                    return price;
+                }
+
+                return price * 1.1m;
+            }
+            set 
+            {
+                minBid = value;
+            }
+        }
 
         /// <summary>
         /// The id of the bidder who currently has the highest bid on the product
