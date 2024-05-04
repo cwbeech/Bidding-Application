@@ -18,7 +18,6 @@ namespace Bid501_Client
     {
         public HandleLoginAttempt hla;
 
-
         public LoginGUI(HandleLoginAttempt hla)
         {
             //setup
