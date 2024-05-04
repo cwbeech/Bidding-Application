@@ -52,6 +52,7 @@ namespace Bid501_Client
                 foreach (IProduct p in pNew)
                 {
                     IProduct old = prods.FirstOrDefault(prod => prod.id == p.id);
+                    IProduct modified; //why is this here, delete it
 
                     if (old != null)
                     {
@@ -105,9 +106,7 @@ namespace Bid501_Client
                 //Show highest bidder
                 if (p.currBidID == clientID)
                 {
-                    //MessageBox.Show("You are current highest bidder");
-                    uxHighest.Visible = true;
-                    uxBidAmount.Visible = false;
+                    MessageBox.Show("You are current highest bidder");
                 }
                 else
                 {
