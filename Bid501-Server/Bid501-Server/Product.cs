@@ -36,17 +36,17 @@ namespace Bid501_Server
         {
             get
             {
-                if(currBidID == 0)
+                if (currBidID == 0)
                 {
                     return price;
                 }
-
                 return price * 1.1m;
             }
-            set 
+            set
             {
                 minBid = value;
             }
+
         }
 
         /// <summary>
