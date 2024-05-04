@@ -1,13 +1,14 @@
 ﻿using Bid501_Shared;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Bid501_Server
 {
-    public class ProductDatabase : IProductDB
+    public class ProductDatabase : IProductDB, INotifyPropertyChanged
     {
         /// <summary>
         /// A list of all active products and their ID
@@ -28,6 +29,8 @@ namespace Bid501_Server
         /// the nextID to assign to a product (not sure if we need this as of rn 04/18)
         /// </summary>
         private int nextID;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Constructor for a ProductDatabase
@@ -98,6 +101,7 @@ namespace Bid501_Server
                 actualActiveItems.Remove(prod);
             }
 
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(actualActiveItems)));
         }
 
         /// <summary>
@@ -121,6 +125,9 @@ namespace Bid501_Server
                 allItems.Remove(prod);
                 actualActiveItems.Add(prod, prod.id);
             }
+
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(actualActiveItems)));
+
         }
 
         /// <summary>

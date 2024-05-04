@@ -13,9 +13,25 @@ namespace Bid501_Server
         private ProductDatabase pd;
         private Ping pi;
 
+        public event EventHandler DatabaseUpdate;
+
         public ProductController(ProductDatabase p)
         {
             this.pd = p;
+            p.PropertyChanged += ActiveItemsChanged;
+        }
+
+        private void ActiveItemsChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == nameof(ProductDatabase.actualActiveItems))
+            {
+                DatabaseUpdateRequired();
+            }
+        }
+
+        private void DatabaseUpdateRequired()
+        {
+            DatabaseUpdate?.Invoke(this, new EventArgs());
         }
 
         public void LoadPing(Ping pi)
@@ -27,6 +43,8 @@ namespace Bid501_Server
         {
             pd.BidStarted(pID);
         }
+
+        public void 
 
         /// <summary>
         /// Validates the bid revieved from the ServerCommunicationControl, if valid, places it

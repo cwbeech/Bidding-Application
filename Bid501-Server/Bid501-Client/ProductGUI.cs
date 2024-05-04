@@ -52,7 +52,6 @@ namespace Bid501_Client
                 foreach (IProduct p in pNew)
                 {
                     IProduct old = prods.FirstOrDefault(prod => prod.id == p.id);
-                    IProduct modified; //why is this here, delete it
 
                     if (old != null)
                     {
@@ -70,7 +69,21 @@ namespace Bid501_Client
                 uxTimeLeft.Text = pp.timeLeft.ToString();
                 uxMinBidAmount.Text = pp.minBid.ToString();
                 uxDetail.Text = pp.description;
+                uxBidAmount2.Value = pp.minBid;
                 uxProductBox.Refresh();
+
+                //Show highest bidder
+                if (pp.currBidID == clientID)
+                {
+                    //MessageBox.Show("You are current highest bidder");
+                    uxHighest.Visible = true;
+                    uxBidConfirm.Visible = false;
+                }
+                else
+                {
+                    uxHighest.Visible = false;
+                    uxBidConfirm.Visible = true;
+                }
             }
             else
             {
@@ -95,24 +108,7 @@ namespace Bid501_Client
         {
 			try
             {
-                //Set up gui
-                int index = uxProductBox.SelectedIndex;
-                IProduct p = uxProductBox.Items[index] as IProduct;
-                uxProductName.Text = p.name;
-                uxTimeLeft.Text = p.timeLeft.ToString();
-                uxMinBidAmount.Text = p.minBid.ToString();
-                uxDetail.Text = p.description;
-
-                //Show highest bidder
-                if (p.currBidID == clientID)
-                {
-                    MessageBox.Show("You are current highest bidder");
-                }
-                else
-                {
-                    uxHighest.Visible = false;
-                    uxBidConfirm.Visible = true;
-                }
+                UpdateProductGUI(database);
             }
 
             //sussy catch
@@ -131,9 +127,9 @@ namespace Bid501_Client
             IProduct p = uxProductBox.Items[index] as IProduct;
 
             //send bid info
-            if (int.Parse(uxBidAmount.Text) >= p.minBid)
+            if (int.Parse(uxBidAmount2.Text) >= p.minBid)
             {
-                hpb((decimal)int.Parse(uxBidAmount.Text), p.id);
+                hpb((decimal)int.Parse(uxBidAmount2.Text), p.id);
             }
         }
     }

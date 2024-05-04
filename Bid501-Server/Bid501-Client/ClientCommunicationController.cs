@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System.Net.WebSockets;
 using Newtonsoft.Json.Linq;
 using System.Net.Sockets;
+using System.Net.NetworkInformation;
 
 namespace Bid501_Client
 {
@@ -33,6 +34,7 @@ namespace Bid501_Client
             //ws = new WebSocketSharp.WebSocket("ws://10.150.103.258:8001/login");//Dennis's IP
             database = new ProductDatabaseProxy();
             ws.OnMessage += MessageFromServer;
+            
             ws.Connect();
 			if (ws.ReadyState == WebSocketSharp.WebSocketState.Open)
             {
@@ -43,6 +45,11 @@ namespace Bid501_Client
 
         private void MessageFromServer(object sender, MessageEventArgs e)
         {
+
+            if(e.RawData.Length == 0)
+            {
+                HandleBid(-2, -2);
+            }
             Deserialize(e.Data);
         }
 
@@ -143,6 +150,10 @@ namespace Bid501_Client
             { 
                 ws.Send("0:" + user + ":" + pass);
                 ws.Close();
+            }
+            else if(bidAmt == -2 && prodID == -2)
+            {
+                ws.Send("1:" + clientID + ":" + bidAmt + ":" + prodID);
             }
             else 
             { 
