@@ -51,7 +51,9 @@ namespace Bid501_Client
                 BindingList<ProductProxy> pNew = this.database.itemsView;
                 List<ProductProxy> i = new List<ProductProxy>();
 
-                BindingList<ProductProxy> prodsCopy = prods;
+                BindingList<ProductProxy> prodsCopy = new BindingList<ProductProxy>();
+
+                prods.CopyTo(prodsCopy.ToArray<ProductProxy>(), 0);
 
                 foreach (IProduct p in pNew)
                 {
