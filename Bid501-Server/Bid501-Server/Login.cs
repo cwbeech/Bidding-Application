@@ -74,7 +74,7 @@ namespace Bid501_Server
 		private void HandleLogin(string[] msg)
 		{
 			bool logout;
-			int toReturn = ctrl.LoginDel(msg[1], msg[2], 0, out logout); //NOTE: LoginDel needs to return userid which I don't believe it currently does - Aidan, 4/30
+			int toReturn = ctrl.LoginDel(msg[1], msg[2], 0, "client", out logout); //NOTE: LoginDel needs to return userid which I don't believe it currently does - Aidan, 4/30
 
 			if (logout)
 			{

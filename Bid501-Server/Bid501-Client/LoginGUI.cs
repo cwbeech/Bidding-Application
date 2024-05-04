@@ -50,7 +50,7 @@ namespace Bid501_Client
             }
             else
             {
-                this.Invoke(new Action(() => this.loginFail.Visible = true));
+                MessageBox.Show("Invalid Login");
             }
         }
 

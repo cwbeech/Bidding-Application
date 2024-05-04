@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Bid501_Server
 {
@@ -43,7 +44,7 @@ namespace Bid501_Server
         /// <param name="pass">The attempted password</param>
         /// <param name="type">Determines the type of user, 0 for bidder, 1 for admin</param>
         /// <returns>returns userid for a valid login, -1 for valid user, invalid password, and 2 for a valid user/pass but already logged in</returns>
-        public int LoginAttempt(string user, string pass, int type, out bool logout)
+        public int LoginAttempt(string user, string pass, int type, string loc, out bool logout)
         {
             foreach(var kp in registeredUsers)
             {
@@ -53,9 +54,36 @@ namespace Bid501_Server
                     {
                         if (!activeUsers.Contains(kp.Key))
                         {
-                            activeUsers.Add(kp.Key);
-                            logout = false;
-                            return kp.Key.UserID;
+                            switch (loc)
+                            {
+                                case "server":
+                                    if(kp.Key.UserType == UserGroup.Admin && type == 1)
+                                    {
+                                        activeUsers.Add(kp.Key);
+                                        logout = false;
+                                        return kp.Key.UserID;
+                                    }
+                                    else
+                                    {
+                                        logout = false;
+                                        return -1;
+                                    }
+                                case "client":
+                                    if(kp.Key.UserType == UserGroup.Bidder && type == 0)
+                                    {
+                                        activeUsers.Add(kp.Key);
+                                        logout = false;
+                                        return kp.Key.UserID;
+                                    }
+                                    else
+                                    {
+                                        logout = false;
+                                        return -1;
+                                    }
+                                default:
+                                    logout = false;
+                                    return -1;
+                            }
                         }
 
                         logout = true;
