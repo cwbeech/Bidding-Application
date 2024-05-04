@@ -55,13 +55,13 @@ namespace Bid501_Client
 
                 foreach (IProduct p in pNew)
                 {
-                    if (!prods.Contains(p))
-                        prodsCopy.Add((ProductProxy)p);
+                    if (!prodsCopy.Contains(p))
+                        prods.Add((ProductProxy)p);
                 }
-                foreach (IProduct p in prods)
+                foreach (IProduct p in prodsCopy)
                 {
                     if (!pNew.Contains(p))
-                        prodsCopy.Remove((ProductProxy)p);
+                        prods.Remove((ProductProxy)p);
                 }
 
                 prods = prodsCopy;
