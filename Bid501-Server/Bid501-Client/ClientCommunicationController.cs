@@ -42,7 +42,7 @@ namespace Bid501_Client
             ws.Connect();
 			if (ws.ReadyState == WebSocketSharp.WebSocketState.Open)
             {
-                MessageBox.Show("hi");
+                MessageBox.Show("Connected To Server");
             }
 
 		}

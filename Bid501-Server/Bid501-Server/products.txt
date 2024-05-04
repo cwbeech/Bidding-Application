@@ -1,0 +1,10 @@
+Nintendo Switch:A handheld gaming device produced by Nintendo:100.00
+Renaissance Artwork:A painting renaissance painting, probably valuable:250.50
+Antique Knife:An antique blade:80.00
+Racing Horse:A pure-bred racing horse:20.00
+PS4:A video game console, produced by Sony:100.00
+iPhone 7:An iPhone 7, produced by Apple:80.00
+Bose SoundSport:A bose speaker:120.00
+Arduino Microcontroller:An arduino microcontroller, the exact one is a surprise:50.00
+
+
