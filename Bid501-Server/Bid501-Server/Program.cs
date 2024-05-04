@@ -78,7 +78,6 @@ namespace Bid501_Server
             LoginView lv = new LoginView(ld, ugui, gau, gap);
 
             s.SetDelegates(ld, pba, gap, rd, lo, ugui, gau);
-            pc.LoadPing(pi);
 
             Application.Run(lv);
 

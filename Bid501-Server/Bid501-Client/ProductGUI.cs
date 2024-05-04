@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Bid501_Shared;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Bid501_Client
 {
@@ -51,6 +53,19 @@ namespace Bid501_Client
 
                 foreach (IProduct p in pNew)
                 {
+                    if (!prods.Contains(p))
+                        prods.Add((ProductProxy)p);
+                }
+                foreach (IProduct p in prods)
+                {
+                    if (!pNew.Contains(p))
+                        prods.Remove((ProductProxy)p);
+                }
+
+                foreach (IProduct p in pNew)
+                {
+                   
+
                     IProduct old = prods.FirstOrDefault(prod => prod.id == p.id);
 
                     if (old != null)
