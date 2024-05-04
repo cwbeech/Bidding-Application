@@ -108,28 +108,6 @@ namespace Bid501_Client
 			try
             {
                 UpdateProductGUI(database);
-                /*
-                //Set up gui
-                int index = uxProductBox.SelectedIndex;
-                IProduct p = uxProductBox.Items[index] as IProduct;
-                uxProductName.Text = p.name;
-                uxTimeLeft.Text = p.timeLeft.ToString();
-                uxMinBidAmount.Text = p.minBid.ToString();
-                uxDetail.Text = p.description;
-
-                //Show highest bidder
-                if (p.currBidID == clientID)
-                {
-                    //MessageBox.Show("You are current highest bidder");
-                    uxHighest.Visible = true;
-                    uxBidConfirm.Visible = false;
-                }
-                else
-                {
-                    uxHighest.Visible = false;
-                    uxBidConfirm.Visible = true;
-                }
-                */
             }
 
             //sussy catch
