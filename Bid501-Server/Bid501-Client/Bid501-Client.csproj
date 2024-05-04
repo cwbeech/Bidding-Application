@@ -54,8 +54,6 @@
   <ItemGroup>
     <Compile Include="ClientCommunicationController.cs" />
     <Compile Include="ClientMainController.cs" />
-    <Compile Include="ClientState.cs" />
-    <Compile Include="DummyValues.cs" />
     <Compile Include="ProductDatabaseProxy.cs" />
     <Compile Include="ProductGUI.cs">
       <SubType>Form</SubType>

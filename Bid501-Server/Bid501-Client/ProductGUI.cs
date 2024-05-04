@@ -118,7 +118,6 @@ namespace Bid501_Client
                     //Show highest bidder
                     if (pp.currBidID == clientID)
                     {
-                        //MessageBox.Show("You are current highest bidder");
                         uxHighest.Visible = true;
                         uxBidConfirm.Visible = false;
                     }
@@ -142,12 +141,6 @@ namespace Bid501_Client
 
         }
         
-        /// <summary>
-        /// Selected index of list box changed, update everything on GUI to represent current product selected: ProductName, MinBidAmount, Detail, TimeLeft.
-        /// Also updates if clientID is the current highest bidder.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void uxProductBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 			try
