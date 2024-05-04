@@ -16,6 +16,10 @@ namespace Bid501_Server
 {
 	public class ServerCommunictionControl : WebSocketBehavior
 	{
+		public UpdateGUI ugui;
+
+		public GetActiveUsers gau;
+
 		public LoginAttempt LoginDel;
 
 		public PlaceBidAttempt PlaceBidDel;
@@ -24,73 +28,117 @@ namespace Bid501_Server
 
 		public ReturnDatabase rd;
 
+		public Logout lo;
+
+        public ProductController pc;
+
 		private WebSocketServer wss;
 
-		public ServerCommunictionControl()
+		private List<WebSocketSharp.WebSocket> activeConnections = new List<WebSocketSharp.WebSocket>();
+
+		public ServerCommunictionControl(ProductController pc)
 		{ 
 
 			wss = new WebSocketServer(8001);
 
-			//wss.AddWebSocketService<Login>("/login", () =>
-			//{
-			//	Login loginService = new Login(this);
-			//	return loginService;
-			//});
-			wss.AddWebSocketService("/login", () =>
-			{
-				return this;
-			});
+            this.pc = pc;
+
+            wss.AddWebSocketService<Login>("/login", () =>
+            {
+            	Login loginService = new Login(this, pc);
+            	return loginService;
+            });
+            //wss.AddWebSocketService("/login", () =>
+            //{
+            //	return this;
+            //});
+            //wss.AddWebSocketService<Login>("/login");
 
 			wss.Start();
 		}
 
-		/// <summary>
-		/// Sets the delegates for hte server communication ctrl
-		/// </summary>
-		/// <param name="ld"></param>
-		/// <param name="pba"></param>
-		/// <param name="gap"></param>
-		public void SetDelegates(LoginAttempt ld, PlaceBidAttempt pba, GetActiveProds gap, ReturnDatabase rd)
+        public void pingAllConnections()
+        {
+            foreach(Login ws in wss.WebSocketServices["/login"].Sessions.Sessions)
+            {
+                ws.Context.WebSocket.Ping();
+            }
+        }
+
+        protected override void OnOpen()
+        {
+			base.OnOpen();
+			activeConnections.Add(Context.WebSocket);
+        }
+
+        protected override void OnClose(CloseEventArgs e)
+        {
+			base.OnClose(e);
+			activeConnections.Remove(Context.WebSocket);
+        }
+
+        public void SendPing()
+        {
+            //wss.Ping();
+            //wss.
+        }
+
+        /// <summary>
+        /// Sets the delegates for hte server communication ctrl
+        /// </summary>
+        /// <param name="ld"></param>
+        /// <param name="pba"></param>
+        /// <param name="gap"></param>
+        public void SetDelegates(LoginAttempt ld, PlaceBidAttempt pba, GetActiveProds gap, ReturnDatabase rd, Logout lo, UpdateGUI ugui, GetActiveUsers gau)
 		{
             this.LoginDel = ld;
             this.PlaceBidDel = pba;
             this.gap = gap;
 			this.rd = rd;
+			this.lo = lo;
+			this.ugui = ugui;
+			this.gau = gau;
         }
 
-		protected override void OnMessage(MessageEventArgs e)
+		/*protected override void OnMessage(MessageEventArgs e)
 		{
-			/*string msg = e.Data;
-			msg = msg + " Received in server.";
-			//Sessions.Broadcast(msg);
-			Sessions.SendTo(ID, msg);*/
+            Task.Run(() =>
+            {
+            string[] msg = e.Data.Split(':');
+                if (Convert.ToInt32(msg[0]) == 0)
+                {//login attempt from client
+                 //bool toReturn = PlaceBidDel(Convert.ToInt32(msg[0]), Convert.ToDecimal(msg[1]), Convert.ToInt32(msg[2]));
+                    bool logout;
+                    int toReturn = LoginDel(msg[1], msg[2], 0, out logout); //NOTE: LoginDel needs to return userid which I don't believe it currently does - Aidan, 4/30
 
-			//string[] msg = e.Data.Split(':');
-			string[] msg = e.Data.Split(':');
-			if (Convert.ToInt32(msg[0]) == 0)
-			{//login attempt from client
-			 //bool toReturn = PlaceBidDel(Convert.ToInt32(msg[0]), Convert.ToDecimal(msg[1]), Convert.ToInt32(msg[2]));
-				int toReturn = LoginDel(msg[1], msg[2], 0); //NOTE: LoginDel needs to return userid which I don't believe it currently does - Aidan, 4/30
-				string aaa = JsonConvert.SerializeObject(rd());
-				string sendString = "0&" + toReturn + "&" + aaa;
-				Sessions.SendTo(ID, sendString);
-			}
-			else if (Convert.ToInt32(msg[0]) == 1)
-			{//place bid attempt from client
-				bool bidGood = PlaceBidDel(Convert.ToInt32(msg[1]), Convert.ToDecimal(msg[2]), Convert.ToInt32(msg[3]));
-				//if (bidGood)
-				//{
-				//**Note** Client side wants the database regardless of whether the bid went through or not, so I commented out these liens - Aidan, 5/1
-					//List<Product> sendList = gap().ToList<Product>();
-					IProductDB sendDB = rd();
-					string toSend = JsonConvert.SerializeObject(sendDB);
-					toSend = "1&" + toSend;
-					Sessions.Broadcast(toSend);
-				//}
+                    if (logout)
+                    {
+                        lo(toReturn);
+                        ugui(gap(), gau());
+                        Sessions.CloseSession(ID);
+                    }
 
-			}
-			
+                    string aaa = JsonConvert.SerializeObject(rd());
+                    string sendString = "0&" + toReturn + "&" + aaa;
+                    Sessions.SendTo(ID, sendString);
+                    ugui(gap(), gau());
 
-		}
+                }
+                else if (Convert.ToInt32(msg[0]) == 1)
+                {//place bid attempt from client
+                    bool bidGood = PlaceBidDel(Convert.ToInt32(msg[1]), Convert.ToDecimal(msg[2]), Convert.ToInt32(msg[3]));
+                    string toSend = JsonConvert.SerializeObject(rd());
+                    toSend = "1&" + toSend;
+
+                    foreach (WebSocketSharp.WebSocket w in activeConnections)
+                    {
+                        w.Send(toSend);
+                    }
+                    //}
+
+                }
+            });
+            
+		}*/
 	}
 }

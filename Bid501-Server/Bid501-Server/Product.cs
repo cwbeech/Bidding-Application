@@ -32,7 +32,22 @@ namespace Bid501_Server
         /// <summary>
         /// Current minimum bid allowed on the product
         /// </summary>
-        public decimal minBid { get; set; }
+        public decimal minBid
+        {
+            get
+            {
+                if (currBidID == -1)
+                {
+                    return price;
+                }
+                return price * 1.1m;
+            }
+            set
+            {
+                minBid = value;
+            }
+
+        }
 
         /// <summary>
         /// The id of the bidder who currently has the highest bid on the product
@@ -53,8 +68,6 @@ namespace Bid501_Server
             this.name = name;
             this.description = description;
             this.price = price;
-
-            minBid = price;
 			currBidID = 0;
             timeLeft = DateTime.Now; //NOTE: whenever you display this, probably want to use ToShortDateString or something like it - Aidan, 5/2
         }
@@ -77,6 +90,8 @@ namespace Bid501_Server
             return pInfo;
         }
 
+
+        
         /// <summary>
         /// Overrides the ToString to return the Product's name.
         /// </summary>
@@ -85,6 +100,7 @@ namespace Bid501_Server
 		{
             return name;
 		}
+        
 
         /// <summary>
         /// Returns a string separated by ':' containing the information of a product

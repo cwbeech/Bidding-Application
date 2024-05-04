@@ -12,15 +12,34 @@ namespace Bid501_Server
     {
         private ProductDatabase pd;
 
+        public event EventHandler DatabaseUpdate;
+
         public ProductController(ProductDatabase p)
         {
             this.pd = p;
+            p.PropertyChanged += ActiveItemsChanged;
         }
+
+        private void ActiveItemsChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == nameof(ProductDatabase.actualActiveItems))
+            {
+                DatabaseUpdateRequired();
+            }
+        }
+
+        private void DatabaseUpdateRequired()
+        {
+            DatabaseUpdate?.Invoke(this, new EventArgs());
+        }
+
 
         public void StartBid(int pID)
         {
             pd.BidStarted(pID);
         }
+
+         
 
         /// <summary>
         /// Validates the bid revieved from the ServerCommunicationControl, if valid, places it
@@ -73,6 +92,7 @@ namespace Bid501_Server
 
         public IProductDB ReturnDatabase()
         {
+            pd.ReturnSendList();
             return (IProductDB)pd;
         }
 
@@ -83,7 +103,7 @@ namespace Bid501_Server
         public void BidClosed(int pID)
         {
             pd.BidClosed(pID);
-        }
+		}
 
         /// <summary>
         /// Returns all relevant information about a product in a List of strings in the order of:

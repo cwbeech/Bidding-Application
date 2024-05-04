@@ -60,7 +60,11 @@ namespace Bid501_Client
         {
             get
             {
-                return price; //idk what this is supposed to be
+                if(currBidID == -1)
+                {
+                    return price;
+                }
+                return price * 1.1m;
             }
         }
 
@@ -84,16 +88,16 @@ namespace Bid501_Client
             return name;
         }
 
-        /*
-        public ProductProxy(string n, string d, int i, decimal p)
+        public ProductProxy()
         {
-            name = n;
-            description = d;
-            id = i;
-            price = p;
-            currBidID = 0; //may want to change how we handle no bid ID
+            name = "";
+            description = "";
+            id = 0;
+            price = 0;
+            currBidID = 0;
+            timeLeft = DateTime.Now;
         }
-        */
+        
         public ProductProxy(IProduct p)
         {
             name = p.name;

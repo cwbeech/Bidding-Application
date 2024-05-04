@@ -1,13 +1,14 @@
 ﻿using Bid501_Shared;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Bid501_Server
 {
-    public class ProductDatabase : IProductDB
+    public class ProductDatabase : IProductDB, INotifyPropertyChanged
     {
         /// <summary>
         /// A list of all active products and their ID
@@ -19,14 +20,17 @@ namespace Bid501_Server
         /// </summary>
         public Dictionary<Product, int> allItems = new Dictionary<Product, int>();
 
-        public Dictionary<int, IProduct> activeItems { get; set; }
+        public Dictionary<int, IProduct> activeItems { get; set; } = new Dictionary<int, IProduct>();
+
 
         private FileIO fio;
 
         /// <summary>
         /// the nextID to assign to a product (not sure if we need this as of rn 04/18)
         /// </summary>
-        private int nextID;
+        private static int nextID = 1;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Constructor for a ProductDatabase
@@ -40,15 +44,15 @@ namespace Bid501_Server
             nextID = 1;
         }
 
-        /*public IProductDB ReturnSendList()
+        public void ReturnSendList()
         {
+            activeItems.Clear();
+
             foreach (KeyValuePair<Product, int> kvp in actualActiveItems)
             {
-                activeItems.Add(kvp.Value, kvp.Key);
+                activeItems.Add(kvp.Value, (IProduct)kvp.Key);
             }
-            IProductDB toReturn = new IProductDB();
-            return new IProductDB(activeItems);
-        }*/
+        }
 
         /// <summary>
         /// Adds a product to the activeItems list
@@ -56,8 +60,12 @@ namespace Bid501_Server
         /// <param name="p">The product to add</param>
         public void AddProduct(Product p)
         {
-            p.id = nextID;
-            nextID++;
+            if (p.id == 0)
+            {
+				p.id = nextID;
+				nextID++;
+			}
+            
             allItems.Add(p, p.id);
         }
 
@@ -97,6 +105,7 @@ namespace Bid501_Server
                 actualActiveItems.Remove(prod);
             }
 
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(actualActiveItems)));
         }
 
         /// <summary>
@@ -120,6 +129,8 @@ namespace Bid501_Server
                 allItems.Remove(prod);
                 actualActiveItems.Add(prod, prod.id);
             }
+
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(actualActiveItems)));
         }
 
         /// <summary>
@@ -135,7 +146,7 @@ namespace Bid501_Server
                 if(kp.Value == pID)
                 {
                     kp.Key.currBidID = userID;
-                    kp.Key.minBid = bid;
+                    kp.Key.price = bid;
                 }
             }
         }
@@ -162,7 +173,7 @@ namespace Bid501_Server
 
             if(p != null)
             {
-                if (userID != p.currBidID && bid > p.minBid)
+                if (userID != p.currBidID && bid >= p.minBid)
                 {
                     return true;
                 }

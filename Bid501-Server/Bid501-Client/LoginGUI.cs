@@ -50,7 +50,7 @@ namespace Bid501_Client
             }
             else
             {
-                this.loginFail.Visible = true;
+                this.Invoke(new Action(() => this.loginFail.Visible = true));
             }
         }
 
