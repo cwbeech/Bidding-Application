@@ -82,7 +82,7 @@ namespace Bid501_Server
 			bool bidGood = ctrl.PlaceBidDel(Convert.ToInt32(msg[1]), Convert.ToDecimal(msg[2]), Convert.ToInt32(msg[3]));
 			string toSend = JsonConvert.SerializeObject(ctrl.rd());
 			toSend = "1&" + toSend;
-			Sessions.SendTo(ID, toSend);
+			Sessions.Broadcast(toSend);
 
 			//foreach (WebSocketSharp.WebSocket w in ctrl.activeConnections)
 			//{
