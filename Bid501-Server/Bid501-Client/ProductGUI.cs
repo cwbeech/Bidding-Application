@@ -69,6 +69,7 @@ namespace Bid501_Client
                 uxTimeLeft.Text = pp.timeLeft.ToString();
                 uxMinBidAmount.Text = pp.minBid.ToString();
                 uxDetail.Text = pp.description;
+                uxBidAmount2.Value = pp.minBid;
                 uxProductBox.Refresh();
             }
             else
@@ -132,9 +133,9 @@ namespace Bid501_Client
             IProduct p = uxProductBox.Items[index] as IProduct;
 
             //send bid info
-            if (int.Parse(uxBidAmount.Text) >= p.minBid)
+            if (int.Parse(uxBidAmount2.Text) >= p.minBid)
             {
-                hpb((decimal)int.Parse(uxBidAmount.Text), p.id);
+                hpb((decimal)int.Parse(uxBidAmount2.Text), p.id);
             }
         }
     }
