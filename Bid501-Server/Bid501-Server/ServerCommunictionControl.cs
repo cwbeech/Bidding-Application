@@ -39,15 +39,16 @@ namespace Bid501_Server
 
 			wss = new WebSocketServer(8001);
 
-			//wss.AddWebSocketService<Login>("/login", () =>
-			//{
-			//	Login loginService = new Login(this);
-			//	return loginService;
-			//});
-			wss.AddWebSocketService("/login", () =>
-			{
-				return this;
-			});
+            wss.AddWebSocketService<Login>("/login", () =>
+            {
+            	Login loginService = new Login(this);
+            	return loginService;
+            });
+            //wss.AddWebSocketService("/login", () =>
+            //{
+            //	return this;
+            //});
+            //wss.AddWebSocketService<Login>("/login");
 
 			wss.Start();
 		}
@@ -81,43 +82,45 @@ namespace Bid501_Server
 			this.gau = gau;
         }
 
-		protected override void OnMessage(MessageEventArgs e)
+		/*protected override void OnMessage(MessageEventArgs e)
 		{
-			/*string msg = e.Data;
-			msg = msg + " Received in server.";
-			//Sessions.Broadcast(msg);
-			Sessions.SendTo(ID, msg);*/
+            Task.Run(() =>
+            {
+            string[] msg = e.Data.Split(':');
+                if (Convert.ToInt32(msg[0]) == 0)
+                {//login attempt from client
+                 //bool toReturn = PlaceBidDel(Convert.ToInt32(msg[0]), Convert.ToDecimal(msg[1]), Convert.ToInt32(msg[2]));
+                    bool logout;
+                    int toReturn = LoginDel(msg[1], msg[2], 0, out logout); //NOTE: LoginDel needs to return userid which I don't believe it currently does - Aidan, 4/30
 
-			//string[] msg = e.Data.Split(':');
-			string[] msg = e.Data.Split(':');
-			if (Convert.ToInt32(msg[0]) == 0)
-			{//login attempt from client
-			 //bool toReturn = PlaceBidDel(Convert.ToInt32(msg[0]), Convert.ToDecimal(msg[1]), Convert.ToInt32(msg[2]));
-				int toReturn = LoginDel(msg[1], msg[2], 0); //NOTE: LoginDel needs to return userid which I don't believe it currently does - Aidan, 4/30
+                    if (logout)
+                    {
+                        lo(toReturn);
+                        ugui(gap(), gau());
+                        Sessions.CloseSession(ID);
+                    }
 
-				if (toReturn < -1)
-				{
-					lo(-1 * toReturn);
-					ugui(gap(), gau());
-					Sessions.CloseSession(ID);
-				}
-				string aaa = JsonConvert.SerializeObject(rd());
-				string sendString = "0&" + toReturn + "&" + aaa;
-				Sessions.SendTo(ID, sendString);
-				ugui(gap(), gau());
-				
-			}
-			else if (Convert.ToInt32(msg[0]) == 1)
-			{//place bid attempt from client
-				bool bidGood = PlaceBidDel(Convert.ToInt32(msg[1]), Convert.ToDecimal(msg[2]), Convert.ToInt32(msg[3]));
-				string toSend = JsonConvert.SerializeObject(rd());
-				toSend = "1&" + toSend;
-				Sessions.Broadcast(toSend);
-				//}
+                    string aaa = JsonConvert.SerializeObject(rd());
+                    string sendString = "0&" + toReturn + "&" + aaa;
+                    Sessions.SendTo(ID, sendString);
+                    ugui(gap(), gau());
 
-			}
-			
+                }
+                else if (Convert.ToInt32(msg[0]) == 1)
+                {//place bid attempt from client
+                    bool bidGood = PlaceBidDel(Convert.ToInt32(msg[1]), Convert.ToDecimal(msg[2]), Convert.ToInt32(msg[3]));
+                    string toSend = JsonConvert.SerializeObject(rd());
+                    toSend = "1&" + toSend;
 
-		}
+                    foreach (WebSocketSharp.WebSocket w in activeConnections)
+                    {
+                        w.Send(toSend);
+                    }
+                    //}
+
+                }
+            });
+            
+		}*/
 	}
 }

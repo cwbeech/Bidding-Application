@@ -27,14 +27,19 @@ namespace Bid501_Client
         public ClientCommunicationController()
         {
             //websocket stuff
-            //ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login"); //personal machine's IP
-            ws = new WebSocketSharp.WebSocket("ws://10.150.109.119:8001/login"); //Aidan's IP
+            ws = new WebSocketSharp.WebSocket("ws://127.0.0.1:8001/login"); //personal machine's IP
+            //ws = new WebSocketSharp.WebSocket("ws://10.150.109.119:8001/login"); //Aidan's IP
             //ws = new WebSocketSharp.WebSocket("ws://192.168.0.63:8001/login");
             //ws = new WebSocketSharp.WebSocket("ws://10.150.103.258:8001/login");//Dennis's IP
             database = new ProductDatabaseProxy();
             ws.OnMessage += MessageFromServer;
             ws.Connect();
-        }
+			if (ws.ReadyState == WebSocketSharp.WebSocketState.Open)
+            {
+                MessageBox.Show("hi");
+            }
+
+		}
 
         private void MessageFromServer(object sender, MessageEventArgs e)
         {
@@ -126,7 +131,10 @@ namespace Bid501_Client
         {
             this.user = user;
             this.pass = pass;
+            if (ws.ReadyState == WebSocketSharp.WebSocketState.Open)
+            { 
             ws.Send("0:" + user + ":" + pass);
+            }   
         }
 
         public void HandleBid(decimal bidAmt, int prodID)
