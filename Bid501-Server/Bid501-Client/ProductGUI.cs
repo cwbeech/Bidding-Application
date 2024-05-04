@@ -51,7 +51,7 @@ namespace Bid501_Client
 
                 foreach (IProduct p in pNew)
                 {
-                    IProduct old = prods.First(prod => prod.id == p.id);
+                    IProduct old = prods.FirstOrDefault(prod => prod.id == p.id);
                     IProduct modified; //why is this here, delete it
 
                     if (old != null)
