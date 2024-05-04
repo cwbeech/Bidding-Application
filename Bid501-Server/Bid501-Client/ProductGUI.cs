@@ -71,6 +71,19 @@ namespace Bid501_Client
                 uxDetail.Text = pp.description;
                 uxBidAmount2.Value = pp.minBid;
                 uxProductBox.Refresh();
+
+                //Show highest bidder
+                if (pp.currBidID == clientID)
+                {
+                    //MessageBox.Show("You are current highest bidder");
+                    uxHighest.Visible = true;
+                    uxBidConfirm.Visible = false;
+                }
+                else
+                {
+                    uxHighest.Visible = false;
+                    uxBidConfirm.Visible = true;
+                }
             }
             else
             {
@@ -95,6 +108,8 @@ namespace Bid501_Client
         {
 			try
             {
+                UpdateProductGUI(database);
+                /*
                 //Set up gui
                 int index = uxProductBox.SelectedIndex;
                 IProduct p = uxProductBox.Items[index] as IProduct;
@@ -115,6 +130,7 @@ namespace Bid501_Client
                     uxHighest.Visible = false;
                     uxBidConfirm.Visible = true;
                 }
+                */
             }
 
             //sussy catch
