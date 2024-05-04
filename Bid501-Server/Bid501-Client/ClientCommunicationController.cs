@@ -36,7 +36,7 @@ namespace Bid501_Client
             //ws = new WebSocketSharp.WebSocket("ws://192.168.0.63:8001/login");
 >>>>>>> 8fe4a99eec5af07bf6d2ecd0b857c80d06523aac
             //ws = new WebSocketSharp.WebSocket("ws://10.150.103.258:8001/login");//Dennis's IP
-            ws = new WebSocketSharp.WebSocket("ws://10.150.106.157:8001/login");
+            ws = new WebSocketSharp.WebSocket("ws://10.150.106.157:8001/login");//Jake's IP
 
             
             database = new ProductDatabaseProxy();
