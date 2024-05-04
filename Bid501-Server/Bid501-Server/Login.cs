@@ -91,10 +91,21 @@ namespace Bid501_Server
 
 		private void HandleBid(string[] msg)
 		{
-			bool bidGood = ctrl.PlaceBidDel(Convert.ToInt32(msg[1]), Convert.ToDecimal(msg[2]), Convert.ToInt32(msg[3]));
-			string toSend = JsonConvert.SerializeObject(ctrl.rd());
-			toSend = "1&" + toSend;
-			Sessions.Broadcast(toSend);
+			string toSend;
+
+			if (Convert.ToDecimal(msg[2]) == -2)
+			{
+				toSend = JsonConvert.SerializeObject(ctrl.rd());
+				toSend = "1&" + toSend;
+				Sessions.Broadcast(toSend);
+			}
+			else
+			{
+				bool bidGood = ctrl.PlaceBidDel(Convert.ToInt32(msg[1]), Convert.ToDecimal(msg[2]), Convert.ToInt32(msg[3]));
+				toSend = JsonConvert.SerializeObject(ctrl.rd());
+				toSend = "1&" + toSend;
+				Sessions.Broadcast(toSend);
+			}
 
 			//foreach (WebSocketSharp.WebSocket w in ctrl.activeConnections)
 			//{
