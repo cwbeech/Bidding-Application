@@ -53,7 +53,11 @@ namespace Bid501_Client
 
                 BindingList<ProductProxy> prodsCopy = new BindingList<ProductProxy>();
 
-                prods.CopyTo(prodsCopy.ToArray<ProductProxy>(), 0);
+                foreach(IProduct p in prods)
+                {
+                    prodsCopy.Add((ProductProxy)p);
+                }
+
 
                 foreach (IProduct p in pNew)
                 {
