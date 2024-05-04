@@ -127,7 +127,6 @@ namespace Bid501_Server
             }
 
             PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(actualActiveItems)));
-
         }
 
         /// <summary>
