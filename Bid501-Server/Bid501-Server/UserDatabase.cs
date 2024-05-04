@@ -85,6 +85,7 @@ namespace Bid501_Server
             registeredUsers.Add(newUser, newUser.UserID);
             fio.PrintCredsToFile(registeredUsers);
 
+            logout = false;
             return newUser.UserID; //note: this was returning 0, should return new user ID - Aidan, 5/2
         }
 

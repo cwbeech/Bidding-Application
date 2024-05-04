@@ -31,8 +31,9 @@ namespace Bid501_Server
             string[] tokens = e.Data.Split(':');
             string user = tokens[0];
             string password = tokens[1];
+            bool logout;
 
-            int result = ctrl.LoginDel(user, password, 0);
+            int result = ctrl.LoginDel(user, password, 0, out logout);
 
             Send(result.ToString());
 			//Note: Got a weird merge conflict. Wasn't sure which was current, so I'm keeping this code commented out. - Aidan, 4/29
