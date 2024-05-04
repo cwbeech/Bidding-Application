@@ -53,6 +53,7 @@ namespace Bid501_Client
 
                 if(pNew.Count < prods.Count)
                 {
+                    IProduct placeholder = null;
                     List<ProductProxy> i = prods.ToList<ProductProxy>();
 
                     foreach (IProduct p in pNew)
@@ -60,7 +61,6 @@ namespace Bid501_Client
                         if (!i.Contains(p))
                         {
                             prods.Add((ProductProxy)p);
-
                         }
                     }
                     foreach (IProduct p in i)
@@ -68,18 +68,20 @@ namespace Bid501_Client
                         if (!pNew.Contains(p))
                         {
                             prods.Remove((ProductProxy)p);
-
-                            if (p.currBidID == clientID)
-                            {
-                                MessageBox.Show("You won!");
-                            }
-                            else
-                            {
-                                MessageBox.Show("You lost");
-                            }
+                            placeholder = p;
                         }
+                    }
 
-                       
+                    if(placeholder != null)
+                    {
+                        if(placeholder.currBidID == clientID)
+                        {
+                            MessageBox.Show("You win!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("You lost!");
+                        }
                     }
 
                     foreach (IProduct p in pNew)
