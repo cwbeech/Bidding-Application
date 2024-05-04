@@ -51,26 +51,26 @@ namespace Bid501_Client
                 BindingList<ProductProxy> pNew = this.database.itemsView;
                 List<ProductProxy> i = new List<ProductProxy>();
 
-                BindingList<ProductProxy> prodsCopy = new BindingList<ProductProxy>();
+                //BindingList<ProductProxy> prodsCopy = new BindingList<ProductProxy>();
 
-                foreach(IProduct p in prods)
-                {
-                    prodsCopy.Add((ProductProxy)p);
-                }
+                //foreach(IProduct p in prods)
+                //{
+                //    prodsCopy.Add((ProductProxy)p);
+                //}
 
 
-                foreach (IProduct p in pNew)
-                {
-                    if (!prodsCopy.Contains(p))
-                        prods.Add((ProductProxy)p);
-                }
-                foreach (IProduct p in prodsCopy)
-                {
-                    if (!pNew.Contains(p))
-                        prods.Remove((ProductProxy)p);
-                }
+                //foreach (iproduct p in pnew)
+                //{
+                //    if (!prodscopy.contains(p))
+                //        prods.add((productproxy)p);
+                //}
+                //foreach (iproduct p in prodscopy)
+                //{
+                //    if (!pnew.contains(p))
+                //        prods.remove((productproxy)p);
+                //}
 
-                prods = prodsCopy;
+                //prods = prodscopy;
 
                 foreach (IProduct p in pNew)
                 {

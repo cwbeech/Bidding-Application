@@ -33,7 +33,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.uxBidConfirm = new System.Windows.Forms.Button();
-            this.uxBidAmount = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.uxProductBox = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -88,14 +87,6 @@
             this.uxBidConfirm.Text = "Place Bid";
             this.uxBidConfirm.UseVisualStyleBackColor = true;
             this.uxBidConfirm.Click += new System.EventHandler(this.uxBidConfirm_Click);
-            // 
-            // uxBidAmount
-            // 
-            this.uxBidAmount.Location = new System.Drawing.Point(257, 239);
-            this.uxBidAmount.Name = "uxBidAmount";
-            this.uxBidAmount.Size = new System.Drawing.Size(71, 20);
-            this.uxBidAmount.TabIndex = 6;
-            this.uxBidAmount.Text = "REMOVEME";
             // 
             // label6
             // 
@@ -177,7 +168,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.uxProductBox);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.uxBidAmount);
             this.Controls.Add(this.uxBidConfirm);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
@@ -198,7 +188,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button uxBidConfirm;
-        private System.Windows.Forms.TextBox uxBidAmount;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ListBox uxProductBox;
         private System.Windows.Forms.Label label1;
