@@ -37,7 +37,7 @@ namespace Bid501_Server
             string pass = UxPasswordTextBox.Text;
             bool logout;
 
-            int loginAttempt = LoginDel(user, pass, 1, out logout);
+            int loginAttempt = LoginDel(user, pass, 1, "server", out logout);
 
             if(loginAttempt == -1)
             {
