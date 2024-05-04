@@ -12,15 +12,33 @@ namespace Bid501_Server
     {
         private ProductDatabase pd;
 
+        public event EventHandler DatabaseUpdate;
+
         public ProductController(ProductDatabase p)
         {
             this.pd = p;
+            p.PropertyChanged += ActiveItemsChanged;
+        }
+
+        private void ActiveItemsChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == nameof(ProductDatabase.actualActiveItems))
+            {
+                DatabaseUpdateRequired();
+            }
+        }
+
+        private void DatabaseUpdateRequired()
+        {
+            DatabaseUpdate?.Invoke(this, new EventArgs());
         }
 
         public void StartBid(int pID)
         {
             pd.BidStarted(pID);
         }
+
+        public void 
 
         /// <summary>
         /// Validates the bid revieved from the ServerCommunicationControl, if valid, places it

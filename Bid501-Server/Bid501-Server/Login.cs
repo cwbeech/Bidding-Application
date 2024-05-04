@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +18,21 @@ namespace Bid501_Server
     {
         private ServerCommunictionControl ctrl;
 
-        public Login(ServerCommunictionControl c)
+		private ProductController pc;
+
+        public Login(ServerCommunictionControl c, ProductController pc)
         //public Login()
         {
-            this.ctrl = c;
+			this.ctrl = c;
+			this.pc = pc;
+
+			this.pc.DatabaseUpdate += DatabaseUpdateRequired;
         }
+
+		public void DatabaseUpdateRequired(object sender, EventArgs e)
+		{
+			ctrl.pingAllConnections();
+		}
 
         /// <summary>
         /// Parses user data, attempts login, sends 0 to client for valid, -1 for invalid login.

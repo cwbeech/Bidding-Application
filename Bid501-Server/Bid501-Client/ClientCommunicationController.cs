@@ -43,6 +43,11 @@ namespace Bid501_Client
 
         private void MessageFromServer(object sender, MessageEventArgs e)
         {
+
+            if(e.RawData.Length == 0)
+            {
+                HandleBid(-2, -2);
+            }
             Deserialize(e.Data);
         }
 
@@ -143,6 +148,10 @@ namespace Bid501_Client
             { 
                 ws.Send("0:" + user + ":" + pass);
                 ws.Close();
+            }
+            else if(bidAmt == -2 && prodID == -2)
+            {
+                ws.Send("1:" + clientID + ":" + bidAmt + ":" + prodID);
             }
             else 
             { 

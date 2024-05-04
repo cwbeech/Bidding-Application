@@ -30,18 +30,22 @@ namespace Bid501_Server
 
 		public Logout lo;
 
+        public ProductController pc;
+
 		private WebSocketServer wss;
 
 		private List<WebSocketSharp.WebSocket> activeConnections = new List<WebSocketSharp.WebSocket>();
 
-		public ServerCommunictionControl()
+		public ServerCommunictionControl(ProductController pc)
 		{ 
 
 			wss = new WebSocketServer(8001);
 
+            this.pc = pc;
+
             wss.AddWebSocketService<Login>("/login", () =>
             {
-            	Login loginService = new Login(this);
+            	Login loginService = new Login(this, pc);
             	return loginService;
             });
             //wss.AddWebSocketService("/login", () =>
@@ -52,6 +56,14 @@ namespace Bid501_Server
 
 			wss.Start();
 		}
+
+        public void pingAllConnections()
+        {
+            foreach(WebSocketSharp.WebSocket ws in wss.WebSocketServices["/login"].Sessions.Sessions)
+            {
+                ws.Ping();
+            }
+        }
 
         protected override void OnOpen()
         {
