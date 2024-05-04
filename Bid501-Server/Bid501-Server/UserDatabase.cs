@@ -43,7 +43,7 @@ namespace Bid501_Server
         /// <param name="pass">The attempted password</param>
         /// <param name="type">Determines the type of user, 0 for bidder, 1 for admin</param>
         /// <returns>returns userid for a valid login, -1 for valid user, invalid password, and 2 for a valid user/pass but already logged in</returns>
-        public int LoginAttempt(string user, string pass, int type)
+        public int LoginAttempt(string user, string pass, int type, out bool logout)
         {
             foreach(var kp in registeredUsers)
             {
@@ -54,12 +54,15 @@ namespace Bid501_Server
                         if (!activeUsers.Contains(kp.Key))
                         {
                             activeUsers.Add(kp.Key);
+                            logout = false;
                             return kp.Key.UserID;
                         }
 
-                        return kp.Key.UserID * -2;
+                        logout = true;
+                        return kp.Key.UserID;
                     }
 
+                    logout = false;
                     return -1;
                 }
             }
