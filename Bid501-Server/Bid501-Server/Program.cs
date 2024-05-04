@@ -52,10 +52,10 @@ namespace Bid501_Server
             
 
             //the starting 4 bids for the program
-            pc.StartBid(4);
             pc.StartBid(5);
             pc.StartBid(6);
             pc.StartBid(7);
+            pc.StartBid(8);
 
 			Application.EnableVisualStyles(); 
             Application.SetCompatibleTextRenderingDefault(false);

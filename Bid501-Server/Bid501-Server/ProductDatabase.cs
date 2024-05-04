@@ -28,7 +28,7 @@ namespace Bid501_Server
         /// <summary>
         /// the nextID to assign to a product (not sure if we need this as of rn 04/18)
         /// </summary>
-        private int nextID;
+        private static int nextID = 1;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -60,8 +60,12 @@ namespace Bid501_Server
         /// <param name="p">The product to add</param>
         public void AddProduct(Product p)
         {
-            p.id = nextID;
-            nextID++;
+            if (p.id == 0)
+            {
+				p.id = nextID;
+				nextID++;
+			}
+            
             allItems.Add(p, p.id);
         }
 
