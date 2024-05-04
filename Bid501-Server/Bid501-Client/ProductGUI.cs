@@ -48,58 +48,85 @@ namespace Bid501_Client
             }
             else if(uxProductBox.Items.Count > 0)
             {
-                BindingList<ProductProxy> pNew = this.database.itemsView;
-                List<ProductProxy> i = new List<ProductProxy>();
 
-                BindingList<ProductProxy> prodsCopy = prods;
+                List<ProductProxy> pNew = this.database.itemsView.ToList<ProductProxy>();
 
-                foreach (IProduct p in pNew)
+                if(pNew.Count < prods.Count)
                 {
-                    if (!prodsCopy.Contains(p))
-                        prods.Add((ProductProxy)p);
-                }
-                foreach (IProduct p in prodsCopy)
-                {
-                    if (!pNew.Contains(p))
-                        prods.Remove((ProductProxy)p);
-                }
+                    List<ProductProxy> i = prods.ToList<ProductProxy>();
 
-                prods = prodsCopy;
-
-                foreach (IProduct p in pNew)
-                {
-                    IProduct old = prods.FirstOrDefault(prod => prod.id == p.id);
-
-                    if (old != null)
+                    foreach (IProduct p in pNew)
                     {
-                        old.price = p.price;
-                        old.currBidID = p.currBidID;
-                    }
-                    else
-                    {
-                        prods.Add((ProductProxy)p);
-                    }
-                }
-                int index = uxProductBox.SelectedIndex;
-                IProduct pp = uxProductBox.Items[index] as IProduct;
-                uxProductName.Text = pp.name;
-                uxTimeLeft.Text = pp.timeLeft.ToString();
-                uxMinBidAmount.Text = pp.minBid.ToString();
-                uxDetail.Text = pp.description;
-                uxBidAmount2.Value = Decimal.Ceiling(pp.minBid);
-                uxProductBox.Refresh();
+                        if (!i.Contains(p))
+                        {
+                            prods.Add((ProductProxy)p);
 
-                //Show highest bidder
-                if (pp.currBidID == clientID)
-                {
-                    //MessageBox.Show("You are current highest bidder");
-                    uxHighest.Visible = true;
-                    uxBidConfirm.Visible = false;
+                        }
+                    }
+                    foreach (IProduct p in i)
+                    {
+                        if (!pNew.Contains(p))
+                        {
+                            prods.Remove((ProductProxy)p);
+                        }
+                    }
+
+                    foreach (IProduct p in pNew)
+                    {
+                        IProduct old = prods.FirstOrDefault(prod => prod.id == p.id);
+
+                        if (old != null)
+                        {
+                            old.price = p.price;
+                            old.currBidID = p.currBidID;
+                        }
+                        else
+                        {
+                            prods.Add((ProductProxy)p);
+                        }
+                    }
+
+                    uxProductBox.Refresh();
                 }
                 else
                 {
-                    uxHighest.Visible = false;
-                    uxBidConfirm.Visible = true;
+                    foreach (IProduct p in pNew)
+                    {
+                        IProduct old = prods.FirstOrDefault(prod => prod.id == p.id);
+
+                        if (old != null)
+                        {
+                            old.price = p.price;
+                            old.currBidID = p.currBidID;
+                        }
+                        else
+                        {
+                            prods.Add((ProductProxy)p);
+                        }
+                    }
+
+
+                    int index = uxProductBox.SelectedIndex;
+                    IProduct pp = uxProductBox.Items[index] as IProduct;
+                    uxProductName.Text = pp.name;
+                    uxTimeLeft.Text = pp.timeLeft.ToString();
+                    uxMinBidAmount.Text = pp.minBid.ToString();
+                    uxDetail.Text = pp.description;
+                    uxBidAmount2.Value = Decimal.Ceiling(pp.minBid);
+                    uxProductBox.Refresh();
+
+                    //Show highest bidder
+                    if (pp.currBidID == clientID)
+                    {
+                        //MessageBox.Show("You are current highest bidder");
+                        uxHighest.Visible = true;
+                        uxBidConfirm.Visible = false;
+                    }
+                    else
+                    {
+                        uxHighest.Visible = false;
+                        uxBidConfirm.Visible = true;
+                    }
                 }
             }
             else
