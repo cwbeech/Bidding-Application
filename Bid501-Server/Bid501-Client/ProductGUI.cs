@@ -69,6 +69,15 @@ namespace Bid501_Client
                         {
                             prods.Remove((ProductProxy)p);
                         }
+
+                        if(p.currBidID == clientID)
+                        {
+                            MessageBox.Show("You won!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("You lost");
+                        }
                     }
 
                     foreach (IProduct p in pNew)
