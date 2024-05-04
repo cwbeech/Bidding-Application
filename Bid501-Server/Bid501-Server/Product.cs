@@ -36,7 +36,7 @@ namespace Bid501_Server
         {
             get
             {
-                if (currBidID == 0)
+                if (currBidID == -1)
                 {
                     return price;
                 }

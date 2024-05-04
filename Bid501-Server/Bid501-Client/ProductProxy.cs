@@ -60,7 +60,7 @@ namespace Bid501_Client
         {
             get
             {
-                if(currBidID == 0)
+                if(currBidID == -1)
                 {
                     return price;
                 }

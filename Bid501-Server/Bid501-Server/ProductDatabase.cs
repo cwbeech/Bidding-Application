@@ -163,7 +163,7 @@ namespace Bid501_Server
 
             if(p != null)
             {
-                if (userID != p.currBidID && bid > p.minBid)
+                if (userID != p.currBidID && bid >= p.minBid)
                 {
                     return true;
                 }
