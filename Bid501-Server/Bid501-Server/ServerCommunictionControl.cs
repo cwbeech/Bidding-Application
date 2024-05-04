@@ -65,6 +65,12 @@ namespace Bid501_Server
 			activeConnections.Remove(Context.WebSocket);
         }
 
+        public void SendPing()
+        {
+            //wss.Ping();
+            //wss.
+        }
+
         /// <summary>
         /// Sets the delegates for hte server communication ctrl
         /// </summary>

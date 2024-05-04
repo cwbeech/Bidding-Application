@@ -33,6 +33,8 @@ namespace Bid501_Server
 
     public delegate void UpdateGUI(BindingList<Product> prods, BindingList<User> users);
 
+    public delegate void Ping();
+
     internal static class Program
     {
         /// <summary>
@@ -45,6 +47,7 @@ namespace Bid501_Server
             UserDatabase ud = new UserDatabase();
             ProductDatabase pd = new ProductDatabase();
             ProductController pc = new ProductController(pd);
+            Ping pi = new Ping(s.SendPing);
             
 
             //the starting 4 bids for the program
@@ -74,6 +77,7 @@ namespace Bid501_Server
             LoginView lv = new LoginView(ld, ugui, gau, gap);
 
             s.SetDelegates(ld, pba, gap, rd, lo, ugui, gau);
+            pc.LoadPing(pi);
 
             Application.Run(lv);
 

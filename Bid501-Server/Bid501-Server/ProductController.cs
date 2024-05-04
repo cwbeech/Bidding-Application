@@ -11,10 +11,16 @@ namespace Bid501_Server
     public class ProductController
     {
         private ProductDatabase pd;
+        private Ping pi;
 
         public ProductController(ProductDatabase p)
         {
             this.pd = p;
+        }
+
+        public void LoadPing(Ping pi)
+        {
+            this.pi = pi;
         }
 
         public void StartBid(int pID)
@@ -60,6 +66,8 @@ namespace Bid501_Server
         public void AddProduct(string name, string desc, decimal price)
         {
             pd.AddProduct(name, desc, price);
+            if (pi != null)
+                pi();
         }
 
         /// <summary>
@@ -69,6 +77,8 @@ namespace Bid501_Server
         public void AddProduct(Product p)
         {
             pd.AddProduct(p);
+            if (pi != null)
+                pi();
         }
 
         public IProductDB ReturnDatabase()
@@ -84,7 +94,9 @@ namespace Bid501_Server
         public void BidClosed(int pID)
         {
             pd.BidClosed(pID);
-        }
+			if (pi != null)
+				pi();
+		}
 
         /// <summary>
         /// Returns all relevant information about a product in a List of strings in the order of:
