@@ -50,7 +50,10 @@ namespace Bid501_Client
             {
                 HandleBid(-2, -2);
             }
-            Deserialize(e.Data);
+            else
+            {
+                Deserialize(e.Data);
+            }
         }
 
         public void Deserialize(string message)
